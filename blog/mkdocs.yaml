@@ -1,0 +1,78 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+site_name: Fletcher Easton
+
+watch:
+    - .
+
+theme:
+    name: material
+    logo: images/logo.png
+    favicon: images/favicon.ico
+
+    palette:
+        # Palette toggle for light mode
+        -   scheme: default
+            primary: deep-purple
+            accent: pink
+            toggle:
+                icon: material/brightness-7
+                name: Switch to dark mode
+
+        # Palette toggle for dark mode
+        -   scheme: slate
+            primary: deep-purple
+            accent: pink
+            toggle:
+                icon: material/brightness-4
+                name: Switch to light mode
+
+    icon:
+        admonition:
+            info: material/alert-box-outline
+
+    features:
+        - navigation.indexes
+        - navigation.expand
+        - navigation.footer
+        - toc.follow
+        - content.tabs.link
+        - content.code.copy
+
+plugins:
+    - search
+
+markdown_extensions:
+    # Callouts
+    - admonition
+    - pymdownx.details
+    - pymdownx.superfences
+
+    # Tabs
+    - pymdownx.superfences
+    -   pymdownx.tabbed:
+            alternate_style: true
+
+    # Table of contents
+    - toc:
+        permalink: true
+
+    # Tasklists
+    - pymdownx.tasklist
+
+    # HTML
+    - md_in_html
+    - attr_list
+
+extra_css:
+    - css/images.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/fletcheaston
+
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/fletcheaston/
+
+nav:
+    - Resume: index.md

@@ -1,0 +1,33 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+# Commit message hook
+-   repo: local
+    hooks:
+    -   id: validate-commit-msg
+        name: validate-commit-msg
+        language: pygrep
+        entry: ^(🐞|🎉|📝|🧪|🧹|💾)( ).*
+        stages: [ commit-msg ]
+        args: [ --negate ]
+
+# Python hooks
+-   repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.4
+    hooks:
+    -   id: ruff
+        language_version: python3.12
+        args: [./experiments/full-text-search, --fix, --exit-non-zero-on-fix]
+
+-   repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.1.4
+    hooks:
+    -   id: ruff-format
+        language_version: python3.12
+        args: [./experiments/full-text-search]
+
+-   repo: https://github.com/asottile/reorder-python-imports
+    rev: v3.10.0
+    hooks:
+    -   id: reorder-python-imports
+        args: [--application-directories=app-chess-backend]

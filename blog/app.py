@@ -18,7 +18,13 @@ app.mount("/static", StaticFiles(directory="site"), name="static")
 def read_path(request: Request, path: str):
     os_path = Path(f"site{path}")
 
+    # Handle pages
     if os_path.is_dir():
         return templates.TemplateResponse(f"{os_path}/index.html", {"request": request})
 
-    return RedirectResponse(f"/static{path}", status_code=307)
+    # Handle static assets
+    if os_path.is_file():
+        return RedirectResponse(f"/static{path}", status_code=307)
+
+    # Handle 404s
+    return templates.TemplateResponse("site/404.html", {"request": request})

@@ -23,7 +23,7 @@ export function VideoCard(props: { title: string; link: string }) {
 
             <iframe
                 ref={videoRef}
-                src="https://www.youtube.com/embed/ayWb6uKpx5E"
+                src={props.link}
                 allowFullScreen
                 className="w-full"
                 style={{ height: videoHeight }}

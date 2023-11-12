@@ -39,8 +39,13 @@ export function Dropdown({ title, links }: { title: React.ReactNode; links: Arra
                                 {links.map((link) => {
                                     return (
                                         <Menu.Item key={link.href.toString()}>
-                                            <div className="btn btn-secondary whitespace-nowrap px-6 text-left">
-                                                <Link href={link.href}>{link.children}</Link>
+                                            <div className="btn btn-secondary whitespace-nowrap px-0 text-left">
+                                                <Link
+                                                    href={link.href}
+                                                    className=""
+                                                >
+                                                    <div className="w-full px-6">{link.children}</div>
+                                                </Link>
                                             </div>
                                         </Menu.Item>
                                     )

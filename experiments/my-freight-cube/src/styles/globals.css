@@ -1,17 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
-html,
-body,
-html * {
-    font-family: "Roboto", sans-serif;
-}
-
 @tailwind base;
 @tailwind components;
 
 /*****************************************************************************/
 /* Global vars */
 :root {
-    --foreground-rgb: 0, 0, 0;
+    --foreground-rgb: 63, 63, 63;
     --background-rgb: 255, 255, 255;
 
     --primary-rgb: 229, 43, 0;
@@ -20,8 +13,8 @@ html * {
     --secondary-rgb: 255, 255, 255;
     --secondary-hover-rgb: 248, 248, 248;
 
-    --nabar-height: 77px;
-    --content-height: calc(100vh - --navbar-height);
+    --navbar-height: 77px;
+    --content-height: calc(100vh - var(--navbar-height));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -43,11 +36,11 @@ body {
 }
 
 nav {
-    height: var(--nabar-height);
+    height: var(--navbar-height);
 }
 
 main {
-    max-height: var(--content-height);
+    height: var(--content-height);
     overflow-y: auto;
 }
 
@@ -71,7 +64,7 @@ main {
     }
 
     .btn-primary-outline {
-        @apply bg-white text-primary hover:bg-primary hover:text-white focus:outline-primary active:outline-primary;
+        @apply bg-white text-primary hover:bg-primary hover:text-white;
     }
 
     .btn-secondary {

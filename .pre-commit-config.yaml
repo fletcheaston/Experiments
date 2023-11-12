@@ -31,3 +31,20 @@ repos:
     hooks:
     -   id: reorder-python-imports
         args: [--application-directories=app-chess-backend]
+
+# Typescript hooks
+-   repo: local
+    hooks:
+    -   id: experiments/my-freight-cube/lint
+        name: experiments/my-freight-cube/lint
+        entry: bash -c 'cd experiments/my-freight-cube && npm run lint'
+        language: system
+        types_or: [ts, tsx]
+
+-   repo: local
+    hooks:
+    -   id: experiments/my-freight-cube/format
+        name: experiments/my-freight-cube/format
+        entry: bash -c 'cd experiments/my-freight-cube && npm run format'
+        language: system
+        types_or: [ts, tsx]

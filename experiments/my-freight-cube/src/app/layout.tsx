@@ -118,7 +118,7 @@ export default function RootLayout({ children }: { children: React.JSX.Element }
                     {children}
 
                     <footer>
-                        <div className="grid grid-cols-4 gap-x-8 px-16 py-4">
+                        <div className="grid grid-cols-2 gap-x-8 px-16 py-4 sm:grid-cols-3 md:grid-cols-4">
                             <Image
                                 src={Logo}
                                 height={40}

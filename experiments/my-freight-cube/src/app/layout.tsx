@@ -118,8 +118,6 @@ export default function RootLayout({ children }: { children: React.JSX.Element }
                 <main className="flex flex-col">
                     {children}
 
-                    <Divider className="mt-8" />
-
                     <footer className="mt-auto">
                         <div className="grid grid-cols-2 gap-x-8 px-16 py-4 sm:grid-cols-3 md:grid-cols-4">
                             <Image

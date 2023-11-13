@@ -1,3 +1,6 @@
+import { Divider } from "@components/divider"
+import React from "react"
+
 import { VideoCard } from "./video-card"
 
 export default async function Page() {
@@ -33,6 +36,8 @@ export default async function Page() {
                     link="https://www.youtube.com/embed/ZS3uddwMbpM"
                 />
             </div>
+
+            <Divider className="mt-8" />
         </>
     )
 }

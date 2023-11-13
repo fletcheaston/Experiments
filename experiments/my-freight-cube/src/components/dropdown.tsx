@@ -19,6 +19,8 @@ interface Divide {
 type Item = LinkProps | Divide
 
 export function Dropdown({ title, items }: { title: React.ReactNode; items: Array<Item> }) {
+    /**************************************************************************/
+    /* Render */
     return (
         <div className="text-right">
             <Menu
@@ -54,7 +56,7 @@ export function Dropdown({ title, items }: { title: React.ReactNode; items: Arra
 
                                     return (
                                         <Menu.Item key={item.href.toString()}>
-                                            <div className="btn btn-secondary whitespace-nowrap px-0 text-left">
+                                            <div className="btn whitespace-nowrap px-0 text-left">
                                                 <Link
                                                     href={item.href}
                                                     className=""

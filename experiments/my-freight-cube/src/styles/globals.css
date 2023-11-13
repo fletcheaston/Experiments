@@ -10,9 +10,6 @@
     --primary-rgb: 229, 43, 0;
     --primary-hover-rgb: 183, 34, 0;
 
-    --secondary-rgb: 255, 255, 255;
-    --secondary-hover-rgb: 248, 248, 248;
-
     --navbar-height: 77px;
     --content-height: calc(100vh - var(--navbar-height));
 }
@@ -24,9 +21,6 @@
 
         --primary-rgb: 26, 64, 107;
         --primary-hover-rgb: 26, 64, 107;
-
-        --secondary-rgb: 0, 0, 0;
-        --secondary-hover-rgb: 7, 7, 7;
     }
 }
 
@@ -48,7 +42,7 @@ main {
 /* Buttons */
 @layer components {
     .btn {
-        @apply rounded px-4 py-1 text-center transition-all;
+        @apply rounded px-4 py-1 text-center transition-all hover:bg-slate-100;
     }
 
     .btn-lg {
@@ -69,10 +63,6 @@ main {
 
     .btn-primary-outline {
         @apply border-[1px] border-primary bg-white text-primary hover:bg-primary hover:text-white;
-    }
-
-    .btn-secondary {
-        @apply bg-secondary hover:bg-secondary-hover;
     }
 
     .btn:disabled {

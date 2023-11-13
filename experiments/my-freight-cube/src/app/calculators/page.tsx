@@ -40,7 +40,7 @@ export default async function Page() {
     /* Render */
     return (
         <>
-            <h1 className="mt-12 text-center text-5xl font-semibold">MyFreightCube Calculators</h1>
+            <h1 className="mt-8 text-center text-5xl font-semibold">MyFreightCube Calculators</h1>
 
             <div className="mt-8 flex flex-wrap justify-center gap-8 px-16">
                 <CalculatorCard

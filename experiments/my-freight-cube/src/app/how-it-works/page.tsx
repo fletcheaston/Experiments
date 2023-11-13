@@ -7,7 +7,7 @@ export default async function Page() {
     /* Render */
     return (
         <>
-            <h1 className="mt-12 text-center text-5xl font-semibold">How It Works</h1>
+            <h1 className="mt-8 text-center text-5xl font-semibold">How It Works</h1>
 
             <div className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-12 px-16">
                 <VideoCard

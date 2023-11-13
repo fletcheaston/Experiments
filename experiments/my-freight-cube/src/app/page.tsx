@@ -43,6 +43,8 @@ function CalculatorCard(props: { title: string; description: string }) {
 }
 
 function BenefitCard(props: { icon: StaticImageData; alt: string; title: string; description: string }) {
+    /**************************************************************************/
+    /* Render */
     return (
         <div className="flex flex-col items-center gap-2 px-6 pb-6 text-center">
             <Image

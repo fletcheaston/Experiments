@@ -1,11 +1,13 @@
+import Image, { StaticImageData } from "next/image"
+import React from "react"
+
 import { Divider } from "@components/divider"
+
 import HeroImage from "@images/hero.jpg"
 import CalculatorIcon from "@images/icon-calculator.png"
 import GearIcon from "@images/icon-gear.png"
 import TruckIcon from "@images/icon-truck.png"
 import PatternImage from "@images/pattern.png"
-import Image, { StaticImageData } from "next/image"
-import React from "react"
 
 function BackgroundCard(props: { icon: StaticImageData }) {
     return (

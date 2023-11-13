@@ -1,5 +1,6 @@
-import { Divider } from "@components/divider"
 import React from "react"
+
+import { Divider } from "@components/divider"
 
 import { VideoCard } from "./video-card"
 

@@ -1,14 +1,16 @@
-import { Divider } from "@components/divider"
-import { Dropdown } from "@components/dropdown"
-import { Bars3 } from "@icons/bars-3"
-import { ChevronDown } from "@icons/chevron-down"
-import { Gear } from "@icons/gear"
-import Logo from "@images/logo-large.svg"
 import classNames from "classnames"
 import { Inter } from "next/font/google"
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
+
+import { Dropdown } from "@components/dropdown"
+
+import { Bars3 } from "@icons/bars-3"
+import { ChevronDown } from "@icons/chevron-down"
+import { Gear } from "@icons/gear"
+
+import Logo from "@images/logo-large.svg"
 
 import "@styles/globals.css"
 

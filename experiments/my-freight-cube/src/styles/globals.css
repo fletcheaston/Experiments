@@ -63,8 +63,12 @@ main {
         @apply bg-primary text-white hover:bg-primary-hover;
     }
 
-    .btn-primary-outline {
+    .btn-primary-text {
         @apply bg-white text-primary hover:bg-primary hover:text-white;
+    }
+
+    .btn-primary-outline {
+        @apply border-[1px] border-primary bg-white text-primary hover:bg-primary hover:text-white;
     }
 
     .btn-secondary {

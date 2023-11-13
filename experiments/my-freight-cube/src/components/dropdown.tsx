@@ -5,9 +5,20 @@ import classNames from "classnames"
 import Link from "next/link"
 import React, { Fragment } from "react"
 
-type LinkProps = Pick<React.ComponentProps<typeof Link>, "href" | "children">
+import { Divider } from "@components/divider"
 
-export function Dropdown({ title, links }: { title: React.ReactNode; links: Array<LinkProps> }) {
+interface LinkProps extends Pick<React.ComponentProps<typeof Link>, "href" | "children"> {
+    type: "link"
+}
+
+interface Divide {
+    type: "divider"
+    id: string
+}
+
+type Item = LinkProps | Divide
+
+export function Dropdown({ title, items }: { title: React.ReactNode; items: Array<Item> }) {
     return (
         <div className="text-right">
             <Menu
@@ -19,7 +30,7 @@ export function Dropdown({ title, links }: { title: React.ReactNode; links: Arra
                         <Menu.Button
                             className={classNames(
                                 "btn btn-lg inline-flex w-full justify-center",
-                                open ? "btn-primary" : "btn-primary-outline",
+                                open ? "btn-primary" : "btn-primary-text",
                             )}
                         >
                             {title}
@@ -36,15 +47,19 @@ export function Dropdown({ title, links }: { title: React.ReactNode; links: Arra
                             leaveTo="transform opacity-0 scale-95"
                         >
                             <Menu.Items className="absolute right-0 mt-2 w-fit origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-black/5 focus:outline-none">
-                                {links.map((link) => {
+                                {items.map((item) => {
+                                    if (item.type === "divider") {
+                                        return <Divider key={item.id} />
+                                    }
+
                                     return (
-                                        <Menu.Item key={link.href.toString()}>
+                                        <Menu.Item key={item.href.toString()}>
                                             <div className="btn btn-secondary whitespace-nowrap px-0 text-left">
                                                 <Link
-                                                    href={link.href}
+                                                    href={item.href}
                                                     className=""
                                                 >
-                                                    <div className="w-full px-6">{link.children}</div>
+                                                    <div className="w-full px-6">{item.children}</div>
                                                 </Link>
                                             </div>
                                         </Menu.Item>

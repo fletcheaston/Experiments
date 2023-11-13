@@ -113,6 +113,8 @@ export default async function Page() {
             </div>
 
             <BackgroundCard icon={PatternImage} />
+
+            <div className="-mt-[1px]" />
         </>
     )
 }

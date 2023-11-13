@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import React from "react"
 
+import { Divider } from "@components/divider"
 import { Dropdown } from "@components/dropdown"
 
 import { Bars3 } from "@icons/bars-3"
@@ -46,16 +47,19 @@ export default function RootLayout({ children }: { children: React.JSX.Element }
                                     className="text-inherit"
                                 />
                             }
-                            links={[
+                            items={[
                                 {
+                                    type: "link",
                                     href: "/calculators",
                                     children: "Calculators",
                                 },
                                 {
+                                    type: "link",
                                     href: "/how-it-works",
                                     children: "How It Works",
                                 },
                                 {
+                                    type: "link",
                                     href: "/settings",
                                     children: "Settings",
                                 },
@@ -75,20 +79,33 @@ export default function RootLayout({ children }: { children: React.JSX.Element }
                                     />
                                 </div>
                             }
-                            links={[
+                            items={[
                                 {
+                                    type: "link",
+                                    href: "/calculators",
+                                    children: "All Calculators",
+                                },
+                                {
+                                    type: "divider",
+                                    id: "divider",
+                                },
+                                {
+                                    type: "link",
                                     href: "/calculators/air-freight-dim-weight",
                                     children: "Air Freight Dim Weight",
                                 },
                                 {
+                                    type: "link",
                                     href: "/calculators/parcel-dim-weight",
                                     children: "Parcel Dim Weight",
                                 },
                                 {
+                                    type: "link",
                                     href: "/calculators/ltl-density",
                                     children: "LTL Density",
                                 },
                                 {
+                                    type: "link",
                                     href: "/calculators/lineal-foot",
                                     children: "Lineal Foot",
                                 },
@@ -97,7 +114,7 @@ export default function RootLayout({ children }: { children: React.JSX.Element }
 
                         <Link
                             href="/how-it-works"
-                            className="btn btn-lg btn-primary-outline"
+                            className="btn btn-lg btn-primary-text"
                         >
                             How It Works
                         </Link>
@@ -106,7 +123,7 @@ export default function RootLayout({ children }: { children: React.JSX.Element }
 
                         <Link
                             href="/settings"
-                            className="btn btn-primary-outline p-2"
+                            className="btn btn-primary-text p-2"
                         >
                             <Gear
                                 height={28}
@@ -121,16 +138,27 @@ export default function RootLayout({ children }: { children: React.JSX.Element }
                     {children}
 
                     <footer className="mt-auto">
+                        <Divider />
+
                         <div className="grid grid-cols-2 gap-x-8 px-16 py-4 sm:grid-cols-3 md:grid-cols-4">
-                            <Image
-                                src={Logo}
-                                height={40}
-                                alt="MyFreightCube logo"
-                                className="flex-shrink-0"
-                            />
+                            <Link
+                                href="/"
+                                className="block"
+                            >
+                                <Image
+                                    src={Logo}
+                                    height={40}
+                                    alt="MyFreightCube logo"
+                                />
+                            </Link>
 
                             <div>
-                                <h4 className="text-3xl font-semibold">Calculators</h4>
+                                <Link
+                                    href="/calculators"
+                                    className="block"
+                                >
+                                    <h4 className="text-3xl font-semibold">Calculators</h4>
+                                </Link>
 
                                 <Link
                                     href="/calculators/air-freight-dim-weight"

@@ -1,7 +1,5 @@
 import React from "react"
 
-import { Divider } from "@components/divider"
-
 import { VideoCard } from "./video-card"
 
 export default async function Page() {
@@ -11,7 +9,7 @@ export default async function Page() {
         <>
             <h1 className="mt-12 text-center text-5xl font-semibold">How It Works</h1>
 
-            <div className="mt-8 grid grid-cols-1 gap-x-12 gap-y-16 px-16 lg:grid-cols-2">
+            <div className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-12 px-16">
                 <VideoCard
                     title="Lineal Foot Calculator"
                     link="https://www.youtube.com/embed/ayWb6uKpx5E"
@@ -38,7 +36,7 @@ export default async function Page() {
                 />
             </div>
 
-            <Divider className="mt-8" />
+            <div className="mt-8" />
         </>
     )
 }

@@ -5,7 +5,7 @@ import Dexie, { Table } from "dexie"
 interface Base {
     id: string
     created: Date
-    default: boolean | null
+    default: "default" | null
 }
 
 export interface Carrier extends Base {

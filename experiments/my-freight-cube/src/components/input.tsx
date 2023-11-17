@@ -83,3 +83,39 @@ export function NumberInput(props: {
         </div>
     )
 }
+
+export function CheckboxInput(props: {
+    label: string
+    required?: boolean
+    checked: boolean
+    setChecked: (checked: boolean) => void
+}) {
+    /**************************************************************************/
+    /* Render */
+    const id = `input-${useId()}`
+
+    /**************************************************************************/
+    /* Render */
+    return (
+        <div className="flex items-center gap-x-1">
+            <input
+                id={id}
+                name={props.label}
+                type="checkbox"
+                className="h-5 w-5 rounded-md border-0 ring-1 ring-inset ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-primary"
+                checked={props.checked}
+                onChange={() => {
+                    props.setChecked(!props.checked)
+                }}
+                required={props.required}
+            />
+
+            <label
+                htmlFor={id}
+                className="bg-white px-0.5 text-sm font-medium leading-4"
+            >
+                {props.label}
+            </label>
+        </div>
+    )
+}

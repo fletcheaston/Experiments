@@ -40,7 +40,7 @@ function AddCarrier() {
                     <Divider className="mt-4" />
 
                     <form
-                        className="mt-4 flex flex-col gap-4"
+                        className="mt-6 flex flex-col gap-6"
                         onSubmit={async (event) => {
                             setSaving(true)
                             event.preventDefault()
@@ -49,7 +49,7 @@ function AddCarrier() {
                             if (defaultCarrier) {
                                 await database.carriers
                                     .where({ default: "default" })
-                                    .modify((carrier) => (carrier.default = null))
+                                    .modify((row) => (row.default = null))
                             }
 
                             // Add the carrier
@@ -69,35 +69,30 @@ function AddCarrier() {
                             setDefaultCarrier(false)
                         }}
                     >
-                        <TextInput
-                            label="Carrier Name"
-                            placeholder="MyFreightCube"
-                            value={name}
-                            required
-                            setValue={setName}
-                        />
+                        <div className="flex gap-x-4">
+                            <TextInput
+                                label="Carrier Name"
+                                placeholder="MyFreightCube"
+                                value={name}
+                                required
+                                setValue={setName}
+                            />
 
-                        <div className="flex gap-x-6">
-                            <div className="w-[40%]">
-                                <NumberInput
-                                    label="Dim Divisor"
-                                    placeholder={0.01}
-                                    step={0.01}
-                                    min={0.01}
-                                    required
-                                    value={dimDivisor}
-                                    setValue={setDimDivisor}
-                                />
-                            </div>
-
-                            <div className="mt-3.5">
-                                <CheckboxInput
-                                    label="Default Carrier"
-                                    checked={defaultCarrier}
-                                    setChecked={setDefaultCarrier}
-                                />
-                            </div>
+                            <NumberInput
+                                label="Dim Divisor"
+                                step={0.01}
+                                min={0.01}
+                                required
+                                value={dimDivisor}
+                                setValue={setDimDivisor}
+                            />
                         </div>
+
+                        <CheckboxInput
+                            label="Default Carrier"
+                            checked={defaultCarrier}
+                            setChecked={setDefaultCarrier}
+                        />
 
                         <Divider />
 
@@ -138,16 +133,14 @@ function EditCarrier(props: { carrier: Carrier; close: () => void }) {
                 <Divider className="mt-4" />
 
                 <form
-                    className="mt-4 flex flex-col gap-4"
+                    className="mt-6 flex flex-col gap-6"
                     onSubmit={async (event) => {
                         setSaving(true)
                         event.preventDefault()
 
                         // If this is the new default carrier, remove the default from all other carriers
                         if (defaultCarrier) {
-                            await database.carriers
-                                .where({ default: "default" })
-                                .modify((carrier) => (carrier.default = null))
+                            await database.carriers.where({ default: "default" }).modify((row) => (row.default = null))
                         }
 
                         // Modify the carrier
@@ -161,35 +154,30 @@ function EditCarrier(props: { carrier: Carrier; close: () => void }) {
                         props.close()
                     }}
                 >
-                    <TextInput
-                        label="Carrier Name"
-                        placeholder="MyFreightCube"
-                        value={name}
-                        required
-                        setValue={setName}
-                    />
+                    <div className="flex gap-x-4">
+                        <TextInput
+                            label="Carrier Name"
+                            placeholder="MyFreightCube"
+                            value={name}
+                            required
+                            setValue={setName}
+                        />
 
-                    <div className="flex gap-x-6">
-                        <div className="w-[40%]">
-                            <NumberInput
-                                label="Dim Divisor"
-                                placeholder={0.01}
-                                step={0.01}
-                                min={0.01}
-                                required
-                                value={dimDivisor}
-                                setValue={setDimDivisor}
-                            />
-                        </div>
-
-                        <div className="mt-3.5">
-                            <CheckboxInput
-                                label="Default Carrier"
-                                checked={defaultCarrier}
-                                setChecked={setDefaultCarrier}
-                            />
-                        </div>
+                        <NumberInput
+                            label="Dim Divisor"
+                            step={0.01}
+                            min={0.01}
+                            required
+                            value={dimDivisor}
+                            setValue={setDimDivisor}
+                        />
                     </div>
+
+                    <CheckboxInput
+                        label="Default Carrier"
+                        checked={defaultCarrier}
+                        setChecked={setDefaultCarrier}
+                    />
 
                     <Divider />
 
@@ -224,9 +212,10 @@ export function Carriers() {
     /* State */
     const rawCarriers = useLiveQuery(() => database.carriers.orderBy("created").toArray())
     const [carriers, setCarriers] = useState(rawCarriers)
-    const loading = rawCarriers === undefined
-
     const [carrierToEdit, setCarrierToEdit] = useState<Carrier | null>(null)
+
+    const loading = rawCarriers === undefined
+    const hasCarriers = carriers !== undefined && carriers.length > 0
 
     /**************************************************************************/
     /* Effects */
@@ -246,8 +235,8 @@ export function Carriers() {
         }
 
         if (
-            !carriers.find((carrier) => {
-                return carrier.id === carrierToEdit.id
+            !carriers.find((row) => {
+                return row.id === carrierToEdit.id
             })
         ) {
             setCarrierToEdit(null)
@@ -258,74 +247,82 @@ export function Carriers() {
     /* Render */
     return (
         <div>
-            <div className="flex items-end justify-between gap-x-16">
-                <h2 className="mt-6 text-3xl font-semibold">My Carriers</h2>
+            <div className="rounded border-[1px] border-slate-300 p-2">
+                <div className="flex items-end justify-between gap-x-16">
+                    <h2 className="text-3xl font-semibold">My Carriers</h2>
 
-                <AddCarrier />
-            </div>
+                    <AddCarrier />
+                </div>
 
-            {carrierToEdit && (
-                <EditCarrier
-                    carrier={carrierToEdit}
-                    close={() => {
-                        setCarrierToEdit(null)
-                    }}
-                />
-            )}
+                <p className="mt-3 text-[0.875rem]">
+                    Edit all your custom carriers and set a default for your calculators.
+                </p>
 
-            <div className="mt-4">
-                <Loading on={loading}>
-                    <Table
-                        columns={[
-                            {
-                                title: "Name",
-                                width: "200px",
-                                align: "left",
-                                renderer: (row) => {
-                                    return row.name
-                                },
-                            },
-                            {
-                                title: "Dim Divisor",
-                                width: "130px",
-                                align: "right",
-                                renderer: (row) => {
-                                    return row.dimDivisor
-                                },
-                            },
-                            {
-                                title: "Default",
-                                width: "75px",
-                                align: "center",
-                                renderer: (row) => {
-                                    return row.default === "default" ? (
-                                        <div className="font-bold text-rose-700">✓</div>
-                                    ) : (
-                                        ""
-                                    )
-                                },
-                            },
-                            {
-                                title: "",
-                                width: "70px",
-                                align: "center",
-                                renderer: (row) => {
-                                    return (
-                                        <button
-                                            className="btn btn-sm btn-primary-text"
-                                            onClick={() => {
-                                                setCarrierToEdit(row)
-                                            }}
-                                        >
-                                            Edit
-                                        </button>
-                                    )
-                                },
-                            },
-                        ]}
-                        rows={carriers}
+                {carrierToEdit && (
+                    <EditCarrier
+                        carrier={carrierToEdit}
+                        close={() => {
+                            setCarrierToEdit(null)
+                        }}
                     />
-                </Loading>
+                )}
+
+                {hasCarriers && (
+                    <div className="mt-2">
+                        <Loading on={loading}>
+                            <Table
+                                columns={[
+                                    {
+                                        title: "Name",
+                                        width: "158px",
+                                        align: "left",
+                                        renderer: (row) => {
+                                            return row.name
+                                        },
+                                    },
+                                    {
+                                        title: "Dim Divisor",
+                                        width: "130px",
+                                        align: "right",
+                                        renderer: (row) => {
+                                            return row.dimDivisor
+                                        },
+                                    },
+                                    {
+                                        title: "Default",
+                                        width: "75px",
+                                        align: "center",
+                                        renderer: (row) => {
+                                            return row.default === "default" ? (
+                                                <div className="font-bold text-rose-700">✓</div>
+                                            ) : (
+                                                ""
+                                            )
+                                        },
+                                    },
+                                    {
+                                        title: "",
+                                        width: "70px",
+                                        align: "center",
+                                        renderer: (row) => {
+                                            return (
+                                                <button
+                                                    className="btn btn-sm btn-primary-text"
+                                                    onClick={() => {
+                                                        setCarrierToEdit(row)
+                                                    }}
+                                                >
+                                                    Edit
+                                                </button>
+                                            )
+                                        },
+                                    },
+                                ]}
+                                rows={carriers}
+                            />
+                        </Loading>
+                    </div>
+                )}
             </div>
         </div>
     )

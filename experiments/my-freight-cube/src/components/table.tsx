@@ -17,7 +17,7 @@ export function Table<R extends { id: string }>(props: { columns: Array<Column<R
                             <th
                                 key={column.title}
                                 style={{ textAlign: column.align, width: column.width }}
-                                className="px-2 first-of-type:ps-4 last-of-type:pe-4"
+                                className="px-2"
                             >
                                 {column.title}
                             </th>
@@ -39,7 +39,7 @@ export function Table<R extends { id: string }>(props: { columns: Array<Column<R
                                         <td
                                             key={column.title}
                                             style={{ textAlign: column.align, width: column.width }}
-                                            className="px-2 first-of-type:ps-4 last-of-type:pe-4"
+                                            className="px-2"
                                         >
                                             {column.renderer(row)}
                                         </td>

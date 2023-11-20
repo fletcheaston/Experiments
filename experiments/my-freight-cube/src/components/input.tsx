@@ -1,5 +1,6 @@
 "use client"
 
+import classNames from "classnames"
 import { useId } from "react"
 
 export function TextInput(props: {
@@ -8,6 +9,7 @@ export function TextInput(props: {
     required?: boolean
     value: string
     setValue: (value: string) => void
+    className?: string
 }) {
     /**************************************************************************/
     /* Render */
@@ -16,7 +18,7 @@ export function TextInput(props: {
     /**************************************************************************/
     /* Render */
     return (
-        <div className="relative w-full">
+        <div className={classNames("relative", props.className ? props.className : "w-full")}>
             <label
                 htmlFor={id}
                 className="absolute -top-2 left-1.5 bg-white px-0.5 text-sm font-medium leading-4"
@@ -48,6 +50,7 @@ export function NumberInput(props: {
     required?: boolean
     value: number
     setValue: (value: number) => void
+    className?: string
 }) {
     /**************************************************************************/
     /* Render */
@@ -56,7 +59,7 @@ export function NumberInput(props: {
     /**************************************************************************/
     /* Render */
     return (
-        <div className="relative w-full">
+        <div className={classNames("relative", props.className ? props.className : "w-full")}>
             <label
                 htmlFor={id}
                 className="absolute -top-2 left-1.5 bg-white px-0.5 text-sm font-medium leading-4"

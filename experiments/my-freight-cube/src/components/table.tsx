@@ -1,3 +1,4 @@
+import classNames from "classnames"
 import React from "react"
 
 interface Column<R> {
@@ -7,7 +8,11 @@ interface Column<R> {
     renderer: (row: R) => React.ReactNode
 }
 
-export function Table<R extends { id: string }>(props: { columns: Array<Column<R>>; rows?: Array<R> }) {
+export function Table<R extends { id: string }>(props: {
+    columns: Array<Column<R>>
+    rows?: Array<R>
+    rowClassName?: (row: R) => string
+}) {
     return (
         <table>
             <thead className="border-b-[1px] border-b-slate-300">
@@ -32,7 +37,10 @@ export function Table<R extends { id: string }>(props: { columns: Array<Column<R
                         return (
                             <tr
                                 key={row.id}
-                                className="bg-white hover:bg-slate-200"
+                                className={classNames(
+                                    "bg-white hover:bg-slate-200",
+                                    props.rowClassName ? props.rowClassName(row) : "",
+                                )}
                             >
                                 {props.columns.map((column) => {
                                     return (

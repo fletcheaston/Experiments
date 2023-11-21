@@ -77,7 +77,7 @@ export const freightClassReference: Array<FreightClass> = [
 
 export function FreightClassReference() {
     return (
-        <div className="flex-shrink border-[1px] border-slate-300 px-4 pb-1 pt-4">
+        <div className="flex-shrink rounded border-[1px] border-slate-300 px-4 pb-1 pt-4">
             <h2 className="whitespace-nowrap text-xl font-semibold">Freight Class Reference</h2>
 
             <Divider className="mb-2" />

@@ -119,7 +119,7 @@ export default function Page() {
                     <Table
                         columns={[
                             {
-                                title: "Name",
+                                title: "Carrier",
                                 width: "150px",
                                 align: "left",
                                 renderer: (row) => {

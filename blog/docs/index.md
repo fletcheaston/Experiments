@@ -78,7 +78,7 @@ If you want to get in touch, send me an email at [work@fletcheaston.com](mailto:
 - Documented code and practices for other engineers and the (non-technical) CEO to follow.
 - Assisted with front-end testing and debugging using React and TypeScript.
 
-### MyFreightCube
+### [MyFreightCube](projects/my-freight-cube.md)
 
 #### Web Development Contractor
 

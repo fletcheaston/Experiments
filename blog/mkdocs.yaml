@@ -76,3 +76,5 @@ extra:
 
 nav:
     - Resume: index.md
+    - Projects:
+          - MyFreightCube: projects/my-freight-cube.md

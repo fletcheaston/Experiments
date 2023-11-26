@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react"
 
 import { Carrier, database } from "@components/database"
 import { Divider } from "@components/divider"
-import { CheckboxInput, NumberInput, TextInput } from "@components/input"
+import { NumberInput, TextInput } from "@components/input"
 import { Loading } from "@components/loading"
 import Modal from "@components/modal"
 import { Table } from "@components/table"
@@ -18,7 +18,6 @@ function AddCarrier() {
 
     const [name, setName] = useState("")
     const [dimDivisor, setDimDivisor] = useState(0.01)
-    const [defaultCarrier, setDefaultCarrier] = useState(false)
 
     /**************************************************************************/
     /* Render */
@@ -45,18 +44,10 @@ function AddCarrier() {
                             setSaving(true)
                             event.preventDefault()
 
-                            // If this is the new default carrier, remove the default from all other carriers
-                            if (defaultCarrier) {
-                                await database.carriers
-                                    .where({ default: "default" })
-                                    .modify((row) => (row.default = null))
-                            }
-
                             // Add the carrier
                             await database.carriers.add({
                                 id: crypto.randomUUID(),
                                 created: new Date(),
-                                default: defaultCarrier ? "default" : null,
                                 name,
                                 dimDivisor,
                             })
@@ -66,7 +57,6 @@ function AddCarrier() {
                             setSaving(false)
                             setName("")
                             setDimDivisor(0.01)
-                            setDefaultCarrier(false)
                         }}
                     >
                         <div className="flex gap-x-4">
@@ -87,12 +77,6 @@ function AddCarrier() {
                                 setValue={setDimDivisor}
                             />
                         </div>
-
-                        <CheckboxInput
-                            label="Default Carrier"
-                            checked={defaultCarrier}
-                            setChecked={setDefaultCarrier}
-                        />
 
                         <Divider />
 
@@ -119,7 +103,6 @@ function EditCarrier(props: { carrier: Carrier; close: () => void }) {
 
     const [name, setName] = useState(props.carrier.name)
     const [dimDivisor, setDimDivisor] = useState(props.carrier.dimDivisor)
-    const [defaultCarrier, setDefaultCarrier] = useState(props.carrier.default === "default")
 
     /**************************************************************************/
     /* Render */
@@ -138,14 +121,8 @@ function EditCarrier(props: { carrier: Carrier; close: () => void }) {
                         setSaving(true)
                         event.preventDefault()
 
-                        // If this is the new default carrier, remove the default from all other carriers
-                        if (defaultCarrier) {
-                            await database.carriers.where({ default: "default" }).modify((row) => (row.default = null))
-                        }
-
                         // Modify the carrier
                         await database.carriers.where({ id: props.carrier.id }).modify({
-                            default: defaultCarrier ? "default" : null,
                             name,
                             dimDivisor,
                         })
@@ -172,12 +149,6 @@ function EditCarrier(props: { carrier: Carrier; close: () => void }) {
                             setValue={setDimDivisor}
                         />
                     </div>
-
-                    <CheckboxInput
-                        label="Default Carrier"
-                        checked={defaultCarrier}
-                        setChecked={setDefaultCarrier}
-                    />
 
                     <Divider />
 
@@ -286,18 +257,6 @@ export function Carriers() {
                                         align: "right",
                                         renderer: (row) => {
                                             return row.dimDivisor
-                                        },
-                                    },
-                                    {
-                                        title: "Default",
-                                        width: "75px",
-                                        align: "center",
-                                        renderer: (row) => {
-                                            return row.default === "default" ? (
-                                                <div className="font-bold text-rose-700">✓</div>
-                                            ) : (
-                                                ""
-                                            )
                                         },
                                     },
                                     {

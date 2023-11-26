@@ -5,7 +5,6 @@ import Dexie, { Table } from "dexie"
 interface Base {
     id: string
     created: Date
-    default: "default" | null
 }
 
 export interface Carrier extends Base {
@@ -27,9 +26,9 @@ export class DexieDatabase extends Dexie {
 
     constructor() {
         super("myFreightCube")
-        this.version(1).stores({
-            carriers: "id,created,&default",
-            equipment: "id,created,&default",
+        this.version(2).stores({
+            carriers: "id,created",
+            equipment: "id,created",
         })
     }
 }

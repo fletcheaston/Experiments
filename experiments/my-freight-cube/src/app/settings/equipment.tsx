@@ -5,10 +5,10 @@ import React, {useEffect, useState} from "react"
 
 import {Equipment, database} from "@components/database"
 import {Divider} from "@components/divider"
-import {CheckboxInput, NumberInput, TextInput} from "@components/input"
-import {Loading} from "@components/loading"
+import {NumberInput, TextInput} from "@components/input"
 import Modal from "@components/modal"
 import {Table} from "@components/table"
+import {Loading} from "@components/loading"
 
 
 function AddEquipment() {
@@ -22,7 +22,6 @@ function AddEquipment() {
     const [inchWidth, setInchWidth] = useState(100.0)
     const [inchHeight, setInchHeight] = useState(100.0)
     const [poundsMaxWeight, setPoundsMaxWeight] = useState(10000.0)
-    const [defaultEquipment, setDefaultEquipment] = useState(false)
 
     /**************************************************************************/
     /* Render */
@@ -49,18 +48,10 @@ function AddEquipment() {
                             setSaving(true)
                             event.preventDefault()
 
-                            // If this is the new default equipment, remove the default from all other equipment
-                            if (defaultEquipment) {
-                                await database.equipment
-                                    .where({default: "default"})
-                                    .modify((row) => (row.default = null))
-                            }
-
                             // Add the equipment
                             await database.equipment.add({
                                 id: crypto.randomUUID(),
                                 created: new Date(),
-                                default: defaultEquipment ? "default" : null,
                                 name,
                                 inchLength,
                                 inchWidth,
@@ -76,7 +67,6 @@ function AddEquipment() {
                             setInchWidth(100.0)
                             setInchHeight(100.0)
                             setPoundsMaxWeight(10000.0)
-                            setDefaultEquipment(false)
                         }}
                     >
                         <div className="flex gap-x-4">
@@ -127,12 +117,6 @@ function AddEquipment() {
                             />
                         </div>
 
-                        <CheckboxInput
-                            label="Default Equipment"
-                            checked={defaultEquipment}
-                            setChecked={setDefaultEquipment}
-                        />
-
                         <Divider/>
 
                         <div>
@@ -161,7 +145,6 @@ function EditEquipment(props: { equipment: Equipment; close: () => void }) {
     const [inchWidth, setInchWidth] = useState(props.equipment.inchWidth)
     const [inchHeight, setInchHeight] = useState(props.equipment.inchHeight)
     const [poundsMaxWeight, setPoundsMaxWeight] = useState(props.equipment.poundsMaxWeight)
-    const [defaultEquipment, setDefaultEquipment] = useState(props.equipment.default === "default")
 
     /**************************************************************************/
     /* Render */
@@ -180,16 +163,8 @@ function EditEquipment(props: { equipment: Equipment; close: () => void }) {
                         setSaving(true)
                         event.preventDefault()
 
-                        // If this is the new default equipment, remove the default from all other equipment
-                        if (defaultEquipment) {
-                            await database.equipment
-                                .where({default: "default"})
-                                .modify((row) => (row.default = null))
-                        }
-
                         // Modify the equipment
                         await database.equipment.where({id: props.equipment.id}).modify({
-                            default: defaultEquipment ? "default" : null,
                             name,
                             inchLength,
                             inchWidth,
@@ -248,12 +223,6 @@ function EditEquipment(props: { equipment: Equipment; close: () => void }) {
                             setValue={setInchHeight}
                         />
                     </div>
-
-                    <CheckboxInput
-                        label="Default Equipment"
-                        checked={defaultEquipment}
-                        setChecked={setDefaultEquipment}
-                    />
 
                     <Divider/>
 
@@ -357,23 +326,11 @@ export function Equipment() {
                                         },
                                     },
                                     {
-                                        title: "Inner Dims",
+                                        title: "Inner Dims (in)",
                                         width: "150px",
                                         align: "right",
                                         renderer: (row) => {
                                             return `${row.inchLength}x${row.inchWidth}x${row.inchHeight}`
-                                        },
-                                    },
-                                    {
-                                        title: "Default",
-                                        width: "75px",
-                                        align: "center",
-                                        renderer: (row) => {
-                                            return row.default === "default" ? (
-                                                <div className="font-bold text-rose-700">✓</div>
-                                            ) : (
-                                                ""
-                                            )
                                         },
                                     },
                                     {

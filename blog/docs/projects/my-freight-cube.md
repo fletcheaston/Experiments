@@ -2,7 +2,7 @@
 title: MyFreightCube
 ---
 
-## What is MyFreightCube?
+## What is [MyFreightCube](https://fletcheaston.com/experiments/myfreightcube)?
 
 MyFreightCube is a set of calculators to help with common shipping/freight calculations.
 

@@ -300,7 +300,7 @@ export function Equipment() {
                 </div>
 
                 <p className="mt-3 text-[0.875rem]">
-                    Edit all your custom equipment and set a default for your calculators.
+                    Edit all your custom equipment.
                 </p>
 
                 {equipmentToEdit && (

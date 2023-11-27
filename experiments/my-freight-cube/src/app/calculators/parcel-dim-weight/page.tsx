@@ -13,21 +13,18 @@ const predefinedCarriers: Array<Carrier> = [
     {
         id: crypto.randomUUID(),
         created: new Date(),
-        default: null,
         name: "FedEx",
         dimDivisor: 139.0,
     },
     {
         id: crypto.randomUUID(),
         created: new Date(),
-        default: null,
         name: "UPS",
         dimDivisor: 139.0,
     },
     {
         id: crypto.randomUUID(),
         created: new Date(),
-        default: null,
         name: "USPS",
         dimDivisor: 139.0,
     },

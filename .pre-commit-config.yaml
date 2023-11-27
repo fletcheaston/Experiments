@@ -48,3 +48,11 @@ repos:
         entry: bash -c 'cd experiments/my-freight-cube && npm run format'
         language: system
         types_or: [ts, tsx]
+
+-   repo: local
+    hooks:
+    -   id: experiments/my-freight-cube/type-check
+        name: experiments/my-freight-cube/type-check
+        entry: bash -c 'cd experiments/my-freight-cube && npm run type-check'
+        language: system
+        types_or: [ts, tsx]

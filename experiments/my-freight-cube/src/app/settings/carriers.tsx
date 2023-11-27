@@ -225,9 +225,7 @@ export function Carriers() {
                     <AddCarrier />
                 </div>
 
-                <p className="mt-3 text-[0.875rem]">
-                    Edit all your custom carriers and set a default for your calculators.
-                </p>
+                <p className="mt-3 text-[0.875rem]">Edit all your custom carriers.</p>
 
                 {carrierToEdit && (
                     <EditCarrier

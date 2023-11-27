@@ -1,0 +1,52 @@
+steps:
+    ###########################################################################
+    # Build the image
+    - id: build
+      name: "gcr.io/cloud-builders/docker"
+      entrypoint: "bash"
+      args:
+          - "-c"
+          - "docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/experiments-my-freight-cube:$SHORT_SHA -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/experiments-my-freight-cube:latest --file experiments/my-freight-cube/Dockerfile ./experiments/my-freight-cube"
+      waitFor:
+          - "-"
+
+    # Push images to Artifact Registry
+    - id: push-sha
+      name: "gcr.io/cloud-builders/docker"
+      args:
+          - "push"
+          - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/experiments-my-freight-cube:$SHORT_SHA"
+      waitFor:
+          - build
+
+    - id: push-latest
+      name: "gcr.io/cloud-builders/docker"
+      args:
+          - "push"
+          - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/experiments-my-freight-cube:latest"
+      waitFor:
+          - build
+
+    # Deploy image to Cloud Run
+    - id: deploy
+      name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+      entrypoint: gcloud
+      args:
+          - "run"
+          - "deploy"
+          - "experiments-my-freight-cube"
+          - "--image"
+          - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/experiments-my-freight-cube:$SHORT_SHA"
+          - "--region"
+          - "us-central1"
+          - "--platform"
+          - "managed"
+      waitFor:
+          - push-sha
+
+# 10 minutes
+timeout: 600s
+
+images:
+    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/experiments-my-freight-cube:$SHORT_SHA"
+    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/experiments-my-freight-cube:latest"

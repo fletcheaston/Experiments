@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+    basePath: "/experiments/myfreightcube",
+    experimental: {
+        typedRoutes: true,
+    },
+}
 
 module.exports = nextConfig

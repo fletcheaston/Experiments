@@ -1,5 +1,6 @@
+import { RouteType } from "next/dist/lib/load-custom-routes"
 import Image, { StaticImageData } from "next/image"
-import Link from "next/link"
+import Link, { LinkProps } from "next/link"
 import React from "react"
 
 import CubeIcon from "@images/icon-density.png"
@@ -12,7 +13,7 @@ function CalculatorCard(props: {
     alt: string
     title: string
     description: string
-    link: string
+    link: LinkProps<RouteType>["href"]
 }) {
     /**************************************************************************/
     /* Render */

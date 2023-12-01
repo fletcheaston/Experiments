@@ -81,3 +81,6 @@ nav:
           - Advent of Code 2023:
                 - projects/advent-of-code-2023/index.md
                 - "Day 1: Trebuchet?!": projects/advent-of-code-2023/day-1.md
+          - Advent of TypeScript 2023:
+                - projects/advent-of-typescript-2023/index.md
+                - "Day 1: Christmas Cookies": projects/advent-of-typescript-2023/day-1.md

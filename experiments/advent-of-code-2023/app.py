@@ -5,6 +5,7 @@ from src import router
 PREFIX = "/experiments/advent-of-code-2023"
 
 app = FastAPI(
+    openapi_url=f"{PREFIX}/openapi.json",
     docs_url=f"{PREFIX}/docs",
     redoc_url=f"{PREFIX}/redoc",
 )

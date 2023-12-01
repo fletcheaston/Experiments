@@ -1,0 +1,52 @@
+steps:
+    ###########################################################################
+    # Build the image
+    -   id: build
+        name: "gcr.io/cloud-builders/docker"
+        entrypoint: "bash"
+        args:
+            - "-c"
+            - "docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code-2023:$SHORT_SHA -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code-2023:latest --file experiments/advent-of-code-2023/Dockerfile ./experiments/advent-of-code-2023"
+        waitFor:
+            - "-"
+
+    # Push images to Artifact Registry
+    -   id: push-sha
+        name: "gcr.io/cloud-builders/docker"
+        args:
+            - "push"
+            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code-2023:$SHORT_SHA"
+        waitFor:
+            - build
+
+    -   id: push-latest
+        name: "gcr.io/cloud-builders/docker"
+        args:
+            - "push"
+            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code-2023:latest"
+        waitFor:
+            - build
+
+    # Deploy image to Cloud Run
+    -   id: deploy
+        name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+        entrypoint: gcloud
+        args:
+            - "run"
+            - "deploy"
+            - "advent-of-code-2023"
+            - "--image"
+            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code-2023:$SHORT_SHA"
+            - "--region"
+            - "us-central1"
+            - "--platform"
+            - "managed"
+        waitFor:
+            - push-sha
+
+# 10 minutes
+timeout: 600s
+
+images:
+    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code-2023:$SHORT_SHA"
+    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code-2023:latest"

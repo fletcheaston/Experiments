@@ -17,20 +17,17 @@ repos:
     hooks:
     -   id: ruff
         language_version: python3.12
-        args: [./experiments/full-text-search, --fix, --exit-non-zero-on-fix]
 
 -   repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.1.4
     hooks:
     -   id: ruff-format
         language_version: python3.12
-        args: [./experiments/full-text-search]
 
--   repo: https://github.com/asottile/reorder-python-imports
-    rev: v3.10.0
+-   repo: https://github.com/PyCQA/isort
+    rev: 5.12.0
     hooks:
-    -   id: reorder-python-imports
-        args: [--application-directories=app-chess-backend]
+      - id: isort
 
 # Typescript hooks
 -   repo: local

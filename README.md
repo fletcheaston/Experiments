@@ -31,9 +31,9 @@ Replace `{env name}` below with your desired conda environment name.
 
 4. Add your conda environment to your IDE
 
-5. Install pre-commit and commit-msg hooks
+5. Install pre-commit and commit-msg hooks for all projects
     ```shell
-    pre-commit install --hook-type pre-commit --hook-type commit-msg
+    make pre-commit-install
     ```
 
 ## Contributing

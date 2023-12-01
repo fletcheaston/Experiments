@@ -78,3 +78,5 @@ nav:
     - Resume: index.md
     - Projects:
           - MyFreightCube: projects/my-freight-cube.md
+          - Advent of Code 2023:
+                - "Day 1: Trebuchet?!": projects/advent-of-code-2023/day-1.md

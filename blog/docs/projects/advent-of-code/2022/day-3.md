@@ -177,4 +177,4 @@ async def year_2022_day_3_part_2(lines: Lines) -> int:
 
 Ez pz 😎.
 
-I love problems with sets (and dictionaries), so this was a really fun one ☺️.
+I love problems with sets (and dictionaries), so this was a really fun one 😁.

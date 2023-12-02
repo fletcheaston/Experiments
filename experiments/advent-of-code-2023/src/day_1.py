@@ -3,16 +3,14 @@ import io
 
 from fastapi import APIRouter, UploadFile
 
+from src.utils import reduce_lfind, reduce_rfind
+
 router = APIRouter(tags=["Day 1: Trebuchet?!"])
 
 
 @router.post("/part-1")
 async def day_1_part_1(calibration_document: UploadFile) -> int:
     """
-    # Day 1: Trebuchet?!
-
-    ## Part 1
-
     Something is wrong with global snow production, and you've been selected to take a look.
     The Elves have even given you a map; on it, they've used stars to mark the top fifty locations that are likely to be having problems.
 
@@ -33,8 +31,8 @@ async def day_1_part_1(calibration_document: UploadFile) -> int:
     who was apparently just excited to show off her art skills.
     Consequently, the Elves are having trouble reading the values on the document.
 
-    The newly-improved calibration document consists of lines of text; each line originally contained a specific calibration value that the Elves now need to recover.
-    On each line, the calibration value can be found by combining the first digit and the last digit (in that order) to form a single two-digit number.
+    The newly-improved calibration document consists of lines of text; each line originally contained a specific **calibration value** that the Elves now need to recover.
+    On each line, the calibration value can be found by combining the **first digit** and the **last digit** (in that order) to form a single **two-digit number**.
 
     For example:
 
@@ -45,10 +43,11 @@ async def day_1_part_1(calibration_document: UploadFile) -> int:
     treb7uchet
     ```
 
-    In this example, the calibration values of these four lines are 12, 38, 15, and 77.
-    Adding these together produces 142.
+    In this example, the calibration values of these four lines are `12`, `38`, `15`, and `77`.
+    Adding these together produces **`142`**.
 
-    Consider your entire calibration document. What is the sum of all of the calibration values?
+    Consider your entire calibration document.
+    **What is the sum of all of the calibration values?**
     """
     total = 0
 
@@ -90,47 +89,12 @@ VALID_DIGIT_TO_NUM: dict[str, int] = {
 VALID_DIGITS = VALID_DIGIT_TO_NUM.keys()
 
 
-def reduce_lfind(a: str, b: str, line: str) -> str:
-    position_a = line.find(a)
-    position_b = line.find(b)
-
-    if position_a == -1:
-        return b
-
-    if position_b == -1:
-        return a
-
-    if position_a < position_b:
-        return a
-
-    return b
-
-
-def reduce_rfind(a: str, b: str, line: str) -> str:
-    position_a = line.rfind(a)
-    position_b = line.rfind(b)
-
-    if position_a == -1:
-        return b
-
-    if position_b == -1:
-        return a
-
-    if position_a > position_b:
-        return a
-
-    return b
-
-
 @router.post("/part-2")
 async def day_1_part_2(calibration_document: UploadFile) -> int:
     """
-    # Day 1: Trebuchet?!
-
-    ## Part 2
-
     Your calculation isn't quite right.
-    It looks like some of the digits are actually spelled out with letters: one, two, three, four, five, six, seven, eight, and nine also count as valid "digits".
+    It looks like some of the digits are actually **spelled out with letters**:
+    `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, and `nine` **also** count as valid "digits".
 
     Equipped with this new information, you now need to find the real first and last digit on each line.
     For example:
@@ -145,10 +109,10 @@ async def day_1_part_2(calibration_document: UploadFile) -> int:
     7pqrstsixteen
     ```
 
-    In this example, the calibration values are 29, 83, 13, 24, 42, 14, and 76.
-    Adding these together produces 281.
+    In this example, the calibration values are `29`, `83`, `13`, `24`, `42`, `14`, and `76`.
+    Adding these together produces **`281`**.
 
-    What is the sum of all of the calibration values?
+    **What is the sum of all of the calibration values?**
     """
     total = 0
 

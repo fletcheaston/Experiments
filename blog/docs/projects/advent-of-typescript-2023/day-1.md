@@ -13,11 +13,11 @@ Santa has a preparation regimen that involves, of course, eating lots of delicio
 Santa's elves have provided Santa an API whereby Santa can submit his favorite cookie flavors.
 This year his favorites are:
 
-- ginger-bread
-- chocolate-chip
+- `ginger-bread`
+- `chocolate-chip`
 
 But the elves have some kind of fancy code-gen build step (built in Rust, of course),
-so all Santa needs to do is update the SantasFavoriteCookies type.
+so all Santa needs to do is update the `SantasFavoriteCookies` type.
 
 Can you help?
 

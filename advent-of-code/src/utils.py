@@ -1,3 +1,6 @@
+from typing import Iterator
+
+
 def reduce_lfind(a: str, b: str, line: str) -> str:
     position_a = line.find(a)
     position_b = line.find(b)
@@ -28,3 +31,9 @@ def reduce_rfind(a: str, b: str, line: str) -> str:
         return a
 
     return b
+
+
+def chunks(data: list[str], size: int) -> Iterator[list[str]]:
+    """Yield successive chunks from data."""
+    for i in range(0, len(data), size):
+        yield data[i : i + size]

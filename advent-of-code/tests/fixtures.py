@@ -1,5 +1,5 @@
 import pytest
-from app import app
+from app import PREFIX, app
 from fastapi.testclient import TestClient
 
 
@@ -7,5 +7,5 @@ from fastapi.testclient import TestClient
 def test_client() -> TestClient:
     return TestClient(
         app=app,
-        base_url="http://testserver/experiments/advent-of-code-2023",
+        base_url=f"http://testserver/{PREFIX}",
     )

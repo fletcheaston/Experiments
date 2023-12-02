@@ -2,7 +2,7 @@ import io
 
 from fastapi import APIRouter, Query, UploadFile
 
-router = APIRouter(tags=["Day 2: Cube Conundrum"])
+router = APIRouter(tags=["2023 - Day 2: Cube Conundrum"])
 
 
 def is_possible(score: str, red: int, green: int, blue: int) -> bool:
@@ -22,7 +22,7 @@ def is_possible(score: str, red: int, green: int, blue: int) -> bool:
 
 
 @router.post("/part-1")
-async def day_2_part_1(
+async def year_2023_day_2_part_1(
     document: UploadFile,
     red: int = Query(...),
     green: int = Query(...),
@@ -95,7 +95,7 @@ async def day_2_part_1(
 
 
 @router.post("/part-2")
-async def day_2_part_2(document: UploadFile) -> int:
+async def year_2023_day_2_part_2(document: UploadFile) -> int:
     """
     The Elf says they've stopped producing snow because they aren't getting any water!
     He isn't sure why the water stopped; however, he can show you how to get to the water source to check it out for yourself.

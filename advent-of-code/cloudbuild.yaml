@@ -6,7 +6,7 @@ steps:
         entrypoint: "bash"
         args:
             - "-c"
-            - "docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code-2023:$SHORT_SHA -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code-2023:latest --file experiments/advent-of-code-2023/Dockerfile ./experiments/advent-of-code-2023"
+            - "docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:$SHORT_SHA -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:latest --file advent-of-code/Dockerfile ./advent-of-code"
         waitFor:
             - "-"
 
@@ -15,7 +15,7 @@ steps:
         name: "gcr.io/cloud-builders/docker"
         args:
             - "push"
-            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code-2023:$SHORT_SHA"
+            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:$SHORT_SHA"
         waitFor:
             - build
 
@@ -23,7 +23,7 @@ steps:
         name: "gcr.io/cloud-builders/docker"
         args:
             - "push"
-            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code-2023:latest"
+            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:latest"
         waitFor:
             - build
 
@@ -34,9 +34,9 @@ steps:
         args:
             - "run"
             - "deploy"
-            - "advent-of-code-2023"
+            - "advent-of-code"
             - "--image"
-            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code-2023:$SHORT_SHA"
+            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:$SHORT_SHA"
             - "--region"
             - "us-central1"
             - "--platform"
@@ -48,5 +48,5 @@ steps:
 timeout: 600s
 
 images:
-    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code-2023:$SHORT_SHA"
-    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code-2023:latest"
+    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:$SHORT_SHA"
+    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:latest"

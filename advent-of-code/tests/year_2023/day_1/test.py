@@ -10,9 +10,9 @@ from fastapi.testclient import TestClient
     ],
 )
 def test_day_1_part_1(filename: str, total: int, test_client: TestClient) -> None:
-    with open(f"tests/day_1/{filename}", "rb") as file:
+    with open(f"tests/year_2023/day_1/{filename}", "rb") as file:
         response = test_client.post(
-            "day-1/part-1",
+            "2023/day-1/part-1",
             files={"calibration_document": file},
         )
 
@@ -28,9 +28,9 @@ def test_day_1_part_1(filename: str, total: int, test_client: TestClient) -> Non
     ],
 )
 def test_day_1_part_2(filename: str, total: int, test_client: TestClient) -> None:
-    with open(f"tests/day_1/{filename}", "rb") as file:
+    with open(f"tests/year_2023/day_1/{filename}", "rb") as file:
         response = test_client.post(
-            "day-1/part-2",
+            "2023/day-1/part-2",
             files={"calibration_document": file},
         )
 

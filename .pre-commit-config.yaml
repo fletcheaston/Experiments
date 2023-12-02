@@ -32,24 +32,24 @@ repos:
 # Typescript hooks
 -   repo: local
     hooks:
-    -   id: experiments/my-freight-cube/lint
-        name: experiments/my-freight-cube/lint
-        entry: bash -c 'cd experiments/my-freight-cube && npm run lint'
+    -   id: my-freight-cube/lint
+        name: my-freight-cube/lint
+        entry: bash -c 'cd my-freight-cube && npm run lint'
         language: system
         types_or: [ts, tsx]
 
 -   repo: local
     hooks:
-    -   id: experiments/my-freight-cube/format
-        name: experiments/my-freight-cube/format
-        entry: bash -c 'cd experiments/my-freight-cube && npm run format'
+    -   id: my-freight-cube/format
+        name: my-freight-cube/format
+        entry: bash -c 'cd my-freight-cube && npm run format'
         language: system
         types_or: [ts, tsx]
 
 -   repo: local
     hooks:
-    -   id: experiments/my-freight-cube/type-check
-        name: experiments/my-freight-cube/type-check
-        entry: bash -c 'cd experiments/my-freight-cube && npm run type-check'
+    -   id: my-freight-cube/type-check
+        name: my-freight-cube/type-check
+        entry: bash -c 'cd my-freight-cube && npm run type-check'
         language: system
         types_or: [ts, tsx]

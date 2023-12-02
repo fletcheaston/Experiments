@@ -5,11 +5,11 @@ from fastapi import APIRouter, UploadFile
 
 from src.utils import reduce_lfind, reduce_rfind
 
-router = APIRouter(tags=["Day 1: Trebuchet?!"])
+router = APIRouter(tags=["2023 - Day 1: Trebuchet?!"])
 
 
 @router.post("/part-1")
-async def day_1_part_1(calibration_document: UploadFile) -> int:
+async def year_2023_day_1_part_1(calibration_document: UploadFile) -> int:
     """
     Something is wrong with global snow production, and you've been selected to take a look.
     The Elves have even given you a map; on it, they've used stars to mark the top fifty locations that are likely to be having problems.
@@ -90,7 +90,7 @@ VALID_DIGITS = VALID_DIGIT_TO_NUM.keys()
 
 
 @router.post("/part-2")
-async def day_1_part_2(calibration_document: UploadFile) -> int:
+async def year_2023_day_1_part_2(calibration_document: UploadFile) -> int:
     """
     Your calculation isn't quite right.
     It looks like some of the digits are actually **spelled out with letters**:

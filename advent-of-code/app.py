@@ -2,7 +2,7 @@ from fastapi import FastAPI
 
 from src import router
 
-PREFIX = "/experiments/advent-of-code-2023"
+PREFIX = "/advent-of-code"
 
 app = FastAPI(
     openapi_url=f"{PREFIX}/openapi.json",

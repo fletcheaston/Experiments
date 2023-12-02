@@ -6,7 +6,7 @@ steps:
       entrypoint: "bash"
       args:
           - "-c"
-          - "docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/experiments-my-freight-cube:$SHORT_SHA -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/experiments-my-freight-cube:latest --file experiments/my-freight-cube/Dockerfile ./experiments/my-freight-cube"
+          - "docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/my-freight-cube:$SHORT_SHA -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/my-freight-cube:latest --file my-freight-cube/Dockerfile ./my-freight-cube"
       waitFor:
           - "-"
 
@@ -15,7 +15,7 @@ steps:
       name: "gcr.io/cloud-builders/docker"
       args:
           - "push"
-          - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/experiments-my-freight-cube:$SHORT_SHA"
+          - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/my-freight-cube:$SHORT_SHA"
       waitFor:
           - build
 
@@ -23,7 +23,7 @@ steps:
       name: "gcr.io/cloud-builders/docker"
       args:
           - "push"
-          - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/experiments-my-freight-cube:latest"
+          - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/my-freight-cube:latest"
       waitFor:
           - build
 
@@ -34,9 +34,9 @@ steps:
       args:
           - "run"
           - "deploy"
-          - "experiments-my-freight-cube"
+          - "my-freight-cube"
           - "--image"
-          - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/experiments-my-freight-cube:$SHORT_SHA"
+          - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/my-freight-cube:$SHORT_SHA"
           - "--region"
           - "us-central1"
           - "--platform"
@@ -48,5 +48,5 @@ steps:
 timeout: 600s
 
 images:
-    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/experiments-my-freight-cube:$SHORT_SHA"
-    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/experiments-my-freight-cube:latest"
+    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/my-freight-cube:$SHORT_SHA"
+    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/my-freight-cube:latest"

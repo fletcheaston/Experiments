@@ -4,7 +4,7 @@ title: Advent of Code 2023
 
 Check out [Advent of Code](https://adventofcode.com/)!
 
-I've set my project up as a [FastAPI server](https://fletcheaston.com/experiments/advent-of-code-2023/docs).
+I've set my project up as a [FastAPI server](https://fletcheaston.com/advent-of-code/docs).
 All endpoints have automated tests and some amount of documentation covering the problem.
 
 ## Times

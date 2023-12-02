@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    basePath: "/experiments/myfreightcube",
+    basePath: "/my-freight-cube",
     experimental: {
         typedRoutes: true,
     },

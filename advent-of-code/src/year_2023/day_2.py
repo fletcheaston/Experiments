@@ -1,6 +1,6 @@
-import io
+from fastapi import APIRouter, Query
 
-from fastapi import APIRouter, Query, UploadFile
+from src.types import Lines
 
 router = APIRouter(tags=["2023 - Day 2: Cube Conundrum"])
 
@@ -23,7 +23,7 @@ def is_possible(score: str, red: int, green: int, blue: int) -> bool:
 
 @router.post("/part-1")
 async def year_2023_day_2_part_1(
-    document: UploadFile,
+    lines: Lines,
     red: int = Query(...),
     green: int = Query(...),
     blue: int = Query(...),
@@ -73,29 +73,28 @@ async def year_2023_day_2_part_1(
     total = 0
 
     # Iterate over lines
-    with document.file as file:
-        for line in io.TextIOWrapper(file, encoding="utf-8"):
-            possible = True
+    for line in lines:
+        possible = True
 
-            game_text, ball_text = line.split(": ")
+        game_text, ball_text = line.split(": ")
 
-            # Extract game number
-            game_number = int(str(game_text).replace("Game ", ""))
+        # Extract game number
+        game_number = int(str(game_text).replace("Game ", ""))
 
-            # Check if scores are possible
-            for scores in ball_text.split(";"):
-                for score in scores.split(", "):
-                    if not is_possible(score, red, green, blue):
-                        possible = False
+        # Check if scores are possible
+        for scores in ball_text.split(";"):
+            for score in scores.split(", "):
+                if not is_possible(score, red, green, blue):
+                    possible = False
 
-            if possible:
-                total += game_number
+        if possible:
+            total += game_number
 
     return total
 
 
 @router.post("/part-2")
-async def year_2023_day_2_part_2(document: UploadFile) -> int:
+async def year_2023_day_2_part_2(lines: Lines) -> int:
     """
     The Elf says they've stopped producing snow because they aren't getting any water!
     He isn't sure why the water stopped; however, he can show you how to get to the water source to check it out for yourself.
@@ -130,25 +129,24 @@ async def year_2023_day_2_part_2(document: UploadFile) -> int:
     powers = 0
 
     # Iterate over lines
-    with document.file as file:
-        for line in io.TextIOWrapper(file, encoding="utf-8"):
-            red = 0
-            green = 0
-            blue = 0
+    for line in lines:
+        red = 0
+        green = 0
+        blue = 0
 
-            _, ball_text = line.split(": ")
+        _, ball_text = line.split(": ")
 
-            for scores in ball_text.split(";"):
-                for score in scores.split(", "):
-                    if "red" in score:
-                        red = max(red, int(score.replace(" red", "")))
+        for scores in ball_text.split(";"):
+            for score in scores.split(", "):
+                if "red" in score:
+                    red = max(red, int(score.replace(" red", "")))
 
-                    if "green" in score:
-                        green = max(green, int(score.replace(" green", "")))
+                if "green" in score:
+                    green = max(green, int(score.replace(" green", "")))
 
-                    if "blue" in score:
-                        blue = max(blue, int(score.replace(" blue", "")))
+                if "blue" in score:
+                    blue = max(blue, int(score.replace(" blue", "")))
 
-            powers += red * green * blue
+        powers += red * green * blue
 
     return powers

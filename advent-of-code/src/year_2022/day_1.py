@@ -1,12 +1,12 @@
-import io
+from fastapi import APIRouter
 
-from fastapi import APIRouter, UploadFile
+from src.types import Lines
 
 router = APIRouter(tags=["2022 - Day 1: Calorie Counting"])
 
 
 @router.post("/part-1")
-async def year_2022_day_1_part_1(document: UploadFile) -> int:
+async def year_2022_day_1_part_1(lines: Lines) -> int:
     """
     Santa's reindeer typically eat regular reindeer food, but they need a lot of magical energy to deliver presents on Christmas.
     For that, their favorite snack is a special type of star fruit that only grows deep in the jungle.
@@ -62,16 +62,15 @@ async def year_2022_day_1_part_1(document: UploadFile) -> int:
     max_total = 0
 
     # Iterate over lines
-    with document.file as file:
-        for line in io.TextIOWrapper(file, encoding="utf-8"):
-            if line.strip():
-                # Add to the running total
-                running_total += int(line)
+    for line in lines:
+        if line.strip():
+            # Add to the running total
+            running_total += int(line)
 
-            else:
-                # Reset the running total
-                max_total = max(max_total, running_total)
-                running_total = 0
+        else:
+            # Reset the running total
+            max_total = max(max_total, running_total)
+            running_total = 0
 
     # Make sure to catch the last running total
     max_total = max(max_total, running_total)
@@ -80,7 +79,7 @@ async def year_2022_day_1_part_1(document: UploadFile) -> int:
 
 
 @router.post("/part-2")
-async def year_2022_day_1_part_2(document: UploadFile) -> int:
+async def year_2022_day_1_part_2(lines: Lines) -> int:
     """
     By the time you calculate the answer to the Elves' question, they've already realized that the Elf carrying the most Calories of food might eventually run out of snacks.
 
@@ -97,16 +96,15 @@ async def year_2022_day_1_part_2(document: UploadFile) -> int:
     totals: list[int] = []
 
     # Iterate over lines
-    with document.file as file:
-        for line in io.TextIOWrapper(file, encoding="utf-8"):
-            if line.strip():
-                # Add to the running total
-                running_total += int(line)
+    for line in lines:
+        if line.strip():
+            # Add to the running total
+            running_total += int(line)
 
-            else:
-                # Reset the running total
-                totals.append(running_total)
-                running_total = 0
+        else:
+            # Reset the running total
+            totals.append(running_total)
+            running_total = 0
 
     # Make sure to catch the last running total
     totals.append(running_total)

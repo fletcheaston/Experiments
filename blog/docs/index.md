@@ -6,7 +6,7 @@ title: Resume
 
 I'm a Senior Software Engineer located in San Diego, CA.
 
-I care deeply about code quality, maintainability, and doing things well. This website is my current passion project, so expect to see some really fun and cool things here shortly!
+I care deeply about code quality, maintainability, and doing things well.
 
 When I'm not at the computer, you can find me at the gym, hiking the nearest mountain, or reading Sci-Fi.
 
@@ -14,19 +14,21 @@ If you want to get in touch, send me an email at [work@fletcheaston.com](mailto:
 
 ## Work Experience
 
+### Rad AI
+
+**Senior Software Engineer II, September 2023 - Present**
+
+- I'm working here now!
+
 ### ROSALIND
 
-#### Technical Lead
-
-**September 2022 - September 2023**
+**Technical Lead, September 2022 - September 2023**
 
 - Led the platform engineering and data science teams in architecting the next version of Rosalind.
 - Collaborated closely with current customers, product team members, and executives to build the next version of Rosalind.
 - Managed the platform engineering team and mentored junior engineers.
 
-#### Senior Softare Engineer
-
-**August 2021 - September 2022**
+**Senior Softare Engineer, August 2021 - September 2022**
 
 - Led the Rosalind engineering team through the FedRAMP audit with Coalfire, achieving FedRAMP Moderate status in under a year.
 - Rebuilt the Rosalind Diagnostic Monitoring platform for COVID-19 analysis with a team of software engineers.
@@ -34,9 +36,7 @@ If you want to get in touch, send me an email at [work@fletcheaston.com](mailto:
 
 ### Grove
 
-#### Lead DevOps and Backend Engineer
-
-**September 2019 - July 2021**
+**Lead DevOps and Backend Engineer, September 2019 - July 2021**
 
 - Coordinated an API-first development process with customers, designers, and front-end engineers.
 - Developed, documented, and tested REST APIs using FastAPI, Django, and pytest.
@@ -45,9 +45,7 @@ If you want to get in touch, send me an email at [work@fletcheaston.com](mailto:
 
 ### California Strawberry Commission
 
-#### Automation Engineer
-
-**October 2019 - July 2021**
+**Automation Engineer, October 2019 - July 2021**
 
 - Developed edge and cloud-based machine-vision systems to identify and count Lygus, mites, and strawberry runners using TensorFlow and FastAPI.
 - Built robust pipelines in AWS for updating the machine-vision models powering the cloud-based object detection.
@@ -56,9 +54,7 @@ If you want to get in touch, send me an email at [work@fletcheaston.com](mailto:
 
 ### HealMed Solutions
 
-#### DevOps and Backend Engineering Contractor
-
-**January 2021 - June 2021**
+**DevOps and Backend Engineering Contractor, January 2021 - June 2021**
 
 - Worked closely with HealMed Solutions to develop HIPAA-compliant software for partnered hospital systems.
 - Developed a well-documented backend in FastAPI and SQLAlchemy using a TDD process.
@@ -68,9 +64,7 @@ If you want to get in touch, send me an email at [work@fletcheaston.com](mailto:
 
 ### Assembled Supply
 
-#### DevOps and Backend Engineering Contractor
-
-**July 2020 - June 2021**
+**DevOps and Backend Engineering Contractor, July 2020 - June 2021**
 
 - Scraped and cleaned data from various industrial supplies websites using selenium and scrapy.
 - Built a data management system for matching items from dozens of sellers for direct price comparisons.
@@ -80,9 +74,7 @@ If you want to get in touch, send me an email at [work@fletcheaston.com](mailto:
 
 ### [MyFreightCube](projects/my-freight-cube.md)
 
-#### Web Development Contractor
-
-**October 2020 - January 2021**
+**DevOps and Full-Stack Engineering Contractor, October 2020 - January 2021**
 
 - Built a highly performant API to efficiently arrange variably sized pallets in box trucks using FastAPI and NumPy/SciPy.
 - Developed a responsive web app and cloud architecture to support precise freight conversions and calculations.
@@ -90,9 +82,7 @@ If you want to get in touch, send me an email at [work@fletcheaston.com](mailto:
 
 ### Cal Poly Racing - Baja
 
-#### Electrons Software Lead
-
-**August 2019 - June 2020**
+**Electrons Software Lead, August 2019 - June 2020**
 
 - Led the electronics team in building software for high-performance embedded systems/microcontrollers, using various sensors to gather data about the Baja vehicle.
 - Conducted rigorous testing of sensors on the Baja vehicle in the field.
@@ -100,9 +90,7 @@ If you want to get in touch, send me an email at [work@fletcheaston.com](mailto:
 
 ### Precision Agriculture and Automation Club
 
-#### Club President
-
-**May 2018 - June 2020**
+**Club President, May 2018 - June 2020**
 
 - Led the robotics team in developing software and hardware solutions to various international competitions.
 - Built an autonomous watermelon harvesting robot that won $5,000 at the 2018 AgBot competition.
@@ -111,9 +99,7 @@ If you want to get in touch, send me an email at [work@fletcheaston.com](mailto:
 
 ### Cal Poly Corporation
 
-#### BRAE Undergrad Research Assistant
-
-**May 2018 - June 2020**
+**BRAE Undergrad Research Assistant, May 2018 - June 2020**
 
 - Assisted the SmartFarm project by installing, monitoring, and analyzing data from custom Arduino boards in CSU Fresno almond orchards.
 - Built an autonomous in-field platform for hosting a variety of mechanical and electrical equipment.

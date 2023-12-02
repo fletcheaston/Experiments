@@ -1,5 +1,7 @@
 ---
-title: Advent of TypeScript 2023
+title: Advent of TypeScript
+hide:
+  - toc
 ---
 
 Check out [TypeHero](https://typehero.dev/)!

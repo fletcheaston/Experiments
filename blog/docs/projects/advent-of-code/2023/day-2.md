@@ -1,7 +1,3 @@
----
-title: Advent of Code 2023 - Day 2
----
-
 # Day 2: Code Conundrum
 
 ## Part 1

@@ -9,7 +9,7 @@ def lines(document: UploadFile) -> list[str]:
 
     with document.file as file:
         for line in io.TextIOWrapper(file, encoding="utf-8"):
-            all_lines.append(line)
+            all_lines.append(line.strip())
 
     return all_lines
 

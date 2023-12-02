@@ -63,7 +63,7 @@ async def year_2022_day_1_part_1(lines: Lines) -> int:
 
     # Iterate over lines
     for line in lines:
-        if line.strip():
+        if line:
             # Add to the running total
             running_total += int(line)
 
@@ -97,7 +97,7 @@ async def year_2022_day_1_part_2(lines: Lines) -> int:
 
     # Iterate over lines
     for line in lines:
-        if line.strip():
+        if line:
             # Add to the running total
             running_total += int(line)
 

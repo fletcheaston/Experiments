@@ -120,7 +120,7 @@ router = APIRouter(tags=["2022 - Day 1: Calorie Counting"])
 
 
 @router.post("/part-2")
-async def year_2022_day_1_part_1(document: UploadFile) -> int:
+async def year_2022_day_1_part_2(document: UploadFile) -> int:
     running_total = 0
     totals: list[int] = []
 

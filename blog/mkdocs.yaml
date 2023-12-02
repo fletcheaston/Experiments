@@ -43,6 +43,8 @@ theme:
 
 plugins:
     - search
+    - git-revision-date-localized:
+        enable_creation_date: true
 
 markdown_extensions:
     # Callouts
@@ -88,3 +90,6 @@ nav:
         - projects/advent-of-typescript/index.md
         - "Day 1: Christmas Cookies": projects/advent-of-typescript/2023/day-1.md
         - "Day 2: Christmas Cookie Inventory": projects/advent-of-typescript/2023/day-2.md
+    - Advent of Code - 2022:
+        - projects/advent-of-code/2022/index.md
+        - "Day 1: Calorie Counting": projects/advent-of-code/2022/day-1.md

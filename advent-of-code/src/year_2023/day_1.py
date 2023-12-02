@@ -9,7 +9,7 @@ router = APIRouter(tags=["2023 - Day 1: Trebuchet?!"])
 
 
 @router.post("/part-1")
-async def year_2023_day_1_part_1(calibration_document: UploadFile) -> int:
+async def year_2023_day_1_part_1(document: UploadFile) -> int:
     """
     Something is wrong with global snow production, and you've been selected to take a look.
     The Elves have even given you a map; on it, they've used stars to mark the top fifty locations that are likely to be having problems.
@@ -52,12 +52,10 @@ async def year_2023_day_1_part_1(calibration_document: UploadFile) -> int:
     total = 0
 
     # Iterate over lines
-    with calibration_document.file as file:
-        for calibration_line in io.TextIOWrapper(file, encoding="utf-8"):
+    with document.file as file:
+        for line in io.TextIOWrapper(file, encoding="utf-8"):
             # Remove all non-numeric characters from the string
-            numerics = [
-                character for character in calibration_line if character.isnumeric()
-            ]
+            numerics = [character for character in line if character.isnumeric()]
 
             # Combine first and last digits, add to total
             total += int(f"{numerics[0]}{numerics[-1]}")
@@ -90,7 +88,7 @@ VALID_DIGITS = VALID_DIGIT_TO_NUM.keys()
 
 
 @router.post("/part-2")
-async def year_2023_day_1_part_2(calibration_document: UploadFile) -> int:
+async def year_2023_day_1_part_2(document: UploadFile) -> int:
     """
     Your calculation isn't quite right.
     It looks like some of the digits are actually **spelled out with letters**:
@@ -117,14 +115,14 @@ async def year_2023_day_1_part_2(calibration_document: UploadFile) -> int:
     total = 0
 
     # Iterate over lines
-    with calibration_document.file as file:
-        for calibration_line in io.TextIOWrapper(file, encoding="utf-8"):
+    with document.file as file:
+        for line in io.TextIOWrapper(file, encoding="utf-8"):
             # Find the earliest "digit"
             first_digit = functools.reduce(
-                lambda a, b: reduce_lfind(a, b, calibration_line), VALID_DIGITS
+                lambda a, b: reduce_lfind(a, b, line), VALID_DIGITS
             )
             last_digit = functools.reduce(
-                lambda a, b: reduce_rfind(a, b, calibration_line), VALID_DIGITS
+                lambda a, b: reduce_rfind(a, b, line), VALID_DIGITS
             )
 
             first = VALID_DIGIT_TO_NUM[first_digit]

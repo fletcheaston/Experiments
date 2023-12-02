@@ -1,7 +1,5 @@
 ---
 title: Advent of TypeScript
-hide:
-  - toc
 ---
 
 Check out [TypeHero](https://typehero.dev/)!

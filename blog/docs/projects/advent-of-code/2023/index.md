@@ -1,7 +1,5 @@
 ---
 title: Advent of Code - 2023
-hide:
-  - toc
 ---
 
 Check out [Advent of Code](https://adventofcode.com/)!

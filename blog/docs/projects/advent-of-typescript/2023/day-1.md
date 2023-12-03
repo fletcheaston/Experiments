@@ -21,7 +21,14 @@ so all Santa needs to do is update the `SantasFavoriteCookies` type.
 
 Can you help?
 
+## Solution
+
+```typescript
+type SantasFavoriteCookies = 'ginger-bread' | 'chocolate-chip';
+```
+
 ## Tests
+
 ```typescript
 import { Expect, Equal } from 'type-testing';
 
@@ -29,11 +36,6 @@ type test_0_actual = SantasFavoriteCookies;
 //   ^?
 type test_0_expected = 'ginger-bread' | 'chocolate-chip';
 type test_0 = Expect<Equal<test_0_actual, test_0_expected>>;
-```
-
-## Solution
-```typescript
-type SantasFavoriteCookies = 'ginger-bread' | 'chocolate-chip';
 ```
 
 ## Recap

@@ -21,7 +21,14 @@ Your goal is to update `CookieSurveyInput` so that it will return a union of all
 
 Good luck! As Santa always says: "your hard work will pay off eventually, just be patient".
 
+## Solution
+
+```typescript
+type CookieSurveyInput<T> = keyof T;
+```
+
 ## Tests
+
 ```typescript
 import { Expect, Equal } from "type-testing";
 
@@ -57,11 +64,6 @@ type test_unrealted_expected = "hi" | "hi2" | "hi3" | "hi4" | "hi5" | "hi6" | "h
 type test_unrelated = Expect<
 	Equal<test_unrelated_actual, test_unrealted_expected>
 >;
-```
-
-## Solution
-```typescript
-type CookieSurveyInput<T> = keyof T;
 ```
 
 ## Recap

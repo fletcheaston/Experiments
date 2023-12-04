@@ -26,7 +26,7 @@ def test_part_1(
         response = test_client.post(
             "2023/day-3/part-1",
             json={
-                "document": file.readlines(),
+                "document": file.read().splitlines(),
             },
         )
 
@@ -56,7 +56,7 @@ def test_part_2(
         response = test_client.post(
             "2023/day-3/part-2",
             json={
-                "document": file.readlines(),
+                "document": file.read().splitlines(),
             },
         )
 

@@ -1,12 +1,34 @@
-from fastapi import APIRouter
-
-from src.types import Lines
+from fastapi import APIRouter, Body
 
 router = APIRouter(tags=["2022 - Day 1: Calorie Counting"])
 
 
+DOCUMENT_EXAMPLE = [
+    "1000",
+    "2000",
+    "3000",
+    "",
+    "4000",
+    "",
+    "5000",
+    "6000",
+    "",
+    "7000",
+    "8000",
+    "9000",
+    "",
+    "10000",
+]
+
+
 @router.post("/part-1")
-async def year_2022_day_1_part_1(lines: Lines) -> int:
+async def year_2022_day_1_part_1(
+    document: list[str] = Body(
+        ...,
+        embed=True,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
+) -> int:
     """
     Santa's reindeer typically eat regular reindeer food, but they need a lot of magical energy to deliver presents on Christmas.
     For that, their favorite snack is a special type of star fruit that only grows deep in the jungle.
@@ -62,7 +84,7 @@ async def year_2022_day_1_part_1(lines: Lines) -> int:
     max_total = 0
 
     # Iterate over lines
-    for line in lines:
+    for line in document:
         if line:
             # Add to the running total
             running_total += int(line)
@@ -79,7 +101,13 @@ async def year_2022_day_1_part_1(lines: Lines) -> int:
 
 
 @router.post("/part-2")
-async def year_2022_day_1_part_2(lines: Lines) -> int:
+async def year_2022_day_1_part_2(
+    document: list[str] = Body(
+        ...,
+        embed=True,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
+) -> int:
     """
     By the time you calculate the answer to the Elves' question, they've already realized that the Elf carrying the most Calories of food might eventually run out of snacks.
 
@@ -96,7 +124,7 @@ async def year_2022_day_1_part_2(lines: Lines) -> int:
     totals: list[int] = []
 
     # Iterate over lines
-    for line in lines:
+    for line in document:
         if line:
             # Add to the running total
             running_total += int(line)

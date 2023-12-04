@@ -1,15 +1,28 @@
 import functools
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Body
 
-from src.types import Lines
 from src.utils import reduce_lfind, reduce_rfind
 
 router = APIRouter(tags=["2023 - Day 1: Trebuchet?!"])
 
 
+DOCUMENT_EXAMPLE = [
+    "1abc2",
+    "pqr3stu8vwx",
+    "a1b2c3d4e5f",
+    "treb7uchet",
+]
+
+
 @router.post("/part-1")
-async def year_2023_day_1_part_1(lines: Lines) -> int:
+async def year_2023_day_1_part_1(
+    document: list[str] = Body(
+        ...,
+        embed=True,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
+) -> int:
     """
     Something is wrong with global snow production, and you've been selected to take a look.
     The Elves have even given you a map; on it, they've used stars to mark the top fifty locations that are likely to be having problems.
@@ -52,7 +65,7 @@ async def year_2023_day_1_part_1(lines: Lines) -> int:
     total = 0
 
     # Iterate over lines
-    for line in lines:
+    for line in document:
         # Remove all non-numeric characters from the string
         numerics = [character for character in line if character.isnumeric()]
 
@@ -87,7 +100,13 @@ VALID_DIGITS = VALID_DIGIT_TO_NUM.keys()
 
 
 @router.post("/part-2")
-async def year_2023_day_1_part_2(lines: Lines) -> int:
+async def year_2023_day_1_part_2(
+    document: list[str] = Body(
+        ...,
+        embed=True,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
+) -> int:
     """
     Your calculation isn't quite right.
     It looks like some of the digits are actually **spelled out with letters**:
@@ -114,7 +133,7 @@ async def year_2023_day_1_part_2(lines: Lines) -> int:
     total = 0
 
     # Iterate over lines
-    for line in lines:
+    for line in document:
         # Find the earliest "digit"
         first_digit = functools.reduce(
             lambda a, b: reduce_lfind(a, b, line), VALID_DIGITS

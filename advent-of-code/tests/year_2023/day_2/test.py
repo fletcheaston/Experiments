@@ -12,15 +12,15 @@ from fastapi.testclient import TestClient
     ],
 )
 def test_part_1(filename: str, total: int, test_client: TestClient) -> None:
-    with open(Path(__file__).with_name(filename), "rb") as file:
+    with open(Path(__file__).with_name(filename), "r") as file:
         response = test_client.post(
             "2023/day-2/part-1",
-            params={
+            json={
+                "document": file.read().splitlines(),
                 "red": 12,
                 "green": 13,
                 "blue": 14,
             },
-            files={"document": file},
         )
 
         assert response.status_code == 200
@@ -35,10 +35,12 @@ def test_part_1(filename: str, total: int, test_client: TestClient) -> None:
     ],
 )
 def test_part_2(filename: str, total: int, test_client: TestClient) -> None:
-    with open(Path(__file__).with_name(filename), "rb") as file:
+    with open(Path(__file__).with_name(filename), "r") as file:
         response = test_client.post(
             "2023/day-2/part-2",
-            files={"document": file},
+            json={
+                "document": file.read().splitlines(),
+            },
         )
 
         assert response.status_code == 200

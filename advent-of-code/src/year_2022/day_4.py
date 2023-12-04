@@ -1,12 +1,26 @@
-from fastapi import APIRouter
-
-from src.types import Lines
+from fastapi import APIRouter, Body
 
 router = APIRouter(tags=["2022 - Day 4: Camp Cleanup"])
 
 
+DOCUMENT_EXAMPLE = [
+    "2-4,6-8",
+    "2-3,4-5",
+    "5-7,7-9",
+    "2-8,3-7",
+    "6-6,4-6",
+    "2-6,4-8",
+]
+
+
 @router.post("/part-1")
-async def year_2022_day_4_part_1(lines: Lines) -> int:
+async def year_2022_day_4_part_1(
+    document: list[str] = Body(
+        ...,
+        embed=True,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
+) -> int:
     """
     Space needs to be cleared before the last supplies can be unloaded from the ships, and so several Elves have been assigned the job of cleaning up sections of the camp.
     Every section has a unique **ID number**, and each Elf is assigned a range of section IDs.
@@ -64,7 +78,7 @@ async def year_2022_day_4_part_1(lines: Lines) -> int:
     total = 0
 
     # Iterate over lines
-    for line in lines:
+    for line in document:
         assignment_left, assignment_right = line.split(",")
 
         # Parse the left assignment
@@ -91,7 +105,13 @@ async def year_2022_day_4_part_1(lines: Lines) -> int:
 
 
 @router.post("/part-2")
-async def year_2022_day_4_part_2(lines: Lines) -> int:
+async def year_2022_day_4_part_2(
+    document: list[str] = Body(
+        ...,
+        embed=True,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
+) -> int:
     """
     It seems like there is still quite a bit of duplicate work planned.
     Instead, the Elves would like to know the number of pairs that **overlap at all**.
@@ -110,7 +130,7 @@ async def year_2022_day_4_part_2(lines: Lines) -> int:
     total = 0
 
     # Iterate over lines
-    for line in lines:
+    for line in document:
         assignment_left, assignment_right = line.split(",")
 
         # Parse the left assignment

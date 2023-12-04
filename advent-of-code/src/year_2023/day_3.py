@@ -19,7 +19,11 @@ DOCUMENT_EXAMPLE = [
 
 @router.post("/part-1")
 async def year_2023_day_3_part_1(
-    document: list[str] = Body(..., embed=True, examples=[DOCUMENT_EXAMPLE])
+    document: list[str] = Body(
+        ...,
+        embed=True,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
 ) -> int:
     """
     You and the Elf eventually reach a gondola lift station; he says the gondola lift will take you up to the **water source**, but this is as far as he can bring you.
@@ -138,7 +142,11 @@ async def year_2023_day_3_part_1(
 
 @router.post("/part-2")
 async def year_2023_day_3_part_2(
-    document: list[str] = Body(..., embed=True, examples=[DOCUMENT_EXAMPLE])
+    document: list[str] = Body(
+        ...,
+        embed=True,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
 ) -> int:
     """
     The engineer finds the missing part and installs it in the engine!

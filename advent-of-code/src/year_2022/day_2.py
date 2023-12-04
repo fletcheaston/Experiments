@@ -1,10 +1,15 @@
 from enum import StrEnum
 
-from fastapi import APIRouter
-
-from src.types import Lines
+from fastapi import APIRouter, Body
 
 router = APIRouter(tags=["2022 - Day 2: Rock Paper Scissors"])
+
+
+DOCUMENT_EXAMPLE = [
+    "A Y",
+    "B X",
+    "C Z",
+]
 
 
 class Hand(StrEnum):
@@ -75,7 +80,13 @@ HAND_OUTCOME_TO_HAND: dict[tuple[Hand, Outcome], Hand] = {
 
 
 @router.post("/part-1")
-async def year_2022_day_2_part_1(lines: Lines) -> int:
+async def year_2022_day_2_part_1(
+    document: list[str] = Body(
+        ...,
+        embed=True,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
+) -> int:
     """
     The Elves begin to set up camp on the beach.
     To decide whose tent gets to be closest to the snack storage, a giant Rock Paper Scissors tournament is already in progress.
@@ -119,7 +130,7 @@ async def year_2022_day_2_part_1(lines: Lines) -> int:
     total = 0
 
     # Iterate over lines
-    for line in lines:
+    for line in document:
         other_character, my_character = line.split(" ")
 
         other_hand = CHARACTER_TO_HAND[other_character]
@@ -137,7 +148,13 @@ async def year_2022_day_2_part_1(lines: Lines) -> int:
 
 
 @router.post("/part-2")
-async def year_2022_day_2_part_2(lines: Lines) -> int:
+async def year_2022_day_2_part_2(
+    document: list[str] = Body(
+        ...,
+        embed=True,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
+) -> int:
     """
     The Elf finishes helping with the tent and sneaks back over to you.
     "Anyway, the second column says how the round needs to end: `X` means you need to lose, `Y` means you need to end the round in a draw, and `Z` means you need to win. Good luck!"
@@ -156,7 +173,7 @@ async def year_2022_day_2_part_2(lines: Lines) -> int:
     total = 0
 
     # Iterate over lines
-    for line in lines:
+    for line in document:
         other_character, outcome_character = line.split(" ")
 
         other_hand = CHARACTER_TO_HAND[other_character]

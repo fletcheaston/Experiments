@@ -1,8 +1,15 @@
-from fastapi import APIRouter, Query
-
-from src.types import Lines
+from fastapi import APIRouter, Body
 
 router = APIRouter(tags=["2023 - Day 2: Cube Conundrum"])
+
+
+DOCUMENT_EXAMPLE = [
+    "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green",
+    "Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue",
+    "Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red",
+    "Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red",
+    "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green",
+]
 
 
 def is_possible(score: str, red: int, green: int, blue: int) -> bool:
@@ -23,10 +30,14 @@ def is_possible(score: str, red: int, green: int, blue: int) -> bool:
 
 @router.post("/part-1")
 async def year_2023_day_2_part_1(
-    lines: Lines,
-    red: int = Query(...),
-    green: int = Query(...),
-    blue: int = Query(...),
+    document: list[str] = Body(
+        ...,
+        embed=True,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
+    red: int = Body(..., embed=True),
+    green: int = Body(..., embed=True),
+    blue: int = Body(..., embed=True),
 ) -> int:
     """
     You're launched high into the atmosphere!
@@ -73,7 +84,7 @@ async def year_2023_day_2_part_1(
     total = 0
 
     # Iterate over lines
-    for line in lines:
+    for line in document:
         possible = True
 
         game_text, ball_text = line.split(": ")
@@ -94,7 +105,13 @@ async def year_2023_day_2_part_1(
 
 
 @router.post("/part-2")
-async def year_2023_day_2_part_2(lines: Lines) -> int:
+async def year_2023_day_2_part_2(
+    document: list[str] = Body(
+        ...,
+        embed=True,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
+) -> int:
     """
     The Elf says they've stopped producing snow because they aren't getting any water!
     He isn't sure why the water stopped; however, he can show you how to get to the water source to check it out for yourself.
@@ -129,7 +146,7 @@ async def year_2023_day_2_part_2(lines: Lines) -> int:
     powers = 0
 
     # Iterate over lines
-    for line in lines:
+    for line in document:
         red = 0
         green = 0
         blue = 0

@@ -103,31 +103,387 @@ Find all of the directories with a total size of at most 100000.
 
 ### Solution
 
-Description...
-
 ```python
-# Code...
+import re
+from dataclasses import dataclass, field
+
+from fastapi import APIRouter, Body
+
+router = APIRouter(tags=["2022 - Day 7: No Space Left On Device"])
+
+
+DOCUMENT_EXAMPLE = [
+    "$ cd /",
+    "$ ls",
+    "dir a",
+    "14848514 b.txt",
+    "8504156 c.dat",
+    "dir d",
+    "$ cd a",
+    "$ ls",
+    "dir e",
+    "29116 f",
+    "2557 g",
+    "62596 h.lst",
+    "$ cd e",
+    "$ ls",
+    "584 i",
+    "$ cd ..",
+    "$ cd ..",
+    "$ cd d",
+    "$ ls",
+    "4060174 j",
+    "8033020 d.log",
+    "5626152 d.ext",
+    "7214296 k",
+]
+
+
+@dataclass
+class Directory:
+    name: str
+
+    parent: "Directory | None" = None
+
+    files: dict[str, "File"] = field(default_factory=dict)
+    directories: dict[str, "Directory"] = field(default_factory=dict)
+
+    @property
+    def size(self) -> int:
+        files_size = sum([file.size for file in self.files.values()])
+        directories_size = sum(
+            [directory.size for directory in self.directories.values()]
+        )
+
+        return files_size + directories_size
+
+    def upsert_file(self, file: "File") -> None:
+        if file.name not in self.files:
+            self.files[file.name] = file
+
+    def upsert_directory(self, name: str) -> None:
+        if name not in self.directories:
+            self.directories[name] = Directory(
+                name=name,
+                parent=self,
+            )
+
+    def get_directory(self, name: str) -> "Directory":
+        return self.directories[name]
+
+    def directories_smaller_than(self, size: int) -> list["Directory"]:
+        directories: list["Directory"] = []
+
+        for directory in self.directories.values():
+            if directory.size <= size:
+                directories.append(directory)
+
+            directories += directory.directories_smaller_than(size)
+
+        return directories
+
+
+@dataclass
+class File:
+    name: str
+    size: int
+
+
+@dataclass
+class Filesystem:
+    root_directory: Directory
+    current_directory: Directory
+
+    def feed_line(self, line: str) -> None:
+        if match := re.search(r"\$ cd (.+)", line):
+            name = match.groups()[0]
+
+            match name:
+                case "/":
+                    self.current_directory = self.root_directory
+
+                case "..":
+                    self.current_directory = self.current_directory.parent
+
+                case _:
+                    self.current_directory.upsert_directory(name=name)
+                    self.current_directory = self.current_directory.get_directory(
+                        name=name
+                    )
+
+        elif match := re.search(r"dir (.+)", line):
+            name = match.groups()[0]
+            self.current_directory.upsert_directory(name=name)
+
+        elif match := re.search(r"(\d+) (.+)", line):
+            size, name = match.groups()
+            file = File(
+                name=name,
+                size=int(size),
+            )
+            self.current_directory.upsert_file(file)
+
+    def directories_smaller_than(self, size: int) -> list[Directory]:
+        directories: list[Directory] = []
+
+        if self.root_directory.size <= size:
+            directories.append(self.root_directory)
+
+        directories += self.root_directory.directories_smaller_than(size)
+
+        return directories
+
+
+@router.post("/part-1")
+async def year_2022_day_7_part_1(
+    document: list[str] = Body(
+        ...,
+        embed=True,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
+) -> int:
+    root = Directory(name="/")
+    filesystem = Filesystem(
+        root_directory=root,
+        current_directory=root,
+    )
+
+    # Iterate over lines
+    for line in document:
+        filesystem.feed_line(line)
+
+    return sum(
+        [directory.size for directory in filesystem.directories_smaller_than(100000)]
+    )
 ```
 
 ## Part 2
 
 ### Prompt
 
-Prompt...
+Now, you're ready to choose a directory to delete.
+
+The total disk space available to the filesystem is **`70000000`**.
+To run the update, you need unused space of at least **`30000000`**.
+You need to find a directory you can delete that will **free up enough space** to run the update.
+
+In the example above, the total size of the outermost directory (and thus the total amount of used space) is `48381165`; this means that the size of the **unused** space must currently be `21618835`, which isn't quite the `30000000` required by the update.
+Therefore, the update still requires a directory with total size of at least `8381165` to be deleted before it can run.
+
+To achieve this, you have the following options:
+
+- Delete directory `e`, which would increase unused space by `584`.
+- Delete directory `a`, which would increase unused space by `94853`.
+- Delete directory `d`, which would increase unused space by `24933642`.
+- Delete directory `/`, which would increase unused space by `48381165`.
+
+Directories e and a are both too small; deleting them would not free up enough space.
+However, directories d and / are both big enough!
+Between these, choose the **smallest**: `d`, increasing unused space by **`24933642`**.
+
+Find the smallest directory that, if deleted, would free up enough space on the filesystem to run the update.
+**What is the total size of that directory?**
 
 ### Solution
 
-Description...
+Builds off of Part 1, but retrieves all directories and does some basic match to get the smallest directory above the required size.
 
 ```python
-# Code...
+import re
+from dataclasses import dataclass, field
+
+from fastapi import APIRouter, Body
+
+router = APIRouter(tags=["2022 - Day 7: No Space Left On Device"])
+
+
+DOCUMENT_EXAMPLE = [
+    "$ cd /",
+    "$ ls",
+    "dir a",
+    "14848514 b.txt",
+    "8504156 c.dat",
+    "dir d",
+    "$ cd a",
+    "$ ls",
+    "dir e",
+    "29116 f",
+    "2557 g",
+    "62596 h.lst",
+    "$ cd e",
+    "$ ls",
+    "584 i",
+    "$ cd ..",
+    "$ cd ..",
+    "$ cd d",
+    "$ ls",
+    "4060174 j",
+    "8033020 d.log",
+    "5626152 d.ext",
+    "7214296 k",
+]
+
+
+@dataclass
+class Directory:
+    name: str
+
+    parent: "Directory | None" = None
+
+    files: dict[str, "File"] = field(default_factory=dict)
+    directories: dict[str, "Directory"] = field(default_factory=dict)
+
+    @property
+    def size(self) -> int:
+        files_size = sum([file.size for file in self.files.values()])
+        directories_size = sum(
+            [directory.size for directory in self.directories.values()]
+        )
+
+        return files_size + directories_size
+
+    @property
+    def all_directories(self) -> list["Directory"]:
+        directories: list["Directory"] = [self]
+
+        for directory in self.directories.values():
+            directories.append(directory)
+
+            directories += directory.all_directories
+
+        return directories
+
+    def upsert_file(self, file: "File") -> None:
+        if file.name not in self.files:
+            self.files[file.name] = file
+
+    def upsert_directory(self, name: str) -> None:
+        if name not in self.directories:
+            self.directories[name] = Directory(
+                name=name,
+                parent=self,
+            )
+
+    def get_directory(self, name: str) -> "Directory":
+        return self.directories[name]
+
+    def directories_smaller_than(self, size: int) -> list["Directory"]:
+        directories: list["Directory"] = []
+
+        for directory in self.directories.values():
+            if directory.size <= size:
+                directories.append(directory)
+
+            directories += directory.directories_smaller_than(size)
+
+        return directories
+
+
+@dataclass
+class File:
+    name: str
+    size: int
+
+
+@dataclass
+class Filesystem:
+    root_directory: Directory
+    current_directory: Directory
+
+    @property
+    def all_directories(self) -> list[Directory]:
+        directories: list[Directory] = [self.root_directory]
+
+        directories += self.root_directory.all_directories
+
+        return directories
+
+    @property
+    def size(self) -> int:
+        return self.root_directory.size
+
+    def feed_line(self, line: str) -> None:
+        if match := re.search(r"\$ cd (.+)", line):
+            name = match.groups()[0]
+
+            match name:
+                case "/":
+                    self.current_directory = self.root_directory
+
+                case "..":
+                    self.current_directory = self.current_directory.parent
+
+                case _:
+                    self.current_directory.upsert_directory(name=name)
+                    self.current_directory = self.current_directory.get_directory(
+                        name=name
+                    )
+
+        elif match := re.search(r"dir (.+)", line):
+            name = match.groups()[0]
+            self.current_directory.upsert_directory(name=name)
+
+        elif match := re.search(r"(\d+) (.+)", line):
+            size, name = match.groups()
+            file = File(
+                name=name,
+                size=int(size),
+            )
+            self.current_directory.upsert_file(file)
+
+    def directories_smaller_than(self, size: int) -> list[Directory]:
+        assert self.root_directory.size > size
+
+        return self.root_directory.directories_smaller_than(size)
+
+
+@router.post("/part-2")
+async def year_2022_day_7_part_2(
+    document: list[str] = Body(
+        ...,
+        embed=True,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
+) -> int:
+    total_disk_size = 70000000
+    needed_unused_disk_size = 30000000
+
+    root = Directory(name="/")
+    filesystem = Filesystem(
+        root_directory=root,
+        current_directory=root,
+    )
+
+    # Iterate over lines
+    for line in document:
+        filesystem.feed_line(line)
+
+    # Basic math to get the minimum disk size needed to be freed
+    occupied_disk_size = filesystem.size
+    unused_disk_size = total_disk_size - occupied_disk_size
+    minimum_disk_size_needed = needed_unused_disk_size - unused_disk_size
+
+    # Iterate over all directories, ordered by size (ascending)
+    # Get the smallest directory that's over (or equal to) the minimum free size
+    directories = sorted(filesystem.all_directories, key=lambda x: x.size)
+
+    for directory in directories:
+        if directory.size >= minimum_disk_size_needed:
+            return directory.size
 ```
 
 ## Recap
 
-
 | Day | Part 1 Time | Part 1 Rank | Part 2 Time | Part 2 Rank |
 |-----|-------------|-------------|-------------|-------------|
-| 1   | 00:00:00    | XXXXX       | 00:00:00    | XXXXX       |
+| 7   | >24h        | 114,953     | >24h        | 112,381     |
 
-Recap...
+Similar to [Day 5](day-5.md), this was a large jump in difficulty compared to [Day 6](day-6.md).
+All-in-all though, not terribly difficult.
+I may have gone a bit overboard in data modelling, but I'm a lot more particular about this in Python than I am in TypeScript.
+
+In TypeScript, I'm partial to using objects everywhere, and relying on the compiler for assistance.
+Python's type-hinting is a lot more lenient, it's not something I would fully trust like I would with TypeScript.
+
+On the upside, this sort of in-memory data modelling is a part of Python that I love.
+There are some very simple data structures under the hood, but interacting with them in complex ways is hidden behind a (relatively) clean interface.

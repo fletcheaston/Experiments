@@ -208,7 +208,6 @@ async def day_1_part_2(calibration_document: UploadFile) -> int:
 
 ## Recap
 
-
 | Day | Part 1 Time | Part 1 Rank | Part 2 Time | Part 2 Rank |
 |-----|-------------|-------------|-------------|-------------|
 | 1   | 02:00:23    | 19,252      | 02:49:23    | 14,553      |

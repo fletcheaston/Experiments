@@ -277,7 +277,6 @@ async def year_2023_day_3_part_2(document: list[str] = Body(..., embed=True)) ->
 
 ## Recap
 
-
 | Day | Part 1 Time | Part 1 Rank | Part 2 Time | Part 2 Rank |
 |-----|-------------|-------------|-------------|-------------|
 | 3   | 00:25:44    | 2,399       | 00:36:21    | 2,067       |

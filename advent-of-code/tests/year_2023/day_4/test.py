@@ -7,18 +7,14 @@ from fastapi.testclient import TestClient
 @pytest.mark.parametrize(
     "filename,total",
     [
-        ("part-1.txt", 4361),
-        ("input.txt", 512794),
+        ("part-1.txt", 0),
+        # ("input.txt", 0),
     ],
 )
-def test_part_1(
-    filename: str,
-    total: str,
-    test_client: TestClient,
-) -> None:
+def test_part_1(filename: str, total: int, test_client: TestClient) -> None:
     with open(Path(__file__).with_name(filename), "r") as file:
         response = test_client.post(
-            "2023/day-3/part-1",
+            "2023/day-4/part-1",
             json={
                 "document": file.read().splitlines(),
             },
@@ -31,18 +27,14 @@ def test_part_1(
 @pytest.mark.parametrize(
     "filename,total",
     [
-        ("part-2.txt", 467835),
-        ("input.txt", 67779080),
+        ("part-2.txt", 0),
+        ("input.txt", 0),
     ],
 )
-def test_part_2(
-    filename: str,
-    total: str,
-    test_client: TestClient,
-) -> None:
+def test_part_2(filename: str, total: int, test_client: TestClient) -> None:
     with open(Path(__file__).with_name(filename), "r") as file:
         response = test_client.post(
-            "2023/day-3/part-2",
+            "2023/day-4/part-2",
             json={
                 "document": file.read().splitlines(),
             },

@@ -19,3 +19,4 @@ I'm completing this in 2023, my stats are way off, but it's interesting to see h
 | 4   | >24hr       | 186,488     | >24h        | 182,802     |
 | 5   | >24hr       | 159,128     | >24h        | 156,044     |
 | 6   | >24hr       | 156,301     | >24hr       | 154,714     |
+| 7   | >24h        | 114,953     | >24h        | 112,381     |

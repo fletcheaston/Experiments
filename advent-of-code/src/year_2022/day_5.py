@@ -21,8 +21,14 @@ DOCUMENT_EXAMPLE = [
 
 @router.post("/part-1")
 async def year_2022_day_5_part_1(
-    stacks: dict[str, list[str]] = Body(..., examples=[STACK_EXAMPLE]),
-    document: list[str] = Body(..., examples=[DOCUMENT_EXAMPLE]),
+    stacks: dict[str, list[str]] = Body(
+        ...,
+        examples=[STACK_EXAMPLE],
+    ),
+    document: list[str] = Body(
+        ...,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
 ) -> str:
     """
     The expedition can depart as soon as the final supplies have been unloaded from the ships.
@@ -130,8 +136,14 @@ async def year_2022_day_5_part_1(
 
 @router.post("/part-2")
 async def year_2022_day_5_part_2(
-    stacks: dict[str, list[str]] = Body(..., examples=[STACK_EXAMPLE]),
-    document: list[str] = Body(..., examples=[DOCUMENT_EXAMPLE]),
+    stacks: dict[str, list[str]] = Body(
+        ...,
+        examples=[STACK_EXAMPLE],
+    ),
+    document: list[str] = Body(
+        ...,
+        examples=[DOCUMENT_EXAMPLE],
+    ),
 ) -> str:
     """
     As you watch the crane operator expertly rearrange the crates, you notice the process isn't following your prediction.

@@ -56,7 +56,7 @@ def test_part_1(
     "filename,stacks,message",
     [
         (
-            "part-1.txt",
+            "part-2.txt",
             {
                 "1": ["N", "Z"],
                 "2": ["D", "C", "M"],

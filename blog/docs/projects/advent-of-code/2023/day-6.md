@@ -72,7 +72,7 @@ For each time/distance pair:
     2. Calculate the remaining time
     3. Calculate the distance covered
     4. If the distance covered is greater than the required distance, increment the number of wins for this time/distance pair
-2. Multiple all win counts together using a running total
+2. Multiply all win counts together using a running total
 
 ```python
 from fastapi import APIRouter, Body

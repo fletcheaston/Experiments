@@ -89,4 +89,4 @@ type test_Unrelated = Expect<Equal<test_Unrelated_actual, test_Unrelated_expecte
 
 Ez-pz 😎.
 
-Just a [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types) using the [keyof operator](https://www.typescriptlang.org/docs/handbook/2/keyof-types.html) to extract keys, and replacing the values with the `Address` type, with the keys and values inside of a [Record](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type).
+Just a [generic type](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-types) using the [keyof operator](https://www.typescriptlang.org/docs/handbook/2/keyof-types.html) to extract keys, replace the values with the `Address` type, and put the keys and values inside of a [Record](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeys-type).

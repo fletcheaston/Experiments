@@ -55,6 +55,10 @@ markdown_extensions:
     -   pymdownx.tabbed:
             alternate_style: true
 
+    # MathJax
+    -   pymdownx.arithmatex:
+            generic: true
+
     # Table of contents
     - toc:
         permalink: true
@@ -68,6 +72,11 @@ markdown_extensions:
 
 extra_css:
     - css/images.css
+
+extra_javascript:
+    - javascript/mathjax.js
+    - https://polyfill.io/v3/polyfill.min.js?features=es6
+    - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 extra:
   social:
@@ -86,12 +95,16 @@ nav:
         - "Day 2: Code Conundrum": projects/advent-of-code/2023/day-2.md
         - "Day 3: Gear Ratios": projects/advent-of-code/2023/day-3.md
         - "Day 4: Scratchcards": projects/advent-of-code/2023/day-4.md
+        - "Day 5: If You Give A Seed A Fertilizer": projects/advent-of-code/2023/day-5.md
+        - "Day 6: Wait For It": projects/advent-of-code/2023/day-6.md
     - Advent of TypeScript - 2023:
         - projects/advent-of-typescript/index.md
         - "Day 1: Christmas Cookies": projects/advent-of-typescript/2023/day-1.md
         - "Day 2: Christmas Cookie Inventory": projects/advent-of-typescript/2023/day-2.md
         - "Day 3: The Gift Wrapper": projects/advent-of-typescript/2023/day-3.md
         - "Day 4: Christmas Present Delivery Addresses": projects/advent-of-typescript/2023/day-4.md
+        - "Day 5: Organize Santa's List": projects/advent-of-typescript/2023/day-5.md
+        - "Day 6: Filtering The Children (part 1)": projects/advent-of-typescript/2023/day-6.md
     - Advent of Code - 2022:
         - projects/advent-of-code/2022/index.md
         - "Day 1: Calorie Counting": projects/advent-of-code/2022/day-1.md

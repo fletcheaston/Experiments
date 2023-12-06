@@ -4,7 +4,7 @@ from fastapi import APIRouter, Body
 
 from src.utils import chunks
 
-router = APIRouter(tags=["2023 - Day 5: Title"])
+router = APIRouter(tags=["2023 - Day 5: If You Give A Seed A Fertilizer"])
 
 
 DOCUMENT_EXAMPLE = []

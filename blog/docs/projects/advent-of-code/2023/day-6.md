@@ -374,11 +374,12 @@ $$
 
 If we wait for more than **`2.764` milliseconds** but less than **`7.236` milliseconds**, our boat will have enough speed to cross the required **20 millimeter** distance.
 
-We simply add `1` the lower value and round it down (`2.764` to `3`) and subtract `1` from the upper value and round it up (`7.236` to `7`), and count the integers between them (inclusive).
+We simply add `1` to the lower value and round it down (`2.764` -> `3.764` -> `3`) and subtract `1` from the upper value and round it up (`7.236` -> `6.236` -> `7`), and count the integers between them (inclusive).
 
 This addition/subtraction *before* rounding covers cases when our `covered distance` exactly matches our `distance`, which we want to avoid including (`covered distance` needs to *beat* `distance`).
+For example, if our times were exactly `2` and exactly `7`, we would exclude those times, and our winning times would be `3`, `4`, `5`, and `6`.
 
-For our example, these values are `3`, `4`, `5`, `6`, and `7`.
+For our example of `2.764` and `7.236`, these values are `3`, `4`, `5`, `6`, and `7`.
 If we look at an annotated version of the earlier graph, we can trivially see that these points along the x-axis result in a y-axis value above `20`.
 
 <figure markdown>

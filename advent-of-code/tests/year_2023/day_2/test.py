@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 @pytest.mark.parametrize(
     "filename,total",
     [
-        ("part-1.txt", 8),
+        ("example.txt", 8),
         ("input.txt", 2505),
     ],
 )
@@ -30,7 +30,7 @@ def test_part_1(filename: str, total: int, test_client: TestClient) -> None:
 @pytest.mark.parametrize(
     "filename,total",
     [
-        ("part-2.txt", 2286),
+        ("example.txt", 2286),
         ("input.txt", 70265),
     ],
 )

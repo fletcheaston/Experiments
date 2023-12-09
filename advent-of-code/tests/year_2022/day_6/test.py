@@ -8,7 +8,7 @@ from fastapi.testclient import TestClient
     "filename,output",
     [
         (
-            "part-1.txt",
+            "example.txt",
             7,
         ),
         (
@@ -38,7 +38,7 @@ def test_part_1(
     "filename,output",
     [
         (
-            "part-2.txt",
+            "example.txt",
             19,
         ),
         (

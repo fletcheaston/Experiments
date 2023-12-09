@@ -9,7 +9,7 @@ from src.year_2023.day_7 import HandPartTwo
 @pytest.mark.parametrize(
     "filename,output",
     [
-        ("part-1.txt", 6440),
+        ("example.txt", 6440),
         ("input.txt", 251545216),
     ],
 )
@@ -54,7 +54,7 @@ def test_hand_part_two(
 @pytest.mark.parametrize(
     "filename,output",
     [
-        ("part-2.txt", 5905),
+        ("example.txt", 5905),
         ("input.txt", 250384185),
     ],
 )

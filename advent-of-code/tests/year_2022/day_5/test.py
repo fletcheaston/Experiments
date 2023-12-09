@@ -8,7 +8,7 @@ from fastapi.testclient import TestClient
     "filename,stacks,message",
     [
         (
-            "part-1.txt",
+            "example.txt",
             {
                 "1": ["N", "Z"],
                 "2": ["D", "C", "M"],
@@ -56,7 +56,7 @@ def test_part_1(
     "filename,stacks,message",
     [
         (
-            "part-2.txt",
+            "example.txt",
             {
                 "1": ["N", "Z"],
                 "2": ["D", "C", "M"],

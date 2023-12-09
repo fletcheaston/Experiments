@@ -1,7 +1,3 @@
----
-title: Advent of TypeScript 2023 - Day 1
----
-
 # Day 1: Christmas Cookies
 
 ## Prompt

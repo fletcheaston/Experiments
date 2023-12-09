@@ -1,8 +1,6 @@
----
-title: Advent of TypeScript 2023 - Day 7
----
+# Day 7: Filtering The Children II
 
-# Day 7: Filtering The Children (part 2)
+Prompt by [Dimitri Mitropoulos](https://github.com/dimitropoulos) of [MiTS](https://www.youtube.com/@MichiganTypeScript).
 
 ## Prompt
 
@@ -52,8 +50,6 @@ Ask yourself if there should be any generic type constraints on the inputs (ther
 
 Then try to set up a scaffold that will at least return the same values for each property.
 Your next step is to transform the properties somehow..
-
-prompt by [Dimitri Mitropoulos](https://github.com/dimitropoulos) of [MiTS](https://www.youtube.com/@MichiganTypeScript).
 
 ## Solution
 

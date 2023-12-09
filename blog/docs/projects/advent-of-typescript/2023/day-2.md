@@ -1,7 +1,3 @@
----
-title: Advent of TypeScript 2023 - Day 2
----
-
 # Day 2: Christmas Cookie Inventory
 
 ## Prompt

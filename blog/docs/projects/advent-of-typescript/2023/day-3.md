@@ -1,7 +1,3 @@
----
-title: Advent of TypeScript 2023 - Day 3
----
-
 # Day 3: The Gift Wrapper
 
 ## Prompt

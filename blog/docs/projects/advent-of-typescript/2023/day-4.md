@@ -1,7 +1,3 @@
----
-title: Advent of TypeScript 2023 - Day 4
----
-
 # Day 4: Christmas Present Delivery Addresses
 
 ## Prompt

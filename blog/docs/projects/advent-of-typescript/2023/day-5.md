@@ -1,8 +1,6 @@
----
-title: Advent of TypeScript 2023 - Day 5
----
-
 # Day 5: Organize Santa's List
+
+Prompt by [Dimitri Mitropoulos](https://github.com/dimitropoulos) of [MiTS](https://www.youtube.com/@MichiganTypeScript).
 
 ## Prompt
 
@@ -34,8 +32,6 @@ However this year, Frymagen got one of those MacBook Pros without the escape key
 We need to find a better way to get Santa his list.
 
 Let's implement `SantasList` such that it can be passed the types for the `badList` and `goodList` and it will return a TypeScript tuple with the values of both lists combined.
-
-prompt by [Dimitri Mitropoulos](https://github.com/dimitropoulos) of [MiTS](https://www.youtube.com/@MichiganTypeScript).
 
 ## Solution
 

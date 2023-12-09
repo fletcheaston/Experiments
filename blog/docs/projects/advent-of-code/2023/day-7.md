@@ -1,4 +1,4 @@
-# Day N: Title
+# Day 7: Camel Cards
 
 ## Part 1
 

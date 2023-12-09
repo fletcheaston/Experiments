@@ -1,8 +1,6 @@
----
-title: Advent of TypeScript 2023 - Day 6
----
+# Day 6: Filtering The Children I
 
-# Day 6: Filtering The Children (part 1)
+Prompt by [Dimitri Mitropoulos](https://github.com/dimitropoulos) of [MiTS](https://www.youtube.com/@MichiganTypeScript).
 
 ## Prompt
 
@@ -52,8 +50,6 @@ Take a look at the tests.
 There, you'll see some examples.
 
 Note: *the engineering team manager triple checked with Santa because this seems like a strange way to keep track of naughty and nice children, but Santa ensured the manager that this is exactly what he wants.*
-
-prompt by [Dimitri Mitropoulos](https://github.com/dimitropoulos) of [MiTS](https://www.youtube.com/@MichiganTypeScript).
 
 ## Solution
 

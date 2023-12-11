@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from fastapi import APIRouter, Body
 
@@ -6,6 +6,10 @@ router = APIRouter(tags=["2023 - Day 10: Title"])
 
 
 DOCUMENT_EXAMPLE = []
+
+
+OPEN_CHARACTER = "\033[94m█\033[0m"
+ENCLOSED_CHARACTER = "\033[31m█\033[0m"
 
 
 @dataclass
@@ -30,14 +34,64 @@ OFFSET_MAP: dict[tuple[str, int, int], Position] = {
     ("F", 0, -1): Position(x=1, y=0),
 }
 
+EXPAND_MAP: dict[str, tuple[list[str], list[str], list[str]]] = {
+    OPEN_CHARACTER: (
+        [OPEN_CHARACTER, OPEN_CHARACTER, OPEN_CHARACTER],
+        [OPEN_CHARACTER, OPEN_CHARACTER, OPEN_CHARACTER],
+        [OPEN_CHARACTER, OPEN_CHARACTER, OPEN_CHARACTER],
+    ),
+    ENCLOSED_CHARACTER: (
+        [ENCLOSED_CHARACTER, ENCLOSED_CHARACTER, ENCLOSED_CHARACTER],
+        [ENCLOSED_CHARACTER, ENCLOSED_CHARACTER, ENCLOSED_CHARACTER],
+        [ENCLOSED_CHARACTER, ENCLOSED_CHARACTER, ENCLOSED_CHARACTER],
+    ),
+    "S": (
+        ["S", "S", "S"],
+        ["S", "S", "S"],
+        ["S", "S", "S"],
+    ),
+    "|": (
+        [ENCLOSED_CHARACTER, "|", ENCLOSED_CHARACTER],
+        [ENCLOSED_CHARACTER, "|", ENCLOSED_CHARACTER],
+        [ENCLOSED_CHARACTER, "|", ENCLOSED_CHARACTER],
+    ),
+    "-": (
+        [ENCLOSED_CHARACTER, ENCLOSED_CHARACTER, ENCLOSED_CHARACTER],
+        ["-", "-", "-"],
+        [ENCLOSED_CHARACTER, ENCLOSED_CHARACTER, ENCLOSED_CHARACTER],
+    ),
+    "L": (
+        [ENCLOSED_CHARACTER, "|", ENCLOSED_CHARACTER],
+        [ENCLOSED_CHARACTER, "L", "-"],
+        [ENCLOSED_CHARACTER, ENCLOSED_CHARACTER, ENCLOSED_CHARACTER],
+    ),
+    "J": (
+        [ENCLOSED_CHARACTER, "|", ENCLOSED_CHARACTER],
+        ["-", "J", ENCLOSED_CHARACTER],
+        [ENCLOSED_CHARACTER, ENCLOSED_CHARACTER, ENCLOSED_CHARACTER],
+    ),
+    "7": (
+        [ENCLOSED_CHARACTER, ENCLOSED_CHARACTER, ENCLOSED_CHARACTER],
+        ["-", "7", ENCLOSED_CHARACTER],
+        [ENCLOSED_CHARACTER, "|", ENCLOSED_CHARACTER],
+    ),
+    "F": (
+        [ENCLOSED_CHARACTER, ENCLOSED_CHARACTER, ENCLOSED_CHARACTER],
+        [ENCLOSED_CHARACTER, "F", "-"],
+        [ENCLOSED_CHARACTER, "|", ENCLOSED_CHARACTER],
+    ),
+}
+
 
 @dataclass
 class Map:
     start: Position
     current: Position
-    positions: list[Position]
 
+    positions: list[Position]
     characters: list[list[str]]
+
+    expanded_characters: list[list[str]] = field(default_factory=list)
 
     def get_character(self, x: int, y: int) -> str | None:
         if 0 <= x < len(self.characters[0]) and 0 <= y <= len(self.characters):
@@ -116,33 +170,100 @@ class Map:
                                 crosses += 1
 
                     if crosses % 2 == 1:
-                        self.characters[y_index][x_index] = "E"
+                        self.characters[y_index][x_index] = ENCLOSED_CHARACTER
                         enclosed += 1
 
         return enclosed
 
-    # def open_borders(self) -> None:
-    #     for y_index in range(len(self.characters)):
-    #         for x_index in range(len(self.characters[0])):
-    #             if not self.is_in_loop(x_index, y_index):
-    #                 if y_index == 0:
-    #                     self.characters[y_index][x_index] = "O"
-    #
-    #                 if y_index == len(self.characters) - 1:
-    #                     self.characters[y_index][x_index] = "O"
-    #
-    #                 if x_index == 0:
-    #                     self.characters[y_index][x_index] = "O"
-    #
-    #                 if x_index == len(self.characters[0]) - 1:
-    #                     self.characters[y_index][x_index] = "O"
-    #
-    # def expand(self) -> None:
-    #     pass
+    def cleanup(self) -> None:
+        for y_index in range(len(self.characters)):
+            for x_index in range(len(self.characters[0])):
+                if not self.is_in_loop(x_index, y_index):
+                    if y_index == 0:
+                        self.characters[y_index][x_index] = OPEN_CHARACTER
+
+                    elif y_index == len(self.characters) - 1:
+                        self.characters[y_index][x_index] = OPEN_CHARACTER
+
+                    elif x_index == 0:
+                        self.characters[y_index][x_index] = OPEN_CHARACTER
+
+                    elif x_index == len(self.characters[0]) - 1:
+                        self.characters[y_index][x_index] = OPEN_CHARACTER
+
+                    else:
+                        self.characters[y_index][x_index] = ENCLOSED_CHARACTER
+
+    def expand(self) -> None:
+        # 3x the height of characters
+        self.expanded_characters = [[] for _ in range(len(self.characters) * 3)]
+
+        for y_index in range(len(self.characters)):
+            for x_index in range(len(self.characters[0])):
+                character = self.characters[y_index][x_index]
+
+                first_line, second_line, third_line = EXPAND_MAP[character]
+
+                self.expanded_characters[y_index * 3] += first_line
+                self.expanded_characters[y_index * 3 + 1] += second_line
+                self.expanded_characters[y_index * 3 + 2] += third_line
+
+    def flood_fill(self) -> None:
+        # {(x, y)}
+        positions_to_check: set[tuple[int, int]] = set()
+
+        # Fill positions to check with initial data of all Os
+        for y_index in range(len(self.expanded_characters)):
+            for x_index in range(len(self.expanded_characters[0])):
+                character = self.expanded_characters[y_index][x_index]
+
+                if character == OPEN_CHARACTER:
+                    positions_to_check.add((x_index, y_index))
+
+        while positions_to_check:
+            x_index, y_index = positions_to_check.pop()
+
+            # Check in cardinal directions
+            for x_offset, y_offset in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                try:
+                    character = self.expanded_characters[y_index + y_offset][
+                        x_index + x_offset
+                    ]
+
+                    if character == ENCLOSED_CHARACTER:
+                        self.expanded_characters[y_index + y_offset][
+                            x_index + x_offset
+                        ] = OPEN_CHARACTER
+                        positions_to_check.add((x_index + x_offset, y_index + y_offset))
+                except IndexError:
+                    pass
+
+    def shrink(self) -> None:
+        for y_index in range(0, len(self.expanded_characters), 3):
+            for x_index in range(0, len(self.expanded_characters[0]), 3):
+                # Get the center of each 3x3 grid
+                character = self.expanded_characters[y_index - 2][x_index - 2]
+                self.characters[y_index // 3 - 1][x_index // 3 - 1] = character
+
+    def count(self, character: str) -> int:
+        total = 0
+
+        for y_index in range(len(self.characters)):
+            for x_index in range(len(self.characters[0])):
+                if self.characters[y_index][x_index] == character:
+                    total += 1
+
+        return total
 
     def show(self) -> None:
+        print()
         for line in self.characters:
-            print(line)
+            print("".join(line))
+
+    def show_expanded(self) -> None:
+        print()
+        for line in self.expanded_characters:
+            print("".join(line))
 
 
 @router.post("/part-1")
@@ -205,18 +326,11 @@ async def year_2023_day_10_part_2(
         characters=character_map,
     )
 
-    # Check around the start position for connected positions
     pipe_map.run()
-
-    print()
-
+    pipe_map.cleanup()
+    pipe_map.expand()
+    pipe_map.flood_fill()
+    pipe_map.shrink()
     pipe_map.show()
 
-    value = pipe_map.get_enclosed_positions()
-
-    print()
-
-    pipe_map.show()
-
-    # Get enclosed positions
-    return value
+    return pipe_map.count(ENCLOSED_CHARACTER)

@@ -33,6 +33,7 @@ def test_part_1(
     [
         ("example-2.txt", 4),
         ("example-3.txt", 4),
+        ("example-4.txt", 2),
         ("input.txt", 413),
     ],
 )

@@ -41,9 +41,9 @@ def count_arrangements(springs: str, counts: tuple[int]) -> int:
     elif current_spring == ".":
         return count_arrangements(springs.lstrip("."), counts)
 
-    return count_arrangements("#" + springs[1:], counts) + count_arrangements(
-        "." + springs[1:], counts
-    )
+    total = count_arrangements("#" + springs[1:], counts)
+    total += count_arrangements("." + springs[1:], counts)
+    return total
 
 
 @router.post("/part-1")

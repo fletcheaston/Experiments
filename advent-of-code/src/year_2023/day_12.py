@@ -9,102 +9,41 @@ DOCUMENT_EXAMPLE = []
 
 
 @cache
-def arrangements(springs: str, counts: tuple[int]) -> set[str]:
-    joins: list[str] = []
-    join: str = ""
+def count_arrangements(springs: str, counts: tuple[int]) -> int:
+    # Base case
+    if not springs:
+        if not counts:
+            return 1
 
-    sub_springs: list[str] = []
-    sub_spring: str = ""
+        return 0
 
-    contigs: list[int] = []
-    contig: int = 0
+    # Recursive
+    current_spring = springs[0]
 
-    for spring in springs:
-        if spring == ".":
-            join += "."
+    if current_spring == "#":
+        if not counts or len(springs) < counts[0]:
+            return 0
 
-            if contig:
-                contigs.append(contig)
-                contig = 0
+        if "." in springs[0 : counts[0]]:
+            return 0
 
-            if sub_spring:
-                sub_springs.append(sub_spring)
-                sub_spring = ""
+        if springs[counts[0] :].startswith("#"):
+            return 0
 
-        else:
-            sub_spring += spring
-
-            if join:
-                joins.append(join)
-
-        if spring == "#":
-            contig += 1
-
-    if join:
-        joins.append(join)
-
-    if sub_spring:
-        sub_springs.append(sub_spring)
-
-    if contig:
-        contigs.append(contig)
-
-    # If spring groups == counts, we're good
-    # Clear out the remaining ?s
-    if contigs == list(counts):
-        # If we have ?s, replace with . and try again just to confirm
-        if "?" in springs:
-            return arrangements(springs.replace("?", "."), counts)
-
-        # Otherwise, we're all good!
-        return {springs}
-
-    # We have correct group sizes, just split and look for different sub-springs
-    if len(contigs) == len(counts):
-        print(springs, sub_springs, joins, contigs, counts)
-
-        possible_arrangements: set[str] = set()
-
-        for index, (sub_spring, count) in enumerate(zip(sub_springs, counts)):
-            if sub_spring.count("#") != count:
-                # Try with sub-spring
-                sub_arrangements = arrangements(sub_spring, (count,))
-
-                for sub_arrangement in sub_arrangements:
-                    pass
-
-        return possible_arrangements
-
-    if len(contigs) <= len(counts):
-        possible_arrangements: set[str] = set()
-
-        # Replace a ? and try again
-        springs_list = list(springs)
-
-        for index in range(len(springs_list)):
-            if springs_list[index] == "?":
-                # Try with a #
-                broken_springs_list = springs_list.copy()
-                broken_springs_list[index] = "#"
-                broken_springs = "".join(broken_springs_list)
-
-                possible_arrangements.update(
-                    arrangements("".join(broken_springs), counts)
+        if len(springs) > counts[0]:
+            if springs[counts[0]] == "?":
+                return count_arrangements(
+                    springs[counts[0] + 1 :].lstrip("."), counts[1:]
                 )
 
-                # Try with a .
-                broken_springs_list = springs_list.copy()
-                broken_springs_list[index] = "."
-                broken_springs = "".join(broken_springs_list)
+        return count_arrangements(springs[counts[0] :].lstrip("."), counts[1:])
 
-                possible_arrangements.update(
-                    arrangements("".join(broken_springs), counts)
-                )
+    elif current_spring == ".":
+        return count_arrangements(springs.lstrip("."), counts)
 
-        return possible_arrangements
-
-    # Invalid arrangement
-    return set()
+    return count_arrangements("#" + springs[1:], counts) + count_arrangements(
+        "." + springs[1:], counts
+    )
 
 
 @router.post("/part-1")
@@ -119,13 +58,10 @@ async def year_2023_day_12_part_1(
 
     # Iterate over lines
     for index, line in enumerate(document):
-        print(index)
         springs, count_str = line.split(" ")
-        counts = tuple(int(value) for value in count_str.split(","))
+        counts = [int(value) for value in count_str.split(",")]
 
-        print(springs, counts)
-
-        total += len(arrangements(springs, counts))
+        total += count_arrangements(springs, tuple(counts))
 
     return total
 
@@ -141,7 +77,13 @@ async def year_2023_day_12_part_2(
     total = 0
 
     # Iterate over lines
-    for line in document:
-        pass
+    for index, line in enumerate(document):
+        springs, count_str = line.split(" ")
+        counts = [int(value) for value in count_str.split(",")]
+
+        unfolded_counts = counts * 5
+        unfolded_springs = "?".join([springs] * 5)
+
+        total += count_arrangements(unfolded_springs, tuple(unfolded_counts))
 
     return total

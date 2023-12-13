@@ -33,7 +33,8 @@ def count_arrangements(springs: str, counts: tuple[int]) -> int:
         if len(springs) > counts[0]:
             if springs[counts[0]] == "?":
                 return count_arrangements(
-                    springs[counts[0] + 1 :].lstrip("."), counts[1:]
+                    springs[counts[0] + 1 :].lstrip("."),
+                    counts[1:],
                 )
 
         return count_arrangements(springs[counts[0] :].lstrip("."), counts[1:])

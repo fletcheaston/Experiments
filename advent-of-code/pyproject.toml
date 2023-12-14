@@ -18,6 +18,7 @@ test = [
     "httpx==0.25.2",
     "pytest==7.4.3",
     "pytest-cov==4.1.0",
+    "pytest-xdist==3.5.0",
 ]
 
 [tool.pytest.ini_options]

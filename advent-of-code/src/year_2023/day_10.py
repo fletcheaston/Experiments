@@ -5,7 +5,13 @@ from fastapi import APIRouter, Body
 router = APIRouter(tags=["2023 - Day 10: Title"])
 
 
-DOCUMENT_EXAMPLE = []
+DOCUMENT_EXAMPLE = [
+    "..F7.",
+    ".FJ|.",
+    "SJ.L7",
+    "|F--J",
+    "LJ...",
+]
 
 
 OPEN_CHARACTER = "\033[94m█\033[0m"
@@ -255,16 +261,6 @@ class Map:
 
         return total
 
-    def show(self) -> None:
-        print()
-        for line in self.characters:
-            print("".join(line))
-
-    def show_expanded(self) -> None:
-        print()
-        for line in self.expanded_characters:
-            print("".join(line))
-
 
 @router.post("/part-1")
 async def year_2023_day_10_part_1(
@@ -276,10 +272,8 @@ async def year_2023_day_10_part_1(
 ) -> int:
     character_map: list[list[str]] = []
 
-    # (x, y)
     position = Position(x=0, y=0)
 
-    # Iterate over lines
     for y_index, line in enumerate(document):
         character_map.append(list(line))
 
@@ -294,7 +288,6 @@ async def year_2023_day_10_part_1(
         characters=character_map,
     )
 
-    # Check around the start position for connected positions
     return pipe_map.run()
 
 
@@ -308,10 +301,8 @@ async def year_2023_day_10_part_2(
 ) -> int:
     character_map: list[list[str]] = []
 
-    # (x, y)
     position = Position(x=0, y=0)
 
-    # Iterate over lines
     for y_index, line in enumerate(document):
         character_map.append(list(line))
 
@@ -331,6 +322,5 @@ async def year_2023_day_10_part_2(
     pipe_map.expand()
     pipe_map.flood_fill()
     pipe_map.shrink()
-    pipe_map.show()
 
     return pipe_map.count(ENCLOSED_CHARACTER)

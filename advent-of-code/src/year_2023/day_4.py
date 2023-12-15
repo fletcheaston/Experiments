@@ -80,7 +80,6 @@ async def year_2023_day_4_part_1(
     """
     total = 0
 
-    # Iterate over lines
     for line in document:
         rest = line.split(": ")[1]
         winning_str, my_str = rest.split(" | ")
@@ -156,7 +155,6 @@ async def year_2023_day_4_part_2(
     # Map from index to count
     copies: dict[int, int] = {index: 1 for index in range(len(document))}
 
-    # Iterate over lines
     for index, line in enumerate(document):
         rest = line.split(": ")[1]
         winning_str, my_str = rest.split(" | ")

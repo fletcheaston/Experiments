@@ -83,7 +83,6 @@ async def year_2022_day_1_part_1(
     running_total = 0
     max_total = 0
 
-    # Iterate over lines
     for line in document:
         if line:
             # Add to the running total
@@ -123,7 +122,6 @@ async def year_2022_day_1_part_2(
     running_total = 0
     totals: list[int] = []
 
-    # Iterate over lines
     for line in document:
         if line:
             # Add to the running total

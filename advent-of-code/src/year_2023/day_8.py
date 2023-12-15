@@ -82,7 +82,6 @@ async def year_2023_day_8_part_1(
 
     maps: dict[str, tuple[str, str]] = {}
 
-    # Iterate over lines
     for line in document:
         start, rest = line.split(" = ")
         left, right = rest.replace("(", "").replace(")", "").split(", ")
@@ -176,7 +175,6 @@ async def year_2023_day_8_part_2(
     steps: list[str] = []
     maps: dict[str, tuple[str, str]] = {}
 
-    # Iterate over lines
     for index, line in enumerate(document):
         start, rest = line.split(" = ")
         left, right = rest.replace("(", "").replace(")", "").split(", ")

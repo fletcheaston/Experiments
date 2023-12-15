@@ -129,7 +129,6 @@ async def year_2022_day_2_part_1(
     """
     total = 0
 
-    # Iterate over lines
     for line in document:
         other_character, my_character = line.split(" ")
 
@@ -172,7 +171,6 @@ async def year_2022_day_2_part_2(
     """
     total = 0
 
-    # Iterate over lines
     for line in document:
         other_character, outcome_character = line.split(" ")
 

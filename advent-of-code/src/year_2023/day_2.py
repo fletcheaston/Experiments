@@ -83,7 +83,6 @@ async def year_2023_day_2_part_1(
     """
     total = 0
 
-    # Iterate over lines
     for line in document:
         possible = True
 
@@ -145,7 +144,6 @@ async def year_2023_day_2_part_2(
     """
     powers = 0
 
-    # Iterate over lines
     for line in document:
         red = 0
         green = 0

@@ -96,7 +96,6 @@ async def year_2023_day_13_part_1(
 
     grid = Grid(smudges=0)
 
-    # Iterate over lines
     for line in document:
         if not line:
             # Calculate reflections
@@ -132,7 +131,6 @@ async def year_2023_day_13_part_2(
 
     grid = Grid(smudges=1)
 
-    # Iterate over lines
     for line in document:
         if not line:
             # Calculate reflections

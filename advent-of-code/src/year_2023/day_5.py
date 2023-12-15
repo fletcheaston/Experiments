@@ -199,7 +199,6 @@ async def year_2023_day_5_part_1(
         humidity = 0
         location = 0
 
-        # Iterate over lines
         for line in document:
             if not line:
                 pass
@@ -356,7 +355,6 @@ async def year_2023_day_5_part_2(
 
     mode = "seed-to-soil map:"
 
-    # Iterate over lines
     for line in document:
         if not line:
             pass

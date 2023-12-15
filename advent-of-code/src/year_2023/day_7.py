@@ -228,7 +228,6 @@ async def year_2023_day_7_part_1(
     """
     hands: list[HandPartOne] = []
 
-    # Iterate over lines
     for line in document:
         hand_str, bid_str = line.split(" ")
 
@@ -478,7 +477,6 @@ async def year_2023_day_7_part_2(
     """
     hands: list[HandPartTwo] = []
 
-    # Iterate over lines
     for line in document:
         hand_str, bid_str = line.split(" ")
 

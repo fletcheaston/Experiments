@@ -77,7 +77,6 @@ async def year_2022_day_4_part_1(
     """
     total = 0
 
-    # Iterate over lines
     for line in document:
         assignment_left, assignment_right = line.split(",")
 
@@ -129,7 +128,6 @@ async def year_2022_day_4_part_2(
     """
     total = 0
 
-    # Iterate over lines
     for line in document:
         assignment_left, assignment_right = line.split(",")
 

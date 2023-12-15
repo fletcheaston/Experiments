@@ -64,7 +64,6 @@ async def year_2023_day_1_part_1(
     """
     total = 0
 
-    # Iterate over lines
     for line in document:
         # Remove all non-numeric characters from the string
         numerics = [character for character in line if character.isnumeric()]
@@ -132,7 +131,6 @@ async def year_2023_day_1_part_2(
     """
     total = 0
 
-    # Iterate over lines
     for line in document:
         # Find the earliest "digit"
         first_digit = functools.reduce(

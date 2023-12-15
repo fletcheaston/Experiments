@@ -72,7 +72,6 @@ async def year_2022_day_3_part_1(
     """
     total = 0
 
-    # Iterate over lines
     for line in document:
         first_compartment = line[: len(line) // 2]
         second_compartment = line[len(line) // 2 :]
@@ -140,7 +139,6 @@ async def year_2022_day_3_part_2(
     """
     total = 0
 
-    # Iterate over lines
     for line_1, line_2, line_3 in chunks(document, 3):
         # Convert each line to a set of items and get the intersections
         duplicates = set(line_1).intersection((set(line_2))).intersection((set(line_3)))

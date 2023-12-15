@@ -74,7 +74,6 @@ async def year_2023_day_3_part_1(
 
     symbol_coordinates: set[tuple[int, int]] = set()
 
-    # Iterate over lines
     for line_index, line in enumerate(document):
         character_indexes: list[int] = []
         running_number = ""
@@ -199,7 +198,6 @@ async def year_2023_day_3_part_2(
 
     symbol_coordinates: dict[tuple[int, int], bool] = {}
 
-    # Iterate over lines
     for line_index, line in enumerate(document):
         character_indexes: list[int] = []
         running_number = ""

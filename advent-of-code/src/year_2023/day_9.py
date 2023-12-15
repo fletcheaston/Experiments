@@ -171,7 +171,6 @@ async def year_2023_day_9_part_1(
     """
     total = 0
 
-    # Iterate over lines
     for line in document:
         history = History(
             values=[[int(value.strip()) for value in line.split(" ")]],
@@ -222,7 +221,6 @@ async def year_2023_day_9_part_2(
     """
     total = 0
 
-    # Iterate over lines
     for line in document:
         history = History(
             values=[[int(value.strip()) for value in line.split(" ")]],

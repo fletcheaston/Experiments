@@ -57,7 +57,6 @@ async def year_2023_day_12_part_1(
 ) -> int:
     total = 0
 
-    # Iterate over lines
     for index, line in enumerate(document):
         springs, count_str = line.split(" ")
         counts = [int(value) for value in count_str.split(",")]
@@ -77,7 +76,6 @@ async def year_2023_day_12_part_2(
 ) -> int:
     total = 0
 
-    # Iterate over lines
     for index, line in enumerate(document):
         springs, count_str = line.split(" ")
         counts = [int(value) for value in count_str.split(",")]

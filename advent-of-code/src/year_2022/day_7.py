@@ -258,7 +258,6 @@ async def year_2022_day_7_part_1(
         current_directory=root,
     )
 
-    # Iterate over lines
     for line in document:
         filesystem.feed_line(line)
 
@@ -308,7 +307,6 @@ async def year_2022_day_7_part_2(
         current_directory=root,
     )
 
-    # Iterate over lines
     for line in document:
         filesystem.feed_line(line)
 

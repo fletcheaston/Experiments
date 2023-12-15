@@ -16,7 +16,6 @@ async def year_20xx_day_n_part_1(
 ) -> int:
     total = 0
 
-    # Iterate over lines
     for line in document:
         pass
 
@@ -33,7 +32,6 @@ async def year_20xx_day_n_part_2(
 ) -> int:
     total = 0
 
-    # Iterate over lines
     for line in document:
         pass
 

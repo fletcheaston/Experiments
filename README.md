@@ -33,7 +33,7 @@ Replace `{env name}` below with your desired conda environment name.
 
 5. Install pre-commit and commit-msg hooks for all projects
     ```shell
-    make pre-commit-install
+    pre-commit install --hook-type pre-commit --hook-type commit-msg
     ```
 
 ## Contributing

@@ -36,6 +36,7 @@ repos:
         name: my-freight-cube/lint
         entry: bash -c 'cd my-freight-cube && npm run lint'
         language: system
+        files: ^my-freight-cube/
         types_or: [ts, tsx]
 
 -   repo: local
@@ -44,6 +45,7 @@ repos:
         name: my-freight-cube/format
         entry: bash -c 'cd my-freight-cube && npm run format'
         language: system
+        files: ^my-freight-cube/
         types_or: [ts, tsx]
 
 -   repo: local
@@ -52,4 +54,32 @@ repos:
         name: my-freight-cube/type-check
         entry: bash -c 'cd my-freight-cube && npm run type-check'
         language: system
+        files: ^my-freight-cube/
+        types_or: [ts, tsx]
+
+-   repo: local
+    hooks:
+    -   id: blog-components/lint
+        name: blog-components/lint
+        entry: bash -c 'cd blog-components && npm run lint'
+        language: system
+        files: ^blog-components/
+        types_or: [ts, tsx]
+
+-   repo: local
+    hooks:
+    -   id: blog-components/format
+        name: blog-components/format
+        entry: bash -c 'cd blog-components && npm run format'
+        language: system
+        files: ^blog-components/
+        types_or: [ts, tsx]
+
+-   repo: local
+    hooks:
+    -   id: blog-components/type-check
+        name: blog-components/type-check
+        entry: bash -c 'cd blog-components && npm run type-check'
+        language: system
+        files: ^blog-components/
         types_or: [ts, tsx]

@@ -8,11 +8,12 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                primary: "var(--primary-rgb)",
-                "primary-hover": "var(--primary-hover-rgb)",
+                primary: "var(--md-primary-fg-color)",
+                "primary-hover": "var(--md-primary-fg-color--dark)",
             },
         },
     },
     darkMode: ["class"],
     plugins: [require("@tailwindcss/forms")],
+    prefix: "tw-",
 }

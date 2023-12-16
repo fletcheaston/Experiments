@@ -12,10 +12,10 @@ export function LoadingButton() {
     /**************************************************************************/
     /* Render */
     return (
-        <div className="flex gap-x-4">
+        <div className="tw-flex tw-gap-x-4">
             <div>
                 <button
-                    className="btn btn-primary"
+                    className="tw-btn tw-btn-primary"
                     onClick={() => {
                         setLoading(!loading)
                     }}

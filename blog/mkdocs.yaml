@@ -8,9 +8,10 @@ theme:
     name: material
     logo: images/logo.png
     favicon: images/favicon.ico
+    custom_dir: overrides
 
     palette:
-        # Palette toggle for light mode
+        # Palette for light mode
         -   scheme: default
             primary: deep-purple
             accent: pink
@@ -18,9 +19,9 @@ theme:
                 icon: material/brightness-7
                 name: Switch to dark mode
 
-        # Palette toggle for dark mode
+        # Palette for dark mode
         -   scheme: slate
-            primary: deep-purple
+            primary: teal
             accent: pink
             toggle:
                 icon: material/brightness-4
@@ -71,10 +72,13 @@ markdown_extensions:
     - attr_list
 
 extra_css:
-    - css/images.css
+    - extras/images.css
+    - extras/nav.css
+    - extras/blog-components.css
 
 extra_javascript:
-    - javascript/mathjax.js
+    - extras/mathjax.js
+    - extras/blog-components.js
     - https://polyfill.io/v3/polyfill.min.js?features=es6
     - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 

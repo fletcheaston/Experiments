@@ -4,7 +4,8 @@ import React from "react"
 
 import ClientOnly from "@src/client-only"
 
-import "./globals.css"
+import "@styles/base.css"
+import "@styles/globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
 

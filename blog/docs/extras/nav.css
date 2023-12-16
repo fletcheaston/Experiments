@@ -1,0 +1,4 @@
+
+nav:not(main nav) {
+    font-weight: bold;
+}

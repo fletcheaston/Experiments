@@ -4,6 +4,8 @@ title: Resume
 
 ## Hi! I'm Fletcher Easton
 
+<div data-component="loading-button"></div>
+
 I'm a Senior Software Engineer located in San Diego, CA.
 
 I care deeply about code quality, maintainability, and doing things well.

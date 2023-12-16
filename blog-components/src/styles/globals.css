@@ -1,0 +1,46 @@
+/* DO NOT use `@tailwind base;` here, it'll overwrite far too many base styles */
+@tailwind components;
+
+/*****************************************************************************/
+/* Global vars */
+:root {
+    --md-primary-fg-color: #7e56c2;
+    --md-primary-fg-color--light: #9574cd;
+    --md-primary-fg-color--dark: #673ab6;
+    --md-primary-bg-color: #fff;
+    --md-primary-bg-color--light: #ffffffb3;
+}
+
+/*****************************************************************************/
+/* Buttons */
+@layer components {
+    .tw-btn {
+        @apply tw-cursor-pointer tw-rounded tw-px-4 tw-py-1 tw-text-center tw-transition-all hover:tw-bg-slate-100;
+    }
+
+    .tw-btn-lg {
+        @apply tw-py-2 tw-text-xl;
+    }
+
+    .tw-btn-sm {
+        @apply tw-px-2;
+    }
+
+    .tw-btn-primary {
+        @apply tw-bg-primary tw-text-white hover:tw-bg-primary-hover;
+    }
+
+    .tw-btn-primary-text {
+        @apply tw-bg-transparent tw-text-primary hover:tw-bg-primary hover:tw-text-white;
+    }
+
+    .tw-btn-primary-outline {
+        @apply tw-border-[1px] tw-border-primary tw-bg-transparent tw-text-primary hover:tw-bg-primary hover:tw-text-white;
+    }
+
+    .tw-btn:disabled {
+        @apply tw-cursor-auto tw-opacity-60;
+    }
+}
+
+@tailwind utilities;

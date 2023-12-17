@@ -61,8 +61,8 @@ markdown_extensions:
             generic: true
 
     # Table of contents
-    - toc:
-        permalink: true
+    -   toc:
+            permalink: true
 
     # Tasklists
     - pymdownx.tasklist
@@ -83,45 +83,47 @@ extra_javascript:
     - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/fletcheaston
+    social:
+        -   icon: fontawesome/brands/github
+            link: https://github.com/fletcheaston
 
-    - icon: fontawesome/brands/linkedin
-      link: https://www.linkedin.com/in/fletcheaston/
+        -   icon: fontawesome/brands/linkedin
+            link: https://www.linkedin.com/in/fletcheaston/
 
 nav:
-    - Resume: index.md
-    - MyFreightCube: projects/my-freight-cube.md
-    - Advent of Code - 2023:
-        - projects/advent-of-code/2023/index.md
-        - projects/advent-of-code/2023/day-1.md
-        - projects/advent-of-code/2023/day-2.md
-        - projects/advent-of-code/2023/day-3.md
-        - projects/advent-of-code/2023/day-4.md
-        - projects/advent-of-code/2023/day-5.md
-        - projects/advent-of-code/2023/day-6.md
-        - projects/advent-of-code/2023/day-7.md
-        - projects/advent-of-code/2023/day-8.md
-        - projects/advent-of-code/2023/day-9.md
-        - projects/advent-of-code/2023/day-10.md
-    - Advent of TypeScript - 2023:
-        - projects/advent-of-typescript/index.md
-        - projects/advent-of-typescript/2023/day-1.md
-        - projects/advent-of-typescript/2023/day-2.md
-        - projects/advent-of-typescript/2023/day-3.md
-        - projects/advent-of-typescript/2023/day-4.md
-        - projects/advent-of-typescript/2023/day-5.md
-        - projects/advent-of-typescript/2023/day-6.md
-        - projects/advent-of-typescript/2023/day-7.md
-        - projects/advent-of-typescript/2023/day-8.md
-        - projects/advent-of-typescript/2023/day-9.md
-    - Advent of Code - 2022:
-        - projects/advent-of-code/2022/index.md
-        - projects/advent-of-code/2022/day-1.md
-        - projects/advent-of-code/2022/day-2.md
-        - projects/advent-of-code/2022/day-3.md
-        - projects/advent-of-code/2022/day-4.md
-        - projects/advent-of-code/2022/day-5.md
-        - projects/advent-of-code/2022/day-6.md
-        - projects/advent-of-code/2022/day-7.md
+    -   Resume: index.md
+    -   MyFreightCube: projects/my-freight-cube.md
+    -   React in MkDocs: projects/react-in-mkdocs.md
+    -   Advent of Code - 2023:
+            - projects/advent-of-code/2023/index.md
+            - projects/advent-of-code/2023/day-1.md
+            - projects/advent-of-code/2023/day-2.md
+            - projects/advent-of-code/2023/day-3.md
+            - projects/advent-of-code/2023/day-4.md
+            - projects/advent-of-code/2023/day-5.md
+            - projects/advent-of-code/2023/day-6.md
+            - projects/advent-of-code/2023/day-7.md
+            - projects/advent-of-code/2023/day-8.md
+            - projects/advent-of-code/2023/day-9.md
+            - projects/advent-of-code/2023/day-10.md
+            - projects/advent-of-code/2023/day-16.md
+    -   Advent of TypeScript - 2023:
+            - projects/advent-of-typescript/index.md
+            - projects/advent-of-typescript/2023/day-1.md
+            - projects/advent-of-typescript/2023/day-2.md
+            - projects/advent-of-typescript/2023/day-3.md
+            - projects/advent-of-typescript/2023/day-4.md
+            - projects/advent-of-typescript/2023/day-5.md
+            - projects/advent-of-typescript/2023/day-6.md
+            - projects/advent-of-typescript/2023/day-7.md
+            - projects/advent-of-typescript/2023/day-8.md
+            - projects/advent-of-typescript/2023/day-9.md
+    -   Advent of Code - 2022:
+            - projects/advent-of-code/2022/index.md
+            - projects/advent-of-code/2022/day-1.md
+            - projects/advent-of-code/2022/day-2.md
+            - projects/advent-of-code/2022/day-3.md
+            - projects/advent-of-code/2022/day-4.md
+            - projects/advent-of-code/2022/day-5.md
+            - projects/advent-of-code/2022/day-6.md
+            - projects/advent-of-code/2022/day-7.md

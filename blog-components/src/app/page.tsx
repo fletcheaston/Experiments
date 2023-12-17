@@ -1,3 +1,4 @@
+import { ClickedButton } from "@components/clicked-button"
 import { Divider } from "@components/divider"
 import { LoadingButton } from "@components/loading-button"
 
@@ -11,6 +12,10 @@ export default function Page() {
             <Divider />
 
             <LoadingButton />
+
+            <Divider />
+
+            <ClickedButton />
 
             <Divider />
         </div>

@@ -1,14 +1,11 @@
-/* DO NOT use `@tailwind base;` here, it'll overwrite far too many base styles */
+/* DO NOT use `@tailwind base` here, it'll overwrite far too many base styles */
 @tailwind components;
 
 /*****************************************************************************/
 /* Global vars */
 :root {
     --md-primary-fg-color: #7e56c2;
-    --md-primary-fg-color--light: #9574cd;
     --md-primary-fg-color--dark: #673ab6;
-    --md-primary-bg-color: #fff;
-    --md-primary-bg-color--light: #ffffffb3;
 }
 
 /*****************************************************************************/

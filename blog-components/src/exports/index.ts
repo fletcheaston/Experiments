@@ -1,9 +1,11 @@
 import "@styles/globals.css"
 
-import { initializeLoadingButtons } from "./loading-button"
+import { initialize as initializeClickedButtons } from "./clicked-button"
+import { initialize as initializeLoadingButtons } from "./loading-button"
 
 function initializeBlogComponents() {
     initializeLoadingButtons()
+    initializeClickedButtons()
 }
 
 declare global {

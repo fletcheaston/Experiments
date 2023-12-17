@@ -12,21 +12,15 @@ export function LoadingButton() {
     /**************************************************************************/
     /* Render */
     return (
-        <div className="tw-flex tw-gap-x-4">
-            <div>
-                <button
-                    className="tw-btn tw-btn-primary"
-                    onClick={() => {
-                        setLoading(!loading)
-                    }}
-                >
-                    Switch Loading
-                </button>
-            </div>
-
-            <Loading on={loading}>
-                <div>{loading ? "Loading" : "Loaded"}</div>
-            </Loading>
-        </div>
+        <Loading on={loading}>
+            <button
+                className="tw-btn tw-btn-primary"
+                onClick={() => {
+                    setLoading((prevState) => !prevState)
+                }}
+            >
+                Toggle Loading
+            </button>
+        </Loading>
     )
 }

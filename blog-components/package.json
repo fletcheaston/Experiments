@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
-        "build": "webpack",
+        "build": "rm -rf dist/ && webpack",
         "lint": "next lint",
         "format": "npx prettier --write .",
         "type-check": "tsc"

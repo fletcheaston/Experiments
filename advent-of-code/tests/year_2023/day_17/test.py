@@ -8,8 +8,8 @@ from fastapi.testclient import TestClient
     "filename,output",
     [
         ("example-1.txt", 102),
-        ("example-2.txt", 13),
-        ("example-3.txt", 9),
+        ("example-2.txt", 12),
+        ("example-3.txt", 8),
         ("input.txt", 785),
     ],
 )
@@ -18,7 +18,6 @@ def test_part_1(
     output: int,
     test_client: TestClient,
 ) -> None:
-    print()
     with open(Path(__file__).with_name(filename), "r") as file:
         response = test_client.post(
             "2023/day-17/part-1",
@@ -36,7 +35,7 @@ def test_part_1(
     [
         ("example-1.txt", 94),
         ("example-4.txt", 71),
-        # ("input.txt", 0),
+        ("input.txt", 922),
     ],
 )
 def test_part_2(

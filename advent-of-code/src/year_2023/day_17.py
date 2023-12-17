@@ -43,6 +43,9 @@ Edge = tuple[Coordinate, Coordinate | None, int]
 class Grid:
     grid: dict[Coordinate, int]
 
+    minimum_distance: int
+    maximum_distance: int
+
     edges: dict[Edge, list[Edge]] = field(default_factory=dict)
 
     max_x: int = 0
@@ -54,105 +57,101 @@ class Grid:
         self.grid[coordinate] = cost
 
     def run(self) -> int:
-        # Build up the edges in our graph
-        for x in range(self.max_x):
-            for y in range(self.max_y):
-                point = Coordinate(x=x, y=y)
-
-                for backwards_offset in OFFSETS:
-                    for distance in [1, 2]:
-                        current = (point, backwards_offset, distance)
-                        self.edges[current] = []
-
-                        for next_offset in OFFSETS:
-                            # Skip 180 degree turns
-                            if next_offset == do_180(backwards_offset):
-                                continue
-
-                            next_point = Coordinate(
-                                x=point.x + next_offset.x,
-                                y=point.y + next_offset.y,
-                            )
-
-                            # Skip points that aren't in the grid
-                            if next_point not in self.grid:
-                                continue
-
-                            if next_offset == backwards_offset:
-                                self.edges[current].append(
-                                    (next_point, next_offset, distance + 1)
-                                )
-                            else:
-                                self.edges[current].append((next_point, next_offset, 1))
-
-                    current = (point, backwards_offset, 3)
-                    self.edges[current] = []
-
-                    for next_offset in OFFSETS:
-                        # Skip 180 degree turns
-                        if next_offset == do_180(backwards_offset):
-                            continue
-
-                        # Skip redundant moves
-                        if next_offset == backwards_offset:
-                            continue
-
-                        next_point = Coordinate(
-                            x=point.x + next_offset.x,
-                            y=point.y + next_offset.y,
-                        )
-
-                        # Skip points that aren't in the grid
-                        if next_point not in self.grid:
-                            continue
-
-                        self.edges[current].append((next_point, next_offset, 1))
-
-        # Account for starting position
         start = (Coordinate(x=0, y=0), None, 0)
-        self.edges[start] = []
-
-        for next_offset in OFFSETS:
-            if next_offset not in self.grid:
-                continue
-
-            self.edges[start].append((next_offset, next_offset, 1))
 
         # Build up our cost path
-        queue: list[tuple[int, int, Edge]] = [
-            (0, (self.max_x - 1) + (self.max_y - 1), start)
-        ]
+        queue: list[tuple[int, Edge]] = [(0, start)]
         checked: set[Edge] = {start}
 
         while True:
-            # Get the smallest-cost edge from our queue
-            current_cost, edge_cost, current_edge = heappop(queue)
+            current_cost, (point, backwards_offset, distance) = heappop(queue)
 
-            current_position = current_edge[0]
-
-            # If we're at the end, we're done
             if (
-                current_position.x == self.max_x - 1
-                and current_position.y == self.max_y - 1
+                self.minimum_distance <= distance <= self.maximum_distance
+                and point.x == self.max_x - 1
+                and point.y == self.max_y - 1
             ):
                 return current_cost
 
-            # Iterate over edges and keep searching
-            for next_edge in self.edges[current_edge]:
-                if next_edge in checked:
+            edges: list[Edge] = []
+
+            if backwards_offset is None:
+                for next_offset in OFFSETS:
+                    next_point = Coordinate(
+                        x=point.x + next_offset.x,
+                        y=point.y + next_offset.y,
+                    )
+
+                    if next_point not in self.grid:
+                        continue
+
+                    edges.append((next_point, next_offset, 1))
+
+            elif distance < self.minimum_distance:
+                # Gotta keep moving in the same direction
+                next_point = Coordinate(
+                    x=point.x + backwards_offset.x,
+                    y=point.y + backwards_offset.y,
+                )
+
+                if next_point not in self.grid:
                     continue
 
-                checked.add(next_edge)
-                next_point = next_edge[0]
-                next_cost = current_cost + self.grid[next_point]
+                edges.append((next_point, backwards_offset, distance + 1))
 
+            elif distance < self.maximum_distance:
+                # Can turn now
+                for next_offset in OFFSETS:
+                    if next_offset == do_180(backwards_offset):
+                        # No 180 degree turns
+                        continue
+
+                    next_point = Coordinate(
+                        x=point.x + next_offset.x,
+                        y=point.y + next_offset.y,
+                    )
+
+                    if next_point not in self.grid:
+                        continue
+
+                    if next_offset == backwards_offset:
+                        edges.append((next_point, next_offset, distance + 1))
+
+                    else:
+                        edges.append((next_point, next_offset, 1))
+
+            else:
+                # Over the maximum, gotta turn
+                for next_offset in OFFSETS:
+                    if next_offset == do_180(backwards_offset):
+                        # No 180 degree turns
+                        continue
+
+                    if next_offset == backwards_offset:
+                        # No going straight
+                        continue
+
+                    next_point = Coordinate(
+                        x=point.x + next_offset.x,
+                        y=point.y + next_offset.y,
+                    )
+
+                    if next_point not in self.grid:
+                        continue
+
+                    edges.append((next_point, next_offset, 1))
+
+            for edge in edges:
+                if edge in checked:
+                    continue
+
+                checked.add(edge)
+                current_point = edge[0]
+
+                next_cost = current_cost + self.grid[current_point]
                 heappush(
                     queue,
-                    (
-                        next_cost,
-                        self.max_x - 1 - next_point.x + self.max_y - 1 - next_point.y,
-                        next_edge,
-                    ),
+                    (next_cost, edge),
                 )
 
 
@@ -166,6 +165,8 @@ async def year_2023_day_17_part_1(
 ) -> int:
     grid = Grid(
         grid={},
+        minimum_distance=0,
+        maximum_distance=3,
     )
 
     for y_index, line in enumerate(document):
@@ -183,9 +184,14 @@ async def year_2023_day_17_part_2(
         examples=[DOCUMENT_EXAMPLE],
     ),
 ) -> int:
-    total = 0
+    grid = Grid(
+        grid={},
+        minimum_distance=4,
+        maximum_distance=10,
+    )
 
-    for line in document:
-        pass
+    for y_index, line in enumerate(document):
+        for x_index, character in enumerate(line):
+            grid.add_coordinate(Coordinate(x=x_index, y=y_index), cost=int(character))
 
-    return total
+    return grid.run()

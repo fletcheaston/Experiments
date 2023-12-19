@@ -1,5 +1,6 @@
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import path from "path";
+import MiniCssExtractPlugin from "mini-css-extract-plugin"
+import path from "path"
+
 const config = {
     mode: "production",
     entry: ["./src/exports/index.ts"],
@@ -19,7 +20,12 @@ const config = {
             },
             {
                 test: /\.css$/,
-                use: ["style-loader", { loader: MiniCssExtractPlugin.loader }, "css-loader", "postcss-loader"],
+                use: [
+                    "style-loader",
+                    { loader: MiniCssExtractPlugin.loader },
+                    "css-loader",
+                    "postcss-loader",
+                ],
                 sideEffects: true,
             },
         ],
@@ -46,5 +52,5 @@ const config = {
             module: /.\/src\/styles\/globals.css/,
         },
     ],
-};
-export default config;
+}
+export default config

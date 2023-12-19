@@ -1,6 +1,7 @@
 import { ClickedButton } from "@components/clicked-button"
 import { Divider } from "@components/divider"
 import { LoadingButton } from "@components/loading-button"
+import { PipeMaze } from "@components/pipe-maze"
 
 export default function Page() {
     /**************************************************************************/
@@ -16,6 +17,10 @@ export default function Page() {
             <Divider />
 
             <ClickedButton />
+
+            <Divider />
+
+            <PipeMaze />
 
             <Divider />
         </div>

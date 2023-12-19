@@ -1,4 +1,4 @@
-"use strict";
+"use strict"
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     content: ["./src/**/*.{js,ts,jsx,tsx,mdx}", "./src/**/*.css"],
@@ -13,4 +13,4 @@ module.exports = {
     darkMode: ["class"],
     plugins: [require("@tailwindcss/forms")],
     prefix: "tw-",
-};
+}

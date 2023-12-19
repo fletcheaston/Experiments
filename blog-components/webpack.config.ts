@@ -21,7 +21,12 @@ const config: Configuration = {
             },
             {
                 test: /\.css$/,
-                use: ["style-loader", { loader: MiniCssExtractPlugin.loader }, "css-loader", "postcss-loader"],
+                use: [
+                    "style-loader",
+                    { loader: MiniCssExtractPlugin.loader },
+                    "css-loader",
+                    "postcss-loader",
+                ],
                 sideEffects: true,
             },
         ],

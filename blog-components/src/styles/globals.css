@@ -6,6 +6,7 @@
 :root {
     --md-primary-fg-color: #7e56c2;
     --md-primary-fg-color--dark: #673ab6;
+    --md-accent-fg-color: #f50056;
 }
 
 /*****************************************************************************/
@@ -25,10 +26,6 @@
 
     .tw-btn-primary {
         @apply tw-bg-primary tw-text-white hover:tw-bg-primary-hover;
-    }
-
-    .tw-btn-primary-text {
-        @apply tw-bg-transparent tw-text-primary hover:tw-bg-primary hover:tw-text-white;
     }
 
     .tw-btn-primary-outline {

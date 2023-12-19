@@ -32,7 +32,7 @@ If you want to get in touch, send me an email at [work@fletcheaston.com](mailto:
 
 - Led the Rosalind engineering team through the FedRAMP audit with Coalfire, achieving FedRAMP Moderate status in under a year.
 - Rebuilt the Rosalind Diagnostic Monitoring platform for COVID-19 analysis with a team of software engineers.
-- Worked closely with Astrazeneca to build a custom proteomics-analysis platform.
+- Worked closely with AstraZeneca to build a custom proteomics-analysis platform.
 
 ### Grove
 

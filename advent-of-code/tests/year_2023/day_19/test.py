@@ -7,8 +7,8 @@ from fastapi.testclient import TestClient
 @pytest.mark.parametrize(
     "filename,output",
     [
-        # ("example.txt", 19114),
-        # ("input.txt", 0),
+        ("example.txt", 19114),
+        ("input.txt", 348378),
     ],
 )
 def test_part_1(
@@ -16,7 +16,6 @@ def test_part_1(
     output: int,
     test_client: TestClient,
 ) -> None:
-    print()
     with open(Path(__file__).with_name(filename), "r") as file:
         response = test_client.post(
             "2023/day-19/part-1",
@@ -26,15 +25,14 @@ def test_part_1(
         )
 
         assert response.status_code == 200
-        # assert response.json() == output
-        print(response.json())
+        assert response.json() == output
 
 
 @pytest.mark.parametrize(
     "filename,output",
     [
         ("example.txt", 167409079868000),
-        # ("input.txt", 0),
+        ("input.txt", 121158073425385),
     ],
 )
 def test_part_2(
@@ -42,7 +40,6 @@ def test_part_2(
     output: int,
     test_client: TestClient,
 ) -> None:
-    print()
     with open(Path(__file__).with_name(filename), "r") as file:
         response = test_client.post(
             "2023/day-19/part-2",
@@ -52,5 +49,4 @@ def test_part_2(
         )
 
         assert response.status_code == 200
-        # assert response.json() == output
-        print(response.json())
+        assert response.json() == output

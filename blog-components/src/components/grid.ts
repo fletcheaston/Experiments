@@ -11,6 +11,12 @@ export class Grid<T> {
 
     clear() {
         this.grid = {}
+
+        this.minX = 0
+        this.maxX = 0
+
+        this.minY = 0
+        this.maxY = 0
     }
 
     key(x: number, y: number) {
@@ -28,6 +34,6 @@ export class Grid<T> {
     }
 
     getValue(x: number, y: number): T | undefined {
-        return this.grid[`${x}:${y}`]
+        return this.grid[this.key(x, y)]
     }
 }

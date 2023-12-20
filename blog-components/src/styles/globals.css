@@ -25,11 +25,11 @@
     }
 
     .tw-btn-primary {
-        @apply tw-bg-primary tw-text-white hover:tw-bg-primary-hover;
+        @apply tw-bg-primary tw-text-white hover:tw-bg-primary-hover focus:tw-bg-primary-hover focus:tw-outline-secondary;
     }
 
     .tw-btn-primary-outline {
-        @apply tw-border-[1px] tw-border-primary tw-bg-transparent tw-text-primary hover:tw-bg-primary hover:tw-text-white;
+        @apply tw-border-[1px] tw-border-primary tw-bg-transparent tw-text-primary hover:tw-bg-primary hover:tw-text-white focus:tw-outline-secondary;
     }
 
     .tw-btn:disabled {

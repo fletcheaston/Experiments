@@ -32,8 +32,7 @@ def test_part_1(
 @pytest.mark.parametrize(
     "filename,output",
     [
-        # ("example-1.txt", 0),
-        # ("input.txt", 0),
+        ("input.txt", 244178746156661),
     ],
 )
 def test_part_2(
@@ -41,7 +40,6 @@ def test_part_2(
     output: int,
     test_client: TestClient,
 ) -> None:
-    print()
     with open(Path(__file__).with_name(filename), "r") as file:
         response = test_client.post(
             "2023/day-20/part-2",
@@ -51,5 +49,4 @@ def test_part_2(
         )
 
         assert response.status_code == 200
-        # assert response.json() == output
-        print(response.json())
+        assert response.json() == output

@@ -1,4 +1,5 @@
 import abc
+import math
 from dataclasses import dataclass, field
 from typing import Literal
 
@@ -168,7 +169,6 @@ async def year_2023_day_20_part_1(
 
         return True
 
-    # Fire events off one at a time
     steps_to_cycle = 0
     button_presses = 0
     pulses: dict[State, int] = {
@@ -181,8 +181,6 @@ async def year_2023_day_20_part_1(
         events.append(Event(to_module="broadcaster", from_module="button", state="Low"))
         button_presses += 1
         pulses["Low"] += 1
-
-        # print(button_presses, steps_to_cycle)
 
         while events:
             steps_to_cycle += 1
@@ -215,9 +213,83 @@ async def year_2023_day_20_part_2(
         examples=[DOCUMENT_EXAMPLE],
     ),
 ) -> int:
-    total = 0
+    module_map: dict[str, BaseModule] = {}
+    conjunctions: set[str] = set()
 
+    # Parse inputs to a "module map"
+    # Also pull out the conjunction keys
     for line in document:
-        pass
+        key, output = line.split(" -> ")
+        outputs = [value.strip() for value in output.split(",")]
 
-    return total
+        if key == "broadcaster":
+            module_map[key] = Broadcast(key=key, next_modules=outputs)
+
+        elif key.startswith("%"):
+            key = key.replace("%", "")
+            module_map[key] = FlipFlop(key=key, next_modules=outputs)
+
+        elif key.startswith("&"):
+            key = key.replace("&", "")
+            module_map[key] = Conjunction(key=key, next_modules=outputs)
+            conjunctions.add(key)
+
+        else:
+            raise ValueError
+
+    # Run through all modules
+    # If they have any conjunctions, update said conjunction
+    for key, module in module_map.items():
+        for next_module in module.next_modules:
+            if next_module in conjunctions:
+                # Add to module inputs
+                conjunction_module = module_map[next_module]
+                assert isinstance(conjunction_module, Conjunction)
+                conjunction_module.add_input(key)
+
+    # Get the initial output state of all modules
+    initial_state: dict[str, State] = {}
+
+    for key, module in module_map.items():
+        initial_state[key] = module.output
+
+    # Callback for comparing against initial state
+    def matches_initial_state() -> bool:
+        for _key, _module in module_map.items():
+            if initial_state[_key] != _module.output:
+                return False
+
+        return True
+
+    rx_caller = module_map["kh"]
+    assert isinstance(rx_caller, Conjunction)
+
+    triggers: dict[str, int] = {_input: math.inf for _input in rx_caller.inputs.keys()}
+
+    button_presses = 0
+    events: list[Event] = []
+
+    while button_presses < 1 or not matches_initial_state():
+        events.append(Event(to_module="broadcaster", from_module="button", state="Low"))
+        button_presses += 1
+
+        while events:
+            event = events.pop(0)
+
+            if event.to_module not in module_map:
+                continue
+
+            event_module = module_map[event.to_module]
+
+            new_events = event_module.pulse(event.from_module, event.state)
+            events += new_events
+
+            if event_module.key in triggers and event_module.output == "High":
+                triggers[event_module.key] = min(
+                    triggers[event_module.key], button_presses
+                )
+
+        if all([value != math.inf for value in triggers.values()]):
+            break
+
+    return math.lcm(*triggers.values())

@@ -35,6 +35,62 @@
     .tw-btn:disabled {
         @apply tw-cursor-auto tw-opacity-60;
     }
+
+    .tw-border-tr:after {
+        content: "";
+        width: 4px;
+        height: 4px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-bottom-left-radius: 100%;
+        border-width: 4px;
+        border-color: inherit;
+        border-top: 0;
+        border-right: 0;
+    }
+
+    .tw-border-br:after {
+        content: "";
+        width: 4px;
+        height: 4px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        border-top-left-radius: 100%;
+        border-width: 4px;
+        border-color: inherit;
+        border-bottom: 0;
+        border-left: 0;
+    }
+
+    .tw-border-bl:after {
+        content: "";
+        width: 4px;
+        height: 4px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-top-right-radius: 100%;
+        border-width: 4px;
+        border-color: inherit;
+        border-bottom: 0;
+        border-left: 0;
+    }
+
+    .tw-border-tl:after {
+        content: "";
+        width: 4px;
+        height: 4px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-bottom-right-radius: 100%;
+        border-width: 4px;
+        border-color: inherit;
+        border-top: 0;
+        border-left: 0;
+    }
 }
 
 @tailwind utilities;

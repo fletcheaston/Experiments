@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import cache
 
 from fastapi import APIRouter, Body
@@ -26,6 +26,22 @@ class Coordinate:
         return f"x: {self.x}, y: {self.y}"
 
 
+@dataclass
+class Grid:
+    grid: dict[Coordinate, str] = field(default_factory=dict)
+    max_x: int = 0
+    max_y: int = 0
+
+    def add(self, coordinate: Coordinate, value: str) -> None:
+        self.max_x = max(self.max_x, coordinate.x)
+        self.max_y = max(self.max_y, coordinate.y)
+
+        self.grid[coordinate] = value
+
+    def get(self, coordinate: Coordinate, default=None) -> str | None:
+        return self.grid.get(coordinate, default)
+
+
 @router.post("/part-1")
 async def year_2023_day_21_part_1(
     document: list[str] = Body(
@@ -40,7 +56,7 @@ async def year_2023_day_21_part_1(
     ),
 ) -> int:
     start: Coordinate | None = None
-    grid: dict[Coordinate, str] = {}
+    grid = Grid()
 
     for y_index, line in enumerate(document):
         for x_index, character in enumerate(line):
@@ -49,7 +65,7 @@ async def year_2023_day_21_part_1(
             if character == "S":
                 start = coordinate
 
-            grid[coordinate] = character
+            grid.add(coordinate, character)
 
     assert start is not None
 
@@ -72,12 +88,23 @@ async def year_2023_day_21_part_1(
             ):
                 continue
 
-            if remaining_steps % 2 == steps % 2:
+            if remaining_steps % 2 == 0:
                 visited_plots[new_position] = remaining_steps
 
             count_steps(position=new_position, remaining_steps=remaining_steps - 1)
 
-    count_steps(position=start, remaining_steps=steps + ((steps + 1) % 2))
+    count_steps(position=start, remaining_steps=steps + 1)
+
+    for plot, step_count in visited_plots.items():
+        if plot.y == start.y:
+            print(f"{plot=}")
+            print(f"{step_count=}")
+            print()
+
+    x_s = [plot.x for plot in visited_plots.keys() if plot.y == start.y]
+    print(min(x_s))
+    print(max(x_s))
+    print(len(x_s))
 
     return len(visited_plots)
 
@@ -96,7 +123,7 @@ async def year_2023_day_21_part_2(
     ),
 ) -> int:
     start: Coordinate | None = None
-    grid: dict[Coordinate, str] = {}
+    grid = Grid()
 
     for y_index, line in enumerate(document):
         for x_index, character in enumerate(line):
@@ -105,11 +132,11 @@ async def year_2023_day_21_part_2(
             if character == "S":
                 start = coordinate
 
-            grid[coordinate] = character
+            grid.add(coordinate, character)
 
     assert start is not None
 
-    visited_plots: dict[Coordinate, int] = {start: 0}
+    visited_plots: dict[Coordinate, int] = {}
 
     @cache
     def count_steps(*, position: Coordinate, remaining_steps: int) -> None:

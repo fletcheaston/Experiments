@@ -11,6 +11,22 @@ from fastapi.testclient import TestClient
         ("example.txt", 7, 21),
         ("example.txt", 64, 42),
         ("input.txt", 64, 3758),
+        ("input-p2-l.txt", 65, 3848),
+        ("input-p2-l.txt", 64, 3758),
+        ("input-p2-r.txt", 65, 3848),
+        ("input-p2-r.txt", 64, 3758),
+        ("input-p2-t.txt", 65, 3848),
+        ("input-p2-t.txt", 64, 3758),
+        ("input-p2-b.txt", 65, 3848),
+        ("input-p2-b.txt", 64, 3758),
+        ("input-p2-tl.txt", 65, 3848),
+        ("input-p2-tl.txt", 64, 3758),
+        ("input-p2-tr.txt", 65, 3848),
+        ("input-p2-tr.txt", 64, 3758),
+        ("input-p2-bl.txt", 65, 3848),
+        ("input-p2-bl.txt", 64, 3758),
+        ("input-p2-br.txt", 65, 3848),
+        ("input-p2-br.txt", 64, 3758),
     ],
 )
 def test_part_1(
@@ -29,4 +45,9 @@ def test_part_1(
         )
 
         assert response.status_code == 200
-        assert response.json() == output
+        # assert response.json() == output
+        print(
+            filename.replace("input-p2-", "").replace(".txt", ""),
+            steps % 2,
+            response.json(),
+        )

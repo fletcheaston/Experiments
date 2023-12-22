@@ -22,6 +22,7 @@ from . import (
     day_19,
     day_20,
     day_21,
+    day_22,
 )
 
 router = APIRouter()
@@ -47,3 +48,4 @@ router.include_router(day_18.router, prefix="/day-18")
 router.include_router(day_19.router, prefix="/day-19")
 router.include_router(day_20.router, prefix="/day-20")
 router.include_router(day_21.router, prefix="/day-21")
+router.include_router(day_22.router, prefix="/day-22")

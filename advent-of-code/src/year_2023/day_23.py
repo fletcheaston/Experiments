@@ -1,8 +1,12 @@
+import collections
+import sys
 import typing
 from dataclasses import dataclass, field
 from typing import Literal
 
 from fastapi import APIRouter, Body
+
+sys.setrecursionlimit(5_000)
 
 router = APIRouter(tags=["2023 - Day 23: Title"])
 
@@ -32,7 +36,6 @@ class Grid:
     end: Coordinate = field(default_factory=lambda: Coordinate(x=1, y=0))
 
     grid: dict[Coordinate, TILE] = field(default_factory=dict)
-    edges: dict[EDGE, str] = field(default_factory=dict)
 
     def add(self, coordinate: Coordinate, tile: TILE) -> None:
         # `end` is the largest y-coordinate in the grid
@@ -42,62 +45,83 @@ class Grid:
         # Add to internal grid
         self.grid[coordinate] = tile
 
-    def build_edges(self) -> None:
-        for coordinate, tile in self.grid.items():
-            # Check left
-            left_coordinate = Coordinate(
-                x=coordinate.x - 1,
-                y=coordinate.y,
+    def adjacent(self, coordinate: Coordinate) -> list[Coordinate]:
+        # Check right downhill
+        if self.grid[coordinate] == ">":
+            return [
+                Coordinate(
+                    x=coordinate.x + 1,
+                    y=coordinate.y,
+                )
+            ]
+
+        # Check left downhill
+        if self.grid[coordinate] == "<":
+            return [
+                Coordinate(
+                    x=coordinate.x - 1,
+                    y=coordinate.y,
+                )
+            ]
+
+        # Check down downhill
+        if self.grid[coordinate] == "v":
+            return [
+                Coordinate(
+                    x=coordinate.x,
+                    y=coordinate.y + 1,
+                )
+            ]
+
+        # Check up downhill
+        if self.grid[coordinate] == "^":
+            return [
+                Coordinate(
+                    x=coordinate.x,
+                    y=coordinate.y - 1,
+                )
+            ]
+
+        new_coordinates: list[Coordinate] = []
+
+        for x_offset, y_offset in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            new_coordinate = Coordinate(
+                x=coordinate.x + x_offset, y=coordinate.y + y_offset
             )
 
-            if (
-                tile != ">"
-                and left_coordinate in self.grid
-                and self.grid[left_coordinate] != ">"
-            ):
-                self.edges[(coordinate, left_coordinate)] = "left"
+            if new_coordinate in self.grid:
+                new_coordinates.append(new_coordinate)
 
-            # Check right
-            right_coordinate = Coordinate(
-                x=coordinate.x + 1,
-                y=coordinate.y,
-            )
+        return new_coordinates
 
-            if (
-                tile != "<"
-                and right_coordinate in self.grid
-                and self.grid[right_coordinate] != "<"
-            ):
-                self.edges[(coordinate, right_coordinate)] = "right"
+    def longest_path(self) -> int:
+        to_check = collections.deque([(self.start, set())])
+        accumulated_steps: dict[Coordinate, int] = {self.start: 0}
 
-            # Check up
-            up_coordinate = Coordinate(
-                x=coordinate.x,
-                y=coordinate.y - 1,
-            )
+        while to_check:
+            coordinate, path = to_check.pop()
 
-            if (
-                tile != "v"
-                and up_coordinate in self.grid
-                and self.grid[up_coordinate] != "v"
-            ):
-                self.edges[(coordinate, up_coordinate)] = "up"
+            if coordinate == self.end:
+                continue
 
-            # Check down
-            down_coordinate = Coordinate(
-                x=coordinate.x,
-                y=coordinate.y + 1,
-            )
+            for adj_coordinate in self.adjacent(coordinate):
+                new_cost = accumulated_steps[coordinate] + 1
 
-            if (
-                tile != "^"
-                and down_coordinate in self.grid
-                and self.grid[down_coordinate] != "^"
-            ):
-                self.edges[(coordinate, down_coordinate)] = "down"
+                if adj_coordinate in path:
+                    continue
 
-    def __repr__(self) -> str:
-        return f"{self.start=}, {self.end=}"
+                if (
+                    adj_coordinate not in accumulated_steps
+                    or new_cost > accumulated_steps[adj_coordinate]
+                ):
+                    accumulated_steps[adj_coordinate] = new_cost
+
+                    new_path = path.copy()
+                    new_path.add(adj_coordinate)
+
+                    to_check.appendleft((adj_coordinate, new_path))
+
+        return accumulated_steps[self.end]
 
 
 # Start at 10:50
@@ -116,17 +140,7 @@ async def year_2023_day_23_part_1(
             if character in TILES:
                 grid.add(Coordinate(x=x_index, y=y_index), character)
 
-    grid.build_edges()
-
-    print()
-    for coordinate in grid.grid.items():
-        print(f"{coordinate=}")
-
-    print()
-    for edge in grid.edges.items():
-        print(f"{edge=}")
-
-    return 0
+    return grid.longest_path()
 
 
 @router.post("/part-2")

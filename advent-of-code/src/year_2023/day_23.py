@@ -1,7 +1,8 @@
-import collections
+import math
 import sys
 import typing
 from dataclasses import dataclass, field
+from functools import cached_property
 from typing import Literal
 
 from fastapi import APIRouter, Body
@@ -23,11 +24,15 @@ class Coordinate:
     x: int
     y: int
 
+    @cached_property
+    def distance(self) -> float:
+        return math.sqrt(self.x**2 + self.y**2)
+
+    def __lt__(self, other: "Coordinate") -> bool:
+        return self.distance < other.distance
+
     def __repr__(self) -> str:
         return f"({self.x}, {self.y})"
-
-
-EDGE = tuple[Coordinate, Coordinate]
 
 
 @dataclass
@@ -36,6 +41,14 @@ class Grid:
     end: Coordinate = field(default_factory=lambda: Coordinate(x=1, y=0))
 
     grid: dict[Coordinate, TILE] = field(default_factory=dict)
+
+    intersections: set[Coordinate] = field(default_factory=set)
+    intersection_edges: dict[Coordinate, dict[Coordinate, set[Coordinate]]] = field(
+        default_factory=dict
+    )
+
+    longest_intersections: set[Coordinate] = field(default_factory=set)
+    longest_full_path: set[Coordinate] = field(default_factory=set)
 
     def add(self, coordinate: Coordinate, tile: TILE) -> None:
         # `end` is the largest y-coordinate in the grid
@@ -86,7 +99,8 @@ class Grid:
 
         for x_offset, y_offset in ((1, 0), (-1, 0), (0, 1), (0, -1)):
             new_coordinate = Coordinate(
-                x=coordinate.x + x_offset, y=coordinate.y + y_offset
+                x=coordinate.x + x_offset,
+                y=coordinate.y + y_offset,
             )
 
             if new_coordinate in self.grid:
@@ -94,34 +108,119 @@ class Grid:
 
         return new_coordinates
 
-    def longest_path(self) -> int:
-        to_check = collections.deque([(self.start, set())])
-        accumulated_steps: dict[Coordinate, int] = {self.start: 0}
+    def find_intersections(self) -> None:
+        # We'll consider the start and end intersections
+        # Makes later algorithms easier to work with
+        self.intersections.add(self.start)
+        self.intersections.add(self.end)
 
-        while to_check:
-            coordinate, path = to_check.pop()
+        # Check for more than 2 adjacent nodes
+        for coordinate in self.grid.keys():
+            if len(self.adjacent(coordinate)) > 2:
+                self.intersections.add(coordinate)
 
-            if coordinate == self.end:
+    def path_to_intersections(
+        self,
+        start: Coordinate,
+        current: Coordinate,
+        path: set[Coordinate],
+    ) -> None:
+        # Hit an intersection, end this path here
+        if current in self.intersections:
+            if start not in self.intersection_edges:
+                self.intersection_edges[start] = {}
+
+            self.intersection_edges[start][current] = path
+            return
+
+        # Check adjacent nodes
+        for adjacent in self.adjacent(current):
+            if adjacent not in path:
+                next_path = path.copy()
+                next_path.add(adjacent)
+
+                self.path_to_intersections(start, adjacent, next_path)
+
+    def build_intersection_edges(self) -> None:
+        sorted_intersections = list(self.intersections)
+        sorted_intersections.sort()
+
+        for intersection in sorted_intersections:
+            for adjacent in self.adjacent(intersection):
+                self.path_to_intersections(
+                    intersection, adjacent, {intersection, adjacent}
+                )
+
+    def find_longest_path(
+        self,
+        current: Coordinate,
+        unique_path: set[Coordinate],
+        full_path: set[Coordinate],
+    ) -> None:
+        # Base cases
+        # Reached the end
+        if current == self.end:
+            if len(full_path) > len(self.longest_full_path):
+                self.longest_intersections = unique_path
+                self.longest_full_path = full_path
+
+            return
+
+        # Dead end
+        if current not in self.intersection_edges:
+            return
+
+        # Search next nodes
+        for next_node, path in self.intersection_edges[current].items():
+            # Skip nodes we've already checked
+            if next_node in unique_path:
                 continue
 
-            for adj_coordinate in self.adjacent(coordinate):
-                new_cost = accumulated_steps[coordinate] + 1
+            next_unqiue_path = unique_path.copy()
+            next_unqiue_path.add(next_node)
 
-                if adj_coordinate in path:
-                    continue
+            next_full_path = full_path.copy()
+            next_full_path.update(path)
 
-                if (
-                    adj_coordinate not in accumulated_steps
-                    or new_cost > accumulated_steps[adj_coordinate]
-                ):
-                    accumulated_steps[adj_coordinate] = new_cost
+            self.find_longest_path(next_node, next_unqiue_path, next_full_path)
 
-                    new_path = path.copy()
-                    new_path.add(adj_coordinate)
+    def show(self) -> None:
+        print()
 
-                    to_check.appendleft((adj_coordinate, new_path))
+        for y in range(self.start.y, self.end.y + 1):
+            line = "#"
 
-        return accumulated_steps[self.end]
+            for x in range(self.start.x, self.end.x + 1):
+                coordinate = Coordinate(x=x, y=y)
+                tile = self.grid.get(coordinate, "#")
+
+                if coordinate in self.intersections:
+                    line += "\033[31mX\033[0m"
+
+                else:
+                    line += tile
+
+            line += "#"
+            print(line)
+
+    def show_path(self, path: set[Coordinate]) -> None:
+        print()
+
+        for y in range(self.start.y, self.end.y + 1):
+            line = "#"
+
+            for x in range(self.start.x, self.end.x + 1):
+                coordinate = Coordinate(x=x, y=y)
+                tile = self.grid.get(coordinate, "#")
+
+                if coordinate in path:
+                    line += "\033[31mX\033[0m"
+
+                else:
+                    line += tile
+
+            line += "#"
+            print(line)
 
 
 # Start at 10:50
@@ -140,7 +239,13 @@ async def year_2023_day_23_part_1(
             if character in TILES:
                 grid.add(Coordinate(x=x_index, y=y_index), character)
 
-    return grid.longest_path()
+    grid.find_intersections()
+    grid.build_intersection_edges()
+    grid.find_longest_path(grid.start, {grid.start}, {grid.start})
+
+    # grid.show_path(set(grid.longest_full_path))
+
+    return len(grid.longest_full_path) - 1
 
 
 @router.post("/part-2")
@@ -151,9 +256,17 @@ async def year_2023_day_23_part_2(
         examples=[DOCUMENT_EXAMPLE],
     ),
 ) -> int:
-    total = 0
+    grid = Grid()
 
-    for line in document:
-        pass
+    for y_index, line in enumerate(document):
+        for x_index, character in enumerate(line):
+            if character in TILES:
+                grid.add(Coordinate(x=x_index, y=y_index), ".")
 
-    return total
+    grid.find_intersections()
+    grid.build_intersection_edges()
+    grid.find_longest_path(grid.start, {grid.start}, {grid.start})
+
+    # grid.show_path(set(grid.longest_full_path))
+
+    return len(grid.longest_full_path) - 1

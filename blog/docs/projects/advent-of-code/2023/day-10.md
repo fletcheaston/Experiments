@@ -710,7 +710,7 @@ async def year_2023_day_10_part_2(
 
 | Day | Part 1 Time | Part 1 Rank | Part 2 Time | Part 2 Rank |
 |-----|-------------|-------------|-------------|-------------|
-| 1   | 00:00:00    | XXXXX       | 00:00:00    | XXXXX       |
+| 10  | 01:13:29    | 5,227       | 02:53:15    | 3,953       |
 
 Recap...
 
@@ -718,7 +718,7 @@ Recap...
 
 Red rectangles represent the enclosed characters within the map.
 
-Green rectangles represent the characters within the map that do **appear** to be enclosed but actually aren't.
+Green rectangles represent the characters within the map that **appear** to be enclosed but actually **aren't**.
 
 === "Large - Enclosed"
 

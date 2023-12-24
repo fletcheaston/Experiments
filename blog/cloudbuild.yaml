@@ -1,52 +1,31 @@
 steps:
     ###########################################################################
-    # Build the image
+    # Build the image using Kaniko and push to Artifact Registry
     -   id: build
-        name: "gcr.io/cloud-builders/docker"
-        entrypoint: "bash"
+        name: "gcr.io/kaniko-project/executor:latest"
         args:
-            - "-c"
-            - "docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/blog:$SHORT_SHA -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/blog:latest --file blog/Dockerfile ./blog"
-        waitFor:
-            - "-"
-
-    # Push images to Artifact Registry
-    -   id: push-sha
-        name: "gcr.io/cloud-builders/docker"
-        args:
-            - "push"
-            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/blog:$SHORT_SHA"
-        waitFor:
-            - build
-
-    -   id: push-latest
-        name: "gcr.io/cloud-builders/docker"
-        args:
-            - "push"
-            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/blog:latest"
-        waitFor:
-            - build
+            - --dockerfile=blog/Dockerfile
+            - --context=dir://blog
+            - --cache=true
+            - --cache-ttl=24h
+            - --destination=us-central1-docker.pkg.dev/$PROJECT_ID/containers/blog:$SHORT_SHA
 
     # Deploy image to Cloud Run
     -   id: deploy
         name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
         entrypoint: gcloud
         args:
-            - "run"
-            - "deploy"
-            - "blog"
-            - "--image"
-            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/blog:$SHORT_SHA"
-            - "--region"
-            - "us-central1"
-            - "--platform"
-            - "managed"
+            - run
+            - deploy
+            - blog
+            - --image
+            - us-central1-docker.pkg.dev/$PROJECT_ID/containers/blog:$SHORT_SHA
+            - --region
+            - us-central1
+            - --platform
+            - managed
         waitFor:
             - push-sha
 
 # 10 minutes
 timeout: 600s
-
-images:
-    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/blog:$SHORT_SHA"
-    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/blog:latest"

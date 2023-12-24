@@ -29,6 +29,3 @@ steps:
 
 # 10 minutes
 timeout: 600s
-
-images:
-    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:$SHORT_SHA"

@@ -4,11 +4,11 @@ steps:
     -   id: build
         name: "gcr.io/kaniko-project/executor:latest"
         args:
-        - --dockerfile=advent-of-code/Dockerfile,
-        - --context=dir://advent-of-code,
-        - --cache=true,
-        - --cache-ttl=24h,
-        - --destination=us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:$SHORT_SHA
+            - --dockerfile=advent-of-code/Dockerfile
+            - --context=dir://advent-of-code
+            - --cache=true
+            - --cache-ttl=24h
+            - --destination=us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:$SHORT_SHA
 
     # Deploy image to Cloud Run
     -   id: deploy

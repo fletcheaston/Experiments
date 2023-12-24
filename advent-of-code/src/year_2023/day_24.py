@@ -160,16 +160,16 @@ async def year_2023_day_24_part_2(
 
     solver = z3.Solver()
 
-    px = z3.BitVec("px", 64)
-    py = z3.BitVec("py", 64)
-    pz = z3.BitVec("pz", 64)
+    px = z3.Real("px")
+    py = z3.Real("py")
+    pz = z3.Real("pz")
 
-    vx = z3.BitVec("vx", 64)
-    vy = z3.BitVec("vy", 64)
-    vz = z3.BitVec("vz", 64)
+    vx = z3.Real("vx")
+    vy = z3.Real("vy")
+    vz = z3.Real("vz")
 
     for hailstone in hailstones:
-        time = z3.BitVec(f"hailstone_{hailstone.id}_time", 64)
+        time = z3.Real(f"hailstone_{hailstone.id}_time")
 
         # Must be in the future
         solver.add(time >= 0)

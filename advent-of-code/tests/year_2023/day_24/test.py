@@ -36,7 +36,7 @@ def test_part_1(
     "filename,output",
     [
         ("example-1.txt", 47),
-        # ("input.txt", 765636044333842),
+        ("input.txt", 765636044333842),
     ],
 )
 def test_part_2(

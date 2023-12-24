@@ -7,7 +7,6 @@ steps:
             - --dockerfile=blog/Dockerfile
             - --context=dir://blog
             - --cache=true
-            - --cache-ttl=24h
             - --destination=us-central1-docker.pkg.dev/$PROJECT_ID/containers/blog:$SHORT_SHA
 
     # Deploy image to Cloud Run

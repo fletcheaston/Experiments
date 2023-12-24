@@ -15,15 +15,15 @@ steps:
         name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
         entrypoint: gcloud
         args:
-            - "run"
-            - "deploy"
-            - "advent-of-code"
-            - "--image"
-            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:$SHORT_SHA"
-            - "--region"
-            - "us-central1"
-            - "--platform"
-            - "managed"
+            - run
+            - deploy
+            - advent-of-code
+            - --image
+            - us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:$SHORT_SHA
+            - --region
+            - us-central1
+            - --platform
+            - managed
         waitFor:
             - build
 
@@ -32,4 +32,3 @@ timeout: 600s
 
 images:
     - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:$SHORT_SHA"
-    - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:latest"

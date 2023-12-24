@@ -25,7 +25,7 @@ steps:
             - --platform
             - managed
         waitFor:
-            - push-sha
+            - build
 
 # 10 minutes
 timeout: 600s

@@ -2,6 +2,7 @@ import re
 import uuid
 from dataclasses import dataclass, field
 
+import z3
 from fastapi import APIRouter, Body
 
 router = APIRouter(tags=["2023 - Day 24: Title"])
@@ -137,9 +138,57 @@ async def year_2023_day_24_part_2(
         examples=[DOCUMENT_EXAMPLE],
     ),
 ) -> int:
-    total = 0
+    hailstones: list[Hailstone] = []
 
-    for line in document:
-        pass
+    for index, line in enumerate(document):
+        line = re.sub(" +", " ", line)
+        px, py, pz, _, vx, vy, vz = line.replace(",", "").split(" ")
+        hailstones.append(
+            Hailstone(
+                start=Coordinate(
+                    x=int(px),
+                    y=int(py),
+                    z=int(pz),
+                ),
+                velocity=Velocity(
+                    x=int(vx),
+                    y=int(vy),
+                    z=int(vz),
+                ),
+            ),
+        )
 
-    return total
+    solver = z3.Solver()
+
+    px = z3.BitVec("px", 64)
+    py = z3.BitVec("py", 64)
+    pz = z3.BitVec("pz", 64)
+
+    vx = z3.BitVec("vx", 64)
+    vy = z3.BitVec("vy", 64)
+    vz = z3.BitVec("vz", 64)
+
+    for hailstone in hailstones:
+        time = z3.BitVec(f"hailstone_{hailstone.id}_time", 64)
+
+        # Must be in the future
+        solver.add(time >= 0)
+
+        # Solve for x-axis
+        solver.add(px + vx * time == hailstone.start.x + hailstone.velocity.x * time)
+
+        # Solve for y-axis
+        solver.add(py + vy * time == hailstone.start.y + hailstone.velocity.y * time)
+
+        # Solve for z-axis
+        solver.add(pz + vz * time == hailstone.start.z + hailstone.velocity.z * time)
+
+    assert solver.check() == z3.sat
+
+    model = solver.model()
+
+    x = model.eval(px).as_long()
+    y = model.eval(py).as_long()
+    z = model.eval(pz).as_long()
+
+    return x + y + z

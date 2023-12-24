@@ -1,31 +1,16 @@
 steps:
     ###########################################################################
-    # Build the image
+    # Build the image using Kaniko and push to Artifact Registry
     -   id: build
-        name: "gcr.io/cloud-builders/docker"
-        entrypoint: "bash"
+        name: "gcr.io/kaniko-project/executor:latest"
         args:
-            - "-c"
-            - "docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:$SHORT_SHA -t us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:latest --file advent-of-code/Dockerfile ./advent-of-code"
+            - "--dockerfile=advent-of-code/Dockerfile",
+            - "--context=dir://advent-of-code",
+            - "--cache=true",
+            - "--cache-ttl=24h",
+            - "--destination=us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:$SHORT_SHA"
         waitFor:
             - "-"
-
-    # Push images to Artifact Registry
-    -   id: push-sha
-        name: "gcr.io/cloud-builders/docker"
-        args:
-            - "push"
-            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:$SHORT_SHA"
-        waitFor:
-            - build
-
-    -   id: push-latest
-        name: "gcr.io/cloud-builders/docker"
-        args:
-            - "push"
-            - "us-central1-docker.pkg.dev/$PROJECT_ID/containers/advent-of-code:latest"
-        waitFor:
-            - build
 
     # Deploy image to Cloud Run
     -   id: deploy

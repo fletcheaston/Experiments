@@ -94,7 +94,7 @@ import re
 
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2022 - Day 5: Supply Stacks"])
+router = APIRouter()
 
 
 STACK_EXAMPLE = {
@@ -217,7 +217,7 @@ import re
 
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2022 - Day 5: Supply Stacks"])
+router = APIRouter()
 
 
 STACK_EXAMPLE = {

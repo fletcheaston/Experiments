@@ -151,7 +151,7 @@ import io
 
 from fastapi import APIRouter, UploadFile
 
-router = APIRouter(tags=["Day 2: Cube Conundrum"])
+router = APIRouter()
 
 
 @router.post("/part-2")

@@ -53,7 +53,7 @@ Of course, the actual engine schematic is much larger.
 ```python
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 3: Gear Ratios"])
+router = APIRouter()
 
 
 @router.post("/part-1")
@@ -187,7 +187,7 @@ I misunderstood some of the requirements, so there's a few silly things in the p
 ```python
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 3: Gear Ratios"])
+router = APIRouter()
 
 
 @router.post("/part-2")

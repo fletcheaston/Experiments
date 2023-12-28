@@ -155,7 +155,7 @@ from dataclasses import dataclass
 
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 10: Title"])
+router = APIRouter()
 
 
 DOCUMENT_EXAMPLE = [
@@ -410,7 +410,7 @@ from dataclasses import dataclass, field
 
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 10: Title"])
+router = APIRouter()
 
 
 DOCUMENT_EXAMPLE = [

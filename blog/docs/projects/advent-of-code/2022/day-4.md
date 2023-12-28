@@ -66,7 +66,7 @@ from fastapi import APIRouter
 
 from src.types import Lines
 
-router = APIRouter(tags=["2022 - Day 4: Camp Cleanup"])
+router = APIRouter()
 
 
 @router.post("/part-1")
@@ -123,7 +123,7 @@ from fastapi import APIRouter
 
 from src.types import Lines
 
-router = APIRouter(tags=["2022 - Day 4: Camp Cleanup"])
+router = APIRouter()
 
 
 @router.post("/part-2")

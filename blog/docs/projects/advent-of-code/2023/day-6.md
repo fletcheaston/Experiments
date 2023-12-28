@@ -77,7 +77,7 @@ For each time/distance pair:
 ```python
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 6: Wait For It"])
+router = APIRouter()
 
 
 @router.post("/part-1")
@@ -145,7 +145,7 @@ Just a simplified version of the Part 1 solution, accepting only one time and di
 ```python
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 6: Wait For It"])
+router = APIRouter()
 
 
 @router.post("/part-2")
@@ -394,7 +394,7 @@ import math
 
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 6: Wait For It"])
+router = APIRouter()
 
 
 @router.post("/part-1")

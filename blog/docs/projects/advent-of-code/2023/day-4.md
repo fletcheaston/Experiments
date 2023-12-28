@@ -74,7 +74,7 @@ For each line:
 ```python
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 4: Scratchcards"])
+router = APIRouter()
 
 
 DOCUMENT_EXAMPLE = [
@@ -181,7 +181,7 @@ Then add the number of copies for the current card to the running total.
 ```python
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 4: Scratchcards"])
+router = APIRouter()
 
 
 DOCUMENT_EXAMPLE = [

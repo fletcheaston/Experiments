@@ -106,6 +106,9 @@ nav:
             - projects/advent-of-code/2023/day-8.md
             - projects/advent-of-code/2023/day-9.md
             - projects/advent-of-code/2023/day-10.md
+            - projects/advent-of-code/2023/day-11.md
+            - projects/advent-of-code/2023/day-12.md
+            - projects/advent-of-code/2023/day-13.md
     -   Advent of TypeScript - 2023:
             - projects/advent-of-typescript/index.md
             - projects/advent-of-typescript/2023/day-1.md

@@ -55,7 +55,7 @@ from fastapi import APIRouter
 
 from src.types import Lines
 
-router = APIRouter(tags=["2022 - Day 3: Rucksack Reorganization"])
+router = APIRouter()
 
 ITEM_TO_PRIORITY: dict[str, int] = {
     **{
@@ -144,7 +144,7 @@ from fastapi import APIRouter
 from src.types import Lines
 from src.utils import chunks
 
-router = APIRouter(tags=["2022 - Day 3: Rucksack Reorganization"])
+router = APIRouter()
 
 ITEM_TO_PRIORITY: dict[str, int] = {
     **{

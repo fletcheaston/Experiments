@@ -109,7 +109,7 @@ from dataclasses import dataclass, field
 
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2022 - Day 7: No Space Left On Device"])
+router = APIRouter()
 
 
 DOCUMENT_EXAMPLE = [
@@ -294,7 +294,7 @@ from dataclasses import dataclass, field
 
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2022 - Day 7: No Space Left On Device"])
+router = APIRouter()
 
 
 DOCUMENT_EXAMPLE = [

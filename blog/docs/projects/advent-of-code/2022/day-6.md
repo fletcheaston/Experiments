@@ -50,7 +50,7 @@ Slide a window of `buffer_size` over the input string, convert the substring to 
 ```python
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2022 - Day 6: Tuning Trouble"])
+router = APIRouter()
 
 
 DOCUMENT_EXAMPLE = "mjqjpqmgbljsphdztnvjfqwrcgsmlb"
@@ -97,7 +97,7 @@ Exact same as Part 1, but with a buffer size of `14` instead of `4`.
 ```python
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2022 - Day 6: Tuning Trouble"])
+router = APIRouter()
 
 
 DOCUMENT_EXAMPLE = "mjqjpqmgbljsphdztnvjfqwrcgsmlb"

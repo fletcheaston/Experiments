@@ -90,7 +90,7 @@ from dataclasses import dataclass
 
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 7: Camel Cards"])
+router = APIRouter()
 
 DOCUMENT_EXAMPLE = [
     "32T3K 765",
@@ -331,7 +331,7 @@ from functools import cached_property
 
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 7: Camel Cards"])
+router = APIRouter()
 
 DOCUMENT_EXAMPLE = [
     "32T3K 765",

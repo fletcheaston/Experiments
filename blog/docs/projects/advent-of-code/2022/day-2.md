@@ -54,7 +54,7 @@ from fastapi import APIRouter
 
 from src.types import Lines
 
-router = APIRouter(tags=["2022 - Day 2: Rock Paper Scissors"])
+router = APIRouter()
 
 
 class Hand(StrEnum):
@@ -158,7 +158,7 @@ from fastapi import APIRouter
 
 from src.types import Lines
 
-router = APIRouter(tags=["2022 - Day 2: Rock Paper Scissors"])
+router = APIRouter()
 
 
 class Hand(StrEnum):

@@ -63,7 +63,7 @@ import io
 
 from fastapi import APIRouter, UploadFile
 
-router = APIRouter(tags=["2022 - Day 1: Calorie Counting"])
+router = APIRouter()
 
 
 @router.post("/part-1")
@@ -116,7 +116,7 @@ import io
 
 from fastapi import APIRouter, UploadFile
 
-router = APIRouter(tags=["2022 - Day 1: Calorie Counting"])
+router = APIRouter()
 
 
 @router.post("/part-2")

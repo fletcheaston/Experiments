@@ -59,7 +59,7 @@ Brute-force solution of walking through the steps.
 ```python
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 8: Haunted Wasteland"])
+router = APIRouter()
 
 
 INSTRUCTIONS_EXAMPLE = ""
@@ -165,7 +165,7 @@ import math
 
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 8: Haunted Wasteland"])
+router = APIRouter()
 
 
 INSTRUCTIONS_EXAMPLE = ""

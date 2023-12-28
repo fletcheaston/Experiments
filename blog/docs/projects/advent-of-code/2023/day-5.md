@@ -139,7 +139,7 @@ For each seed, push it through all the layers of mapping with range/bounds check
 ```python
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 5: If You Give A Seed A Fertilizer"])
+router = APIRouter()
 
 
 DOCUMENT_EXAMPLE = []
@@ -292,7 +292,7 @@ from fastapi import APIRouter, Body
 
 from src.utils import chunks
 
-router = APIRouter(tags=["2023 - Day 5: If You Give A Seed A Fertilizer"])
+router = APIRouter()
 
 
 DOCUMENT_EXAMPLE = []

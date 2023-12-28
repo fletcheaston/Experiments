@@ -4,7 +4,7 @@ from typing import Literal
 
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 13: Title"])
+router = APIRouter(tags=["2023 - Day 13: Point of Incidence"])
 
 
 DOCUMENT_EXAMPLE = []

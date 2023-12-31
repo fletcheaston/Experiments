@@ -1,8 +1,9 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 site_name: Fletcher Easton
+site_dir: "build"
 
 watch:
-    - .
+    - docs
 
 theme:
     name: material
@@ -91,41 +92,41 @@ extra:
             link: https://www.linkedin.com/in/fletcheaston/
 
 nav:
-    -   Resume: index.md
-    -   MyFreightCube: projects/my-freight-cube.md
-    -   React in MkDocs: projects/react-in-mkdocs.md
+    -   Resume: resume.md
+    -   MyFreightCube: my-freight-cube.md
+    -   React in MkDocs: react-in-mkdocs.md
     -   Advent of Code - 2023:
-            - projects/advent-of-code/2023/index.md
-            - projects/advent-of-code/2023/day-1.md
-            - projects/advent-of-code/2023/day-2.md
-            - projects/advent-of-code/2023/day-3.md
-            - projects/advent-of-code/2023/day-4.md
-            - projects/advent-of-code/2023/day-5.md
-            - projects/advent-of-code/2023/day-6.md
-            - projects/advent-of-code/2023/day-7.md
-            - projects/advent-of-code/2023/day-8.md
-            - projects/advent-of-code/2023/day-9.md
-            - projects/advent-of-code/2023/day-10.md
-            - projects/advent-of-code/2023/day-11.md
-            - projects/advent-of-code/2023/day-12.md
-            - projects/advent-of-code/2023/day-13.md
+            - advent-of-code/2023/index.md
+            - advent-of-code/2023/day-1.md
+            - advent-of-code/2023/day-2.md
+            - advent-of-code/2023/day-3.md
+            - advent-of-code/2023/day-4.md
+            - advent-of-code/2023/day-5.md
+            - advent-of-code/2023/day-6.md
+            - advent-of-code/2023/day-7.md
+            - advent-of-code/2023/day-8.md
+            - advent-of-code/2023/day-9.md
+            - advent-of-code/2023/day-10.md
+            - advent-of-code/2023/day-11.md
+            - advent-of-code/2023/day-12.md
+            - advent-of-code/2023/day-13.md
     -   Advent of TypeScript - 2023:
-            - projects/advent-of-typescript/index.md
-            - projects/advent-of-typescript/2023/day-1.md
-            - projects/advent-of-typescript/2023/day-2.md
-            - projects/advent-of-typescript/2023/day-3.md
-            - projects/advent-of-typescript/2023/day-4.md
-            - projects/advent-of-typescript/2023/day-5.md
-            - projects/advent-of-typescript/2023/day-6.md
-            - projects/advent-of-typescript/2023/day-7.md
-            - projects/advent-of-typescript/2023/day-8.md
-            - projects/advent-of-typescript/2023/day-9.md
+            - advent-of-typescript/index.md
+            - advent-of-typescript/2023/day-1.md
+            - advent-of-typescript/2023/day-2.md
+            - advent-of-typescript/2023/day-3.md
+            - advent-of-typescript/2023/day-4.md
+            - advent-of-typescript/2023/day-5.md
+            - advent-of-typescript/2023/day-6.md
+            - advent-of-typescript/2023/day-7.md
+            - advent-of-typescript/2023/day-8.md
+            - advent-of-typescript/2023/day-9.md
     -   Advent of Code - 2022:
-            - projects/advent-of-code/2022/index.md
-            - projects/advent-of-code/2022/day-1.md
-            - projects/advent-of-code/2022/day-2.md
-            - projects/advent-of-code/2022/day-3.md
-            - projects/advent-of-code/2022/day-4.md
-            - projects/advent-of-code/2022/day-5.md
-            - projects/advent-of-code/2022/day-6.md
-            - projects/advent-of-code/2022/day-7.md
+            - advent-of-code/2022/index.md
+            - advent-of-code/2022/day-1.md
+            - advent-of-code/2022/day-2.md
+            - advent-of-code/2022/day-3.md
+            - advent-of-code/2022/day-4.md
+            - advent-of-code/2022/day-5.md
+            - advent-of-code/2022/day-6.md
+            - advent-of-code/2022/day-7.md

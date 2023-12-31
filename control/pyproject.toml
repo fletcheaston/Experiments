@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "control"
+version = "0.1.0"
+description = ""
+authors = ["Fletcher Easton <work@fletcheaston.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.0.0"
+django-ninja = "^1.1.0"
+pydantic = "^2.5.3"
+pydantic-settings = "^2.1.0"
+django-simple-history = "^3.4.0"
+psycopg2-binary = "^2.9.9"
+advent-of-code = {path = "../advent-of-code", develop = true}
+django-extensions = "^3.2.3"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.1.9"
+isort = "^5.13.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

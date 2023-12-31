@@ -10,6 +10,15 @@ openapi.json
 *.idea
 *.vscode
 
+# Static/template files
+control/static/
+
+control/app_blog/static/
+control/app_blog/templates/
+
+control/app_my_freight_cube/static/
+control/app_my_freight_cube/templates/
+
 # Silk profiling files
 silk_profiling/
 

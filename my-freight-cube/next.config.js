@@ -4,6 +4,12 @@ const nextConfig = {
     experimental: {
         typedRoutes: true,
     },
+    output: "export",
+    distDir: "build",
+    images: {
+        loader: "custom",
+        loaderFile: "./image-loader.ts",
+    },
 }
 
 module.exports = nextConfig

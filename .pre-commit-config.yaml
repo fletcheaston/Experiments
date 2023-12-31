@@ -11,75 +11,96 @@ repos:
         stages: [ commit-msg ]
         args: [ --negate ]
 
-# Python hooks
--   repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.4
-    hooks:
-    -   id: ruff
-        language_version: python3.12
-
--   repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.4
-    hooks:
-    -   id: ruff-format
-        language_version: python3.12
-
--   repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-
-# Typescript hooks
+# Control hooks
 -   repo: local
     hooks:
-    -   id: my-freight-cube/lint
-        name: my-freight-cube/lint
-        entry: bash -c 'cd my-freight-cube && npm run lint'
+    -   id: control/lint
+        name: control/lint
+        entry: bash -c 'cd control && make lint'
         language: system
-        files: ^my-freight-cube/
-        types_or: [ts, tsx]
+        files: ^control/
+        types_or: [python]
 
 -   repo: local
     hooks:
-    -   id: my-freight-cube/format
-        name: my-freight-cube/format
-        entry: bash -c 'cd my-freight-cube && npm run format'
+    -   id: control/format
+        name: control/format
+        entry: bash -c 'cd control && make format'
         language: system
-        files: ^my-freight-cube/
-        types_or: [ts, tsx]
+        files: ^control/
+        types_or: [python]
+
+# Advent of Code hooks
+-   repo: local
+    hooks:
+    -   id: advent-of-code/lint
+        name: advent-of-code/lint
+        entry: bash -c 'cd advent-of-code && make lint'
+        language: system
+        files: ^advent-of-code/
+        types_or: [python]
 
 -   repo: local
     hooks:
-    -   id: my-freight-cube/type-check
-        name: my-freight-cube/type-check
-        entry: bash -c 'cd my-freight-cube && npm run type-check'
+    -   id: advent-of-code/format
+        name: advent-of-code/format
+        entry: bash -c 'cd advent-of-code && make format'
         language: system
-        files: ^my-freight-cube/
-        types_or: [ts, tsx]
+        files: ^advent-of-code/
+        types_or: [python]
 
--   repo: local
-    hooks:
-    -   id: blog-components/lint
-        name: blog-components/lint
-        entry: bash -c 'cd blog-components && npm run lint'
-        language: system
-        files: ^blog-components/
-        types_or: [ts, tsx]
-
--   repo: local
-    hooks:
-    -   id: blog-components/format
-        name: blog-components/format
-        entry: bash -c 'cd blog-components && npm run format'
-        language: system
-        files: ^blog-components/
-        types_or: [ts, tsx]
-
--   repo: local
-    hooks:
-    -   id: blog-components/type-check
-        name: blog-components/type-check
-        entry: bash -c 'cd blog-components && npm run type-check'
-        language: system
-        files: ^blog-components/
-        types_or: [ts, tsx]
+## MyFreightCube hooks
+#-   repo: local
+#    hooks:
+#    -   id: my-freight-cube/lint
+#        name: my-freight-cube/lint
+#        entry: bash -c 'cd my-freight-cube && npm run lint'
+#        language: system
+#        files: ^my-freight-cube/
+#        types_or: [ts, tsx]
+#
+#-   repo: local
+#    hooks:
+#    -   id: my-freight-cube/format
+#        name: my-freight-cube/format
+#        entry: bash -c 'cd my-freight-cube && npm run format'
+#        language: system
+#        files: ^my-freight-cube/
+#        types_or: [ts, tsx]
+#
+#-   repo: local
+#    hooks:
+#    -   id: my-freight-cube/type-check
+#        name: my-freight-cube/type-check
+#        entry: bash -c 'cd my-freight-cube && npm run type-check'
+#        language: system
+#        files: ^my-freight-cube/
+#        types_or: [ts, tsx]
+#
+## Blog component hooks
+#-   repo: local
+#    hooks:
+#    -   id: blog-components/lint
+#        name: blog-components/lint
+#        entry: bash -c 'cd blog-components && npm run lint'
+#        language: system
+#        files: ^blog-components/
+#        types_or: [ts, tsx]
+#
+#-   repo: local
+#    hooks:
+#    -   id: blog-components/format
+#        name: blog-components/format
+#        entry: bash -c 'cd blog-components && npm run format'
+#        language: system
+#        files: ^blog-components/
+#        types_or: [ts, tsx]
+#
+#-   repo: local
+#    hooks:
+#    -   id: blog-components/type-check
+#        name: blog-components/type-check
+#        entry: bash -c 'cd blog-components && npm run type-check'
+#        language: system
+#        files: ^blog-components/
+#        types_or: [ts, tsx]

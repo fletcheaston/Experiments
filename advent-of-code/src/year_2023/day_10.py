@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 10: Title"])
+router = APIRouter(tags=["2023 - Day 10: Pipe Maze"])
 
 
 DOCUMENT_EXAMPLE = [

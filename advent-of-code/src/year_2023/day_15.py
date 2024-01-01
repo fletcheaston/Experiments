@@ -1,9 +1,21 @@
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 15: Title"])
+router = APIRouter(tags=["2023 - Day 15: Lens Library"])
 
 
-DOCUMENT_EXAMPLE = []
+DOCUMENT_EXAMPLE = [
+    "rn=1",
+    "cm-",
+    "qp=3",
+    "cm=2",
+    "qp-",
+    "pc=4",
+    "ot=9",
+    "ab=5",
+    "pc-",
+    "pc=6",
+    "ot=7",
+]
 
 
 @router.post("/part-1")

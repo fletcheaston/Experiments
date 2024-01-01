@@ -25,6 +25,7 @@ build/Release
 # Distribution / packaging
 .Python
 build/
+build-raw/
 develop-eggs/
 dist/
 downloads/

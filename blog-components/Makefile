@@ -27,3 +27,7 @@ lint: setup
 # Run dev server locally
 dev: setup
 	npm run dev
+
+# Build for prod usage
+build: setup .
+	npm run build

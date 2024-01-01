@@ -11,57 +11,50 @@ repos:
         stages: [ commit-msg ]
         args: [ --negate ]
 
-# Python hooks
--   repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.4
-    hooks:
-    -   id: ruff
-        language_version: python3.12
-
--   repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.4
-    hooks:
-    -   id: ruff-format
-        language_version: python3.12
-
--   repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
-    hooks:
-      - id: isort
-
-# Typescript hooks
+# Advent of Code hooks
 -   repo: local
     hooks:
-    -   id: my-freight-cube/lint
-        name: my-freight-cube/lint
-        entry: bash -c 'cd my-freight-cube && npm run lint'
+    -   id: advent-of-code/lint
+        name: advent-of-code/lint
+        entry: bash -c 'cd advent-of-code && make lint'
         language: system
-        files: ^my-freight-cube/
-        types_or: [ts, tsx]
+        files: ^advent-of-code/
+        types_or: [python]
 
 -   repo: local
     hooks:
-    -   id: my-freight-cube/format
-        name: my-freight-cube/format
-        entry: bash -c 'cd my-freight-cube && npm run format'
+    -   id: advent-of-code/format
+        name: advent-of-code/format
+        entry: bash -c 'cd advent-of-code && make format'
         language: system
-        files: ^my-freight-cube/
-        types_or: [ts, tsx]
+        files: ^advent-of-code/
+        types_or: [python]
+
+# Blog hooks
+-   repo: local
+    hooks:
+    -   id: blog/lint
+        name: blog/lint
+        entry: bash -c 'cd blog && make lint'
+        language: system
+        files: ^blog/
+        types_or: [python]
 
 -   repo: local
     hooks:
-    -   id: my-freight-cube/type-check
-        name: my-freight-cube/type-check
-        entry: bash -c 'cd my-freight-cube && npm run type-check'
+    -   id: blog/format
+        name: blog/format
+        entry: bash -c 'cd blog && make format'
         language: system
-        files: ^my-freight-cube/
-        types_or: [ts, tsx]
+        files: ^blog/
+        types_or: [python]
 
+# Blog component hooks
 -   repo: local
     hooks:
     -   id: blog-components/lint
         name: blog-components/lint
-        entry: bash -c 'cd blog-components && npm run lint'
+        entry: bash -c 'cd blog-components && make lint'
         language: system
         files: ^blog-components/
         types_or: [ts, tsx]
@@ -70,16 +63,26 @@ repos:
     hooks:
     -   id: blog-components/format
         name: blog-components/format
-        entry: bash -c 'cd blog-components && npm run format'
+        entry: bash -c 'cd blog-components && make format'
         language: system
         files: ^blog-components/
         types_or: [ts, tsx]
 
+# MyFreightCube hooks
 -   repo: local
     hooks:
-    -   id: blog-components/type-check
-        name: blog-components/type-check
-        entry: bash -c 'cd blog-components && npm run type-check'
+    -   id: my-freight-cube/lint
+        name: my-freight-cube/lint
+        entry: bash -c 'cd my-freight-cube && make lint'
         language: system
-        files: ^blog-components/
+        files: ^my-freight-cube/
+        types_or: [ts, tsx]
+
+-   repo: local
+    hooks:
+    -   id: my-freight-cube/format
+        name: my-freight-cube/format
+        entry: bash -c 'cd my-freight-cube && make format'
+        language: system
+        files: ^my-freight-cube/
         types_or: [ts, tsx]

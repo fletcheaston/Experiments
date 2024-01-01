@@ -41,7 +41,7 @@ const config: Configuration = {
     },
     output: {
         filename: "blog-components.js",
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, "build"),
     },
     plugins: [
         new MiniCssExtractPlugin({

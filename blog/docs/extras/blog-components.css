@@ -1,157 +1,346 @@
-/* DO NOT use `@tailwind base;` here, it'll overwrite far too many base styles */
+/* DO NOT use `@tailwind base` here, it'll overwrite far too many base styles */
 .tw-btn {
-    cursor: pointer;
-    border-radius: 0.25rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    text-align: center;
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
+        cursor: pointer;
+        border-radius: 0.25rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        text-align: center;
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
 }
 .tw-btn:hover {
-    --tw-bg-opacity: 1;
-    background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+        --tw-bg-opacity: 1;
+        background-color: rgb(241 245 249 / var(--tw-bg-opacity));
 }
 .tw-btn-lg {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
 }
 .tw-btn-sm {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
 }
 .tw-btn-primary {
-    background-color: var(--md-primary-fg-color);
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
+        background-color: var(--md-primary-fg-color);
+        --tw-text-opacity: 1;
+        color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 .tw-btn-primary:hover {
-    background-color: var(--md-primary-fg-color--dark);
+        background-color: var(--md-primary-fg-color--dark);
 }
-.tw-btn-primary-text {
-    background-color: transparent;
-    color: var(--md-primary-fg-color);
-}
-.tw-btn-primary-text:hover {
-    background-color: var(--md-primary-fg-color);
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
+.tw-btn-primary:focus {
+        background-color: var(--md-primary-fg-color--dark);
+        outline-color: var(--md-accent-fg-color);
 }
 .tw-btn-primary-outline {
-    border-width: 1px;
-    border-color: var(--md-primary-fg-color);
-    background-color: transparent;
-    color: var(--md-primary-fg-color);
+        border-width: 1px;
+        border-color: var(--md-primary-fg-color);
+        background-color: transparent;
+        color: var(--md-primary-fg-color);
 }
 .tw-btn-primary-outline:hover {
-    background-color: var(--md-primary-fg-color);
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
+        background-color: var(--md-primary-fg-color);
+        --tw-text-opacity: 1;
+        color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.tw-btn-primary-outline:focus {
+        outline-color: var(--md-accent-fg-color);
 }
 .tw-btn:disabled {
-    cursor: auto;
-    opacity: 0.6;
+        cursor: auto;
+        opacity: 0.6;
 }
+.tw-border-tr:after {
+        content: "";
+        width: 4px;
+        height: 4px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-bottom-left-radius: 100%;
+        border-width: 4px;
+        border-color: inherit;
+        border-top: 0;
+        border-right: 0;
+    }
+.tw-border-br:after {
+        content: "";
+        width: 4px;
+        height: 4px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        border-top-left-radius: 100%;
+        border-width: 4px;
+        border-color: inherit;
+        border-bottom: 0;
+        border-left: 0;
+    }
+.tw-border-bl:after {
+        content: "";
+        width: 4px;
+        height: 4px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-top-right-radius: 100%;
+        border-width: 4px;
+        border-color: inherit;
+        border-bottom: 0;
+        border-left: 0;
+    }
+.tw-border-tl:after {
+        content: "";
+        width: 4px;
+        height: 4px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-bottom-right-radius: 100%;
+        border-width: 4px;
+        border-color: inherit;
+        border-top: 0;
+        border-left: 0;
+    }
 /*****************************************************************************/
 /* Global vars */
 :root {
     --md-primary-fg-color: #7e56c2;
-    --md-primary-fg-color--light: #9574cd;
     --md-primary-fg-color--dark: #673ab6;
-    --md-primary-bg-color: #fff;
-    --md-primary-bg-color--light: #ffffffb3;
+    --md-accent-fg-color: #f50056;
 }
 /*****************************************************************************/
 /* Buttons */
+.tw-absolute {
+        position: absolute;
+}
+.tw-relative {
+        position: relative;
+}
+.tw-left-\[50\%\] {
+        left: 50%;
+}
+.tw-top-2 {
+        top: 0.5rem;
+}
+.tw-top-2\.5 {
+        top: 0.625rem;
+}
 .tw-my-4 {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
 }
 .tw-flex {
-    display: flex;
+        display: flex;
+}
+.tw-size-10 {
+        width: 2.5rem;
+        height: 2.5rem;
+}
+.tw-size-8 {
+        width: 2rem;
+        height: 2rem;
+}
+.tw-h-8 {
+        height: 2rem;
+}
+.tw-h-fit {
+        height: -moz-fit-content;
+        height: fit-content;
+}
+.tw-w-8 {
+        width: 2rem;
+}
+.tw-w-fit {
+        width: -moz-fit-content;
+        width: fit-content;
+}
+.tw-w-full {
+        width: 100%;
+}
+.tw-max-w-\[100\%\] {
+        max-width: 100%;
+}
+.tw-flex-shrink-0 {
+        flex-shrink: 0;
+}
+.tw-translate-x-\[-50\%\] {
+        --tw-translate-x: -50%;
+        transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 @keyframes tw-pulse {
-    50% {
-        opacity: .5;
-    }
+        50% {
+                opacity: .5;
+        }
 }
 .tw-animate-pulse {
-    animation: tw-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        animation: tw-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 .tw-cursor-auto {
-    cursor: auto;
+        cursor: auto;
 }
 .tw-cursor-pointer {
-    cursor: pointer;
+        cursor: pointer;
 }
 .tw-flex-col {
-    flex-direction: column;
+        flex-direction: column;
+}
+.tw-items-center {
+        align-items: center;
+}
+.tw-justify-center {
+        justify-content: center;
+}
+.tw-justify-evenly {
+        justify-content: space-evenly;
+}
+.tw-gap-2 {
+        gap: 0.5rem;
 }
 .tw-gap-4 {
-    gap: 1rem;
+        gap: 1rem;
+}
+.tw-overflow-x-auto {
+        overflow-x: auto;
 }
 .tw-rounded {
-    border-radius: 0.25rem;
+        border-radius: 0.25rem;
+}
+.tw-rounded-bl {
+        border-bottom-left-radius: 0.25rem;
+}
+.tw-rounded-br {
+        border-bottom-right-radius: 0.25rem;
+}
+.tw-rounded-tl {
+        border-top-left-radius: 0.25rem;
+}
+.tw-rounded-tr {
+        border-top-right-radius: 0.25rem;
+}
+.tw-border-2 {
+        border-width: 2px;
 }
 .tw-border-\[1px\] {
-    border-width: 1px;
+        border-width: 1px;
+}
+.tw-border-b-4 {
+        border-bottom-width: 4px;
+}
+.tw-border-l-4 {
+        border-left-width: 4px;
+}
+.tw-border-r-4 {
+        border-right-width: 4px;
+}
+.tw-border-t-4 {
+        border-top-width: 4px;
 }
 .tw-border-t-\[1px\] {
-    border-top-width: 1px;
+        border-top-width: 1px;
 }
 .tw-border-primary {
-    border-color: var(--md-primary-fg-color);
+        border-color: var(--md-primary-fg-color);
+}
+.tw-border-secondary {
+        border-color: var(--md-accent-fg-color);
 }
 .tw-border-t-slate-300 {
-    --tw-border-opacity: 1;
-    border-top-color: rgb(203 213 225 / var(--tw-border-opacity));
+        --tw-border-opacity: 1;
+        border-top-color: rgb(203 213 225 / var(--tw-border-opacity));
 }
 .tw-bg-primary {
-    background-color: var(--md-primary-fg-color);
+        background-color: var(--md-primary-fg-color);
+}
+.tw-bg-primary-hover {
+        background-color: var(--md-primary-fg-color--dark);
+}
+.tw-bg-secondary {
+        background-color: var(--md-accent-fg-color);
 }
 .tw-bg-transparent {
-    background-color: transparent;
+        background-color: transparent;
+}
+.tw-p-1 {
+        padding: 0.25rem;
 }
 .tw-p-4 {
-    padding: 1rem;
+        padding: 1rem;
 }
 .tw-px-4 {
-    padding-left: 1rem;
-    padding-right: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
 }
 .tw-py-1 {
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
 }
 .tw-py-2 {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+}
+.tw-pb-2 {
+        padding-bottom: 0.5rem;
+}
+.tw-pb-4 {
+        padding-bottom: 1rem;
+}
+.tw-pt-8 {
+        padding-top: 2rem;
 }
 .tw-text-center {
-    text-align: center;
+        text-align: center;
 }
 .tw-text-4xl {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
+        font-size: 2.25rem;
+        line-height: 2.5rem;
 }
 .tw-text-primary {
-    color: var(--md-primary-fg-color);
+        color: var(--md-primary-fg-color);
 }
 .tw-text-white {
-    --tw-text-opacity: 1;
-    color: rgb(255 255 255 / var(--tw-text-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.tw-opacity-80 {
+        opacity: 0.8;
 }
 .tw-transition-all {
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+}
+.tw-duration-0 {
+        transition-duration: 0s;
+}
+.focus-within\:tw-outline-secondary:focus-within {
+        outline-color: var(--md-accent-fg-color);
 }
 .hover\:tw-bg-primary:hover {
-    background-color: var(--md-primary-fg-color);
+        background-color: var(--md-primary-fg-color);
+}
+.hover\:tw-bg-primary-hover:hover {
+        background-color: var(--md-primary-fg-color--dark);
+}
+.hover\:tw-text-white:hover {
+        --tw-text-opacity: 1;
+        color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.hover\:tw-outline-secondary:hover {
+        outline-color: var(--md-accent-fg-color);
+}
+.focus\:tw-bg-primary-hover:focus {
+        background-color: var(--md-primary-fg-color--dark);
+}
+.focus\:tw-outline-secondary:focus {
+        outline-color: var(--md-accent-fg-color);
+}
+.active\:tw-outline-secondary:active {
+        outline-color: var(--md-accent-fg-color);
 }
 

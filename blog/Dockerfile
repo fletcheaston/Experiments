@@ -2,12 +2,17 @@ FROM python:3.12
 
 WORKDIR /app
 
-COPY pyproject.toml ./
+RUN pip install poetry
 
-RUN pip install .
+COPY poetry.toml ./
+COPY pyproject.toml ./
+COPY poetry.lock ./
+COPY Makefile ./
+
+RUN make setup
 
 COPY . .
 
-RUN mkdocs build
+RUN make build
 
-ENTRYPOINT uvicorn app:app --proxy-headers --forwarded-allow-ips "*" --host 0.0.0.0 --port 8080
+ENTRYPOINT poetry run uvicorn app:app --proxy-headers --forwarded-allow-ips "*" --host 0.0.0.0 --port 8080

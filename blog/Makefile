@@ -1,7 +1,6 @@
 
 # Clean out files
 clean:
-	rm -rf .venv
 	rm -rf build
 
 # Setup of poetry lockfile

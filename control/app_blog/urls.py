@@ -50,3 +50,40 @@ for static_sub_path in STATIC_DIR.rglob("*"):
             name=static_relative_path.replace("/", ".").rstrip("."),
         )
     )
+
+
+################################################################################
+# 404
+def blog_404(_: HttpRequest) -> HttpResponse:
+    with open(TEMPLATE_DIR / "404.html", "rb") as f:
+        return HttpResponse(f.read())
+
+
+urlpatterns.append(
+    path(
+        "404/",
+        blog_404,
+        name="blog-404",
+    ),
+)
+
+
+def blog_404_redirect(_: HttpRequest, __: str) -> HttpResponse:
+    return redirect("blog-404")
+
+
+urlpatterns.append(
+    path(
+        "<path:__>",
+        blog_404_redirect,
+        name="blog-404-redirect",
+    ),
+)
+urlpatterns.append(
+    path(
+        "",
+        blog_404_redirect,
+        {"__": ""},
+        name="blog-404-redirect-blank",
+    ),
+)

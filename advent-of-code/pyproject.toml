@@ -1,27 +1,30 @@
-[tool.setuptools]
-py-modules = []
-
-[project]
+[tool.poetry]
 name = "advent-of-code"
+version = "0.1.0"
 description = ""
+authors = ["Fletcher Easton <work@fletcheaston.com>"]
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-    "fastapi==0.104.1",
-    "numpy==1.26.2",
-    "python-multipart==0.0.6",
-    "uvicorn==0.24.0",
-    "z3-solver==4.12.4.0",
-]
-dynamic = ["version"]
 
-[project.optional-dependencies]
-test = [
-    "httpx==0.25.2",
-    "pytest==7.4.3",
-    "pytest-cov==4.1.0",
-    "pytest-xdist==3.5.0",
-]
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.104.1"
+python-multipart = "^0.0.6"
+uvicorn = "^0.24.0"
+numpy = "^1.26.2"
+z3-solver = "^4.12.4.0"
+networkx = "^3.2.1"
+
+[tool.poetry.group.dev.dependencies]
+httpx = "^0.25.2"
+pytest = "^7.4.3"
+pytest-cov = "^4.1.0"
+pytest-xdist = "^3.5.0"
+ruff = "^0.1.9"
+isort = "^5.13.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 python_files = [

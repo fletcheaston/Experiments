@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.JSX.Element }
         <html lang="en">
             <body className={classNames(inter.className)}>
                 <nav className="flex items-center border-b-[1px] border-b-slate-300 px-3">
-                    <Link href="/">
+                    <Link href={{ pathname: "/" }}>
                         <Image
                             src={Logo}
                             height={50}
@@ -144,7 +144,7 @@ export default function RootLayout({ children }: { children: React.JSX.Element }
 
                         <div className="grid grid-cols-2 gap-x-8 px-16 py-4 sm:grid-cols-3 md:grid-cols-4">
                             <Link
-                                href="/"
+                                href={{ pathname: "/" }}
                                 className="block"
                             >
                                 <Image

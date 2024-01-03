@@ -5,10 +5,16 @@ from dataclasses import dataclass, field
 import z3
 from fastapi import APIRouter, Body
 
-router = APIRouter(tags=["2023 - Day 24: Title"])
+router = APIRouter(tags=["2023 - Day 24: Never Tell Me The Odds"])
 
 
-DOCUMENT_EXAMPLE = []
+DOCUMENT_EXAMPLE = [
+    "19, 13, 30 @ -2,  1, -2",
+    "18, 19, 22 @ -1, -1, -2",
+    "20, 25, 34 @ -2, -2, -4",
+    "12, 31, 28 @ -1, -2, -1",
+    "20, 19, 15 @  1, -5, -3",
+]
 
 
 @dataclass
@@ -67,9 +73,6 @@ class Hailstone:
             (x - self.start.x) / self.velocity.x,
             (x - other.start.x) / other.velocity.x,
         )
-
-    def __repr__(self) -> str:
-        return f"{self.id} | ({self.start}, {self.velocity})"
 
 
 @router.post("/part-1")

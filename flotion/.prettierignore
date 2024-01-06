@@ -1,0 +1,7 @@
+.next/
+node_modules/
+package-lock.json
+package.json
+coverage
+
+src/app/settings/equipment.tsx
